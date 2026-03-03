@@ -1,8 +1,15 @@
 package modelo;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Objects;
 
+
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public abstract class Pieza {
+
     public enum Color {
         Blanca,
         Negra
@@ -15,6 +22,10 @@ public abstract class Pieza {
     private int puntos;
 
     public abstract void mover();
+
+    //Constructor por defecto necesario para serializar en JaxB
+    public Pieza(){
+    }
 
     public Pieza(Color color, String dibujo, int fila, int columna, int puntos) {
         filaValida(fila);
