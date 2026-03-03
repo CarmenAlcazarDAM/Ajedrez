@@ -71,18 +71,6 @@ public abstract class Pieza {
         this.puntos = puntos;
     }
 
-    //Una pieza será igual que otra si tiene el mismo color y puntos
-    @Override
-    public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()) return false;
-        Pieza pieza = (Pieza) o;
-        return puntos == pieza.puntos && color == pieza.color;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(color, puntos);
-    }
 
 
     /*-------------------------------------*/
@@ -105,5 +93,20 @@ public abstract class Pieza {
         if (columna < 0 || columna > 7) {
             throw new IllegalArgumentException("La posición debe estar entre 0 y 7");
         }
+    }
+
+    /*-------------------------------------*/
+
+    //Una pieza será igual que otra si tiene el mismo color y puntos
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Pieza pieza = (Pieza) o;
+        return puntos == pieza.puntos && color == pieza.color;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(color, puntos);
     }
 }
