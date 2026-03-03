@@ -3,10 +3,11 @@ package modelo;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.io.Serializable;
 import java.util.Objects;
 
 
-@XmlRootElement
+@XmlRootElement(name="pieza")
 @XmlAccessorType(XmlAccessType.FIELD)
 public abstract class Pieza {
 
@@ -24,8 +25,7 @@ public abstract class Pieza {
     public abstract void mover();
 
     //Constructor por defecto necesario para serializar en JaxB
-    public Pieza(){
-    }
+    public Pieza(){}
 
     public Pieza(Color color, String dibujo, int fila, int columna, int puntos) {
         filaValida(fila);
@@ -119,5 +119,20 @@ public abstract class Pieza {
     @Override
     public int hashCode() {
         return Objects.hash(color, puntos);
+    }
+
+
+    /*-------------------------------------*/
+
+    public void validarDestino(int nuevaFila, int nuevaColumna, Tablero tablero){
+        Pieza destino = tablero.obtenerPiezaEnCasilla(nuevaFila, nuevaColumna);
+
+        if(destino!=null && destino.getColor()==this.color){
+            throw new IllegalArgumentException("No puedes matar una pieza de tu propio color.");
+        }
+
+        if(destino!=null && destino instanceof Rey){
+            throw new IllegalArgumentException("No se permite capturar al Rey.");
+        }
     }
 }
