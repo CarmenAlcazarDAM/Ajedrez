@@ -1,4 +1,4 @@
-package modelo;
+package Interfaces;
 
 public interface Saltadora {
 }
