@@ -7,8 +7,7 @@ public class Reina extends Pieza{
     }
 
     @Override
-    public void mover() {
-
+    public void mover(int nuevaFila, int nuevaColumna) {
+        
     }
-
 }

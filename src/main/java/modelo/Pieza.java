@@ -21,7 +21,7 @@ public abstract class Pieza {
     private int columna;
     private int puntos;
 
-    public abstract void mover();
+    public abstract void mover(int nuevaFila, int nuevaColumna);
 
     //Constructor por defecto necesario para serializar en JaxB
     public Pieza(){
