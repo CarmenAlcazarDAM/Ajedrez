@@ -124,6 +124,13 @@ public abstract class Pieza {
 
     /*-------------------------------------*/
 
+    /**
+     * Método que valida si la pieza seleccionada puede moverse a la casilla de destino introducida,
+     * comprobando si hay una pieza del mismo color o es el rey
+     * @param nuevaFila --> número de fila donde está la casilla de destino seleccionada
+     * @param nuevaColumna --> número de columna donde está la casilla de destino seleccionada
+     * @param tablero --> clase donde se encuentran todas las casillas
+     */
     public void validarDestino(int nuevaFila, int nuevaColumna, Tablero tablero){
         Pieza destino = tablero.obtenerPiezaEnCasilla(nuevaFila, nuevaColumna);
 
