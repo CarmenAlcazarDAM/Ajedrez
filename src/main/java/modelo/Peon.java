@@ -8,6 +8,5 @@ public class Peon extends Pieza{
 
     @Override
     public void mover() {
-
     }
 }
