@@ -62,6 +62,13 @@ public class ControllerTablero {
         Tablero.getNegras().add(new Rey(Pieza.Color.Negra, "♚", 7, 4, 100));
     }
 
+    public void iniciarTablero(){
+        Tablero.vaciarPiezas();
+        controladores.ControllerTablero.colocarPiezas();
+    }
+
+
+
 
 
 }
