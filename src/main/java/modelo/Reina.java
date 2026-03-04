@@ -7,7 +7,16 @@ public class Reina extends Pieza{
     }
 
     @Override
+    public boolean comprobarMovimiento(int fila, int columna) {
+        return false;
+    }
+
+    @Override
     public void mover(int nuevaFila, int nuevaColumna) {
+        int distanciaFila = nuevaFila - this.getFila();
+        int distanciaColum = nuevaColumna - this.getColumna();
+
+
         
     }
 }
