@@ -9,7 +9,7 @@ public class Peon extends Pieza {
 
     @Override
     public void mover(int nuevaFila, int nuevaColumna) {
-        if (comprobarMovimiento(nuevaFila,nuevaColumna)){
+        if (this.comprobarMovimiento(nuevaFila,nuevaColumna)){
             this.setColumna(nuevaColumna);
             this.setFila(nuevaFila);
         }
