@@ -17,8 +17,8 @@ public class Reina extends Pieza{
     }
     @Override
     public boolean comprobarMovimiento(int fila, int columna) {
-        int distanciaFila = getFila() - fila;
-        int distanciaColum = getColumna() - columna;
+        int distanciaFila = this.getFila() - fila;
+        int distanciaColum = this.getColumna() - columna;
         boolean legal = false;
 
         if (distanciaFila < 0){
