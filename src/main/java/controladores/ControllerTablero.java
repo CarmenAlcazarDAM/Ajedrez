@@ -4,7 +4,7 @@ import modelo.*;
 
 public class ControllerTablero {
 
-    public void colocarPiezas() {
+    public static void colocarPiezas() {
         // Colocar piezas blancas
         colocarPiezasBlancas();
 
@@ -12,7 +12,7 @@ public class ControllerTablero {
         colocarPiezasNegras();
     }
 
-    private void colocarPiezasBlancas() {
+    private static void colocarPiezasBlancas() {
         // Peones blancos en fila 1
         for (int columna = 0; columna < 8; columna++) {
             Tablero.getBlancas().add(new Peon(Pieza.Color.Blanca, "♙", 1, columna, 1));
@@ -37,7 +37,7 @@ public class ControllerTablero {
         Tablero.getBlancas().add(new Rey(Pieza.Color.Blanca, "♔", 0, 4, 100));
     }
 
-    private void colocarPiezasNegras() {
+    private static void colocarPiezasNegras() {
         // Peones negros en fila 6
         for (int columna = 0; columna < 8; columna++) {
             Tablero.getNegras().add(new Peon(Pieza.Color.Negra, "♟", 6, columna, 1));
@@ -61,4 +61,7 @@ public class ControllerTablero {
         // Rey negro
         Tablero.getNegras().add(new Rey(Pieza.Color.Negra, "♚", 7, 4, 100));
     }
+
+
+
 }

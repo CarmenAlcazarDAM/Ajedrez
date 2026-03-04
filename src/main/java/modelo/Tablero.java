@@ -29,4 +29,15 @@ public class Tablero {
         return eliminadas;
     }
 
+    public void vaciarPiezas() {
+        blancas.clear();
+        negras.clear();
+        eliminadas.clear();
+    }
+
+    public void iniciarTablero(){
+        vaciarPiezas();
+        controladores.ControllerTablero.colocarPiezas();
+    }
 }
+
