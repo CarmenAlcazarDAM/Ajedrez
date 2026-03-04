@@ -143,6 +143,7 @@ public abstract class Pieza {
             if(piezaEnCasillaDestino instanceof Rey){
                 throw new IllegalArgumentException("No se permite capturar al Rey.");
             }
+
     }
 
 }

@@ -21,7 +21,7 @@ public class Peon extends Pieza {
         int distanciaColum = getColumna() - columna;
         boolean legal = false;
 
-        if (this.getColor() == Color.Blanca){
+        if (this.getColor() == Color.BLANCA){
             if (distanciaFila == 1 & distanciaColum == 0){
                 legal = true;
             }
