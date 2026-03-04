@@ -28,16 +28,33 @@ public class Tablero {
     public static List<Pieza> getEliminadas() {
         return eliminadas;
     }
-
-    public void vaciarPiezas() {
+    public static void vaciarPiezas() {
         blancas.clear();
         negras.clear();
         eliminadas.clear();
     }
 
-    public void iniciarTablero(){
-        vaciarPiezas();
-        controladores.ControllerTablero.colocarPiezas();
+    /**
+     * metodo que verifica si una casilla está ocupada
+     * @param nuevaFila fila que se recibe para verificar si la casilla está en la fila
+     * @param nuevaColumna columna que se recibe para verificar si la casilla está en la columna
+     * @return null si está vacio o la pieza concreta que ocupe la casilla
+     */
+    public Pieza obtenerPiezaEnCasilla(int nuevaFila,int nuevaColumna){
+        for ( Pieza p : blancas ) {
+            if (p.getFila() == nuevaFila && p.getColumna() == nuevaColumna) {
+                return p;
+            }
+        }
+        for ( Pieza p : negras ) {
+            if (p.getFila() == nuevaFila && p.getColumna() == nuevaColumna) {
+                return p;
+            }
+        }
+        return null;
+
     }
+
+
 }
 
