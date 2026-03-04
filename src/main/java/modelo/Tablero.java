@@ -55,23 +55,32 @@ public class Tablero {
 
     }
 
-
+    /**
+     * metodo que devuelve true si encuentra una ficha en el camino indicado
+     * @param filaOrigen forma la posicion de origen junto con columnaOrigen
+     * @param columnaOrigen forma la posicion de origen junto con filaOrigen
+     * @param filaDestino forma la posicion de destino junto con columnaDestino
+     * @param columnaDestino forma la posicion de destino junto con filaDestino
+     * @return true si encuentra una pieza intermedia, false si no encuentra ninguna pieza intermedia
+     */
     public boolean hayPiezaIntermedia(int filaOrigen, int columnaOrigen, int filaDestino, int columnaDestino){
-        boolean hayPieza=false;
-        for (Pieza p : blancas){
-            if (p.getFila()+p.getColumna()==obtenerPiezaEnCasilla(filaDestino,columnaDestino).getColumna()+obtenerPiezaEnCasilla(filaDestino,columnaDestino).getFila())return true;
-            if ((p.getFila()+1 + p.getColumna()+1 == filaOrigen+1 + columnaOrigen+1) && ){
 
+        int filaDireccion = Integer.compare(filaDestino, filaOrigen);
+        int columnaDireccion = Integer.compare(columnaDestino, columnaOrigen);
+        int filaActual = filaOrigen + filaDireccion;
+        int columnaActual = columnaOrigen + columnaDireccion;
+
+
+        while (filaActual != filaDestino + filaDireccion || columnaActual != columnaDestino + columnaDireccion) {
+            if (obtenerPiezaEnCasilla(filaActual, columnaActual) != null) {
+                return true;
             }
-
-
+            filaActual += filaDireccion;
+            columnaActual += columnaDireccion;
         }
-        return hayPieza;
 
+        return false;
     }
-
-
-
 
 }
 
