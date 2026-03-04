@@ -1,5 +1,7 @@
 package modelo;
 
+import Interfaces.Saltadora;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -144,6 +146,27 @@ public abstract class Pieza {
                 throw new IllegalArgumentException("No se permite capturar al Rey.");
             }
 
+    }
+
+    /**
+     * Método que comprueba si una pieza puede ser movida a una casilla de destino si la casilla está vacía o no hay pieza
+     * del mismo color, si el movmiento es legal o si no hay una pieza intermedia en caso de no ser una pieza saltadora
+     * @param nuevaFila --> número de fila donde está la casilla de destino seleccionada
+     * @param nuevaColumna --> número de columna donde está la casilla de destino seleccionada
+     * @param tablero --> clase donde se encuentran todas las casillas
+     * @return --> devuelve true si puede moverse a la casilla de destino, true si no puede moverse
+     */
+    public boolean puedeMover(int nuevaFila, int nuevaColumna, Tablero tablero){
+        Pieza piezaEnCasillaDestino = tablero.obtenerPiezaEnCasilla(nuevaFila, nuevaColumna);
+
+        if(piezaEnCasillaDestino!=null && piezaEnCasillaDestino.getColor()==this.color){return false;}
+
+        if(!comprobarMovimiento(nuevaFila,nuevaColumna)){ return false;}
+
+        if(!(this instanceof Saltadora)){
+           if(tablero.hayPiezaIntermedia(this.fila, this.columna, nuevaFila,nuevaColumna)){return false;}
+        }
+        return true;
     }
 
 }
