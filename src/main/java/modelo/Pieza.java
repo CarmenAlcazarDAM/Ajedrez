@@ -12,8 +12,8 @@ import java.util.Objects;
 public abstract class Pieza {
 
     public enum Color {
-        Blanca,
-        Negra
+        BLANCA,
+        NEGRA
     }
 
     private Color color;
