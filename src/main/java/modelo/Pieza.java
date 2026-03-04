@@ -131,15 +131,46 @@ public abstract class Pieza {
      * @param nuevaColumna --> número de columna donde está la casilla de destino seleccionada
      * @param tablero --> clase donde se encuentran todas las casillas
      */
-    public void validarDestino(int nuevaFila, int nuevaColumna, Tablero tablero){
+    public boolean validarDestino(int nuevaFila, int nuevaColumna, Tablero tablero){
         Pieza destino = tablero.obtenerPiezaEnCasilla(nuevaFila, nuevaColumna);
+        boolean destinoDisponible = false;
 
-        if(destino!=null && destino.getColor()==this.color){
-            throw new IllegalArgumentException("No puedes matar una pieza de tu propio color.");
-        }
+        try{
+            if(destino==null && destino.getColor()!=this.color){
+                destinoDisponible=true;
+            }
 
-        if(destino!=null && destino instanceof Rey){
-            throw new IllegalArgumentException("No se permite capturar al Rey.");
+            if(destino==null && !(destino instanceof Rey)){
+                destinoDisponible=true;
+            }
+
+        } catch (IllegalArgumentException e){
+            if(destino!=null && destino.getColor()==this.color){
+                System.out.println("No puedes matar una pieza de tu propio color.");
+                destinoDisponible=false;
+            }
+
+            if(destino!=null && destino instanceof Rey){
+                System.out.println("No se permite capturar al Rey.");
+                destinoDisponible=false;
+            }
+
         }
+            return destinoDisponible;
+    }
+
+
+
+
+
+    public boolean puedeMover(Pieza pieza, int nuevaFila, int nuevaColumna, Tablero tablero){
+
+        //si es posible el destino sigue el código
+        validarDestino(nuevaFila,nuevaColumna, tablero);
+
+        
+
+
+
     }
 }
