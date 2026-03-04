@@ -131,32 +131,16 @@ public abstract class Pieza {
      * @param nuevaColumna --> número de columna donde está la casilla de destino seleccionada
      * @param tablero --> clase donde se encuentran todas las casillas
      */
-    public boolean validarDestino(int nuevaFila, int nuevaColumna, Tablero tablero){
-        Pieza destino = tablero.obtenerPiezaEnCasilla(nuevaFila, nuevaColumna);
-        boolean destinoDisponible = false;
+    public void validarDestino(int nuevaFila, int nuevaColumna, Tablero tablero){
+        Pieza piezaEnCasillaDestino = tablero.obtenerPiezaEnCasilla(nuevaFila, nuevaColumna);
 
-        try{
-            if(destino==null && destino.getColor()!=this.color){
-                destinoDisponible=true;
+            if(piezaEnCasillaDestino!=null && piezaEnCasillaDestino.getColor()==this.color){
+                throw new IllegalArgumentException("No puedes matar una pieza de tu propio color.");
             }
 
-            if(destino==null && !(destino instanceof Rey)){
-                destinoDisponible=true;
+            if(piezaEnCasillaDestino instanceof Rey){
+                throw new IllegalArgumentException("No se permite capturar al Rey.");
             }
-
-        } catch (IllegalArgumentException e){
-            if(destino!=null && destino.getColor()==this.color){
-                System.out.println("No puedes matar una pieza de tu propio color.");
-                destinoDisponible=false;
-            }
-
-            if(destino!=null && destino instanceof Rey){
-                System.out.println("No se permite capturar al Rey.");
-                destinoDisponible=false;
-            }
-
-        }
-            return destinoDisponible;
     }
 
 }
