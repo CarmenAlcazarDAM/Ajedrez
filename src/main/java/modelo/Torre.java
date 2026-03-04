@@ -8,12 +8,20 @@ public class Torre extends Pieza{
 
     @Override
     public void mover(int nuevaFila, int nuevaColumna) {
-
-        if (nuevaFila == this.getFila() || nuevaColumna == this.getColumna()){
+        if (this.comprobarMovimiento(nuevaFila,nuevaColumna)){
             this.setFila(nuevaFila);
             this.setColumna(nuevaColumna);
-        } else {
-            System.out.println("El movimiento es invalido");
         }
+
+    }
+
+    @Override
+    public boolean comprobarMovimiento(int fila, int columna) {
+        boolean legal = false;
+
+        if (fila == 0 || columna == 0){
+            legal = true;
+        }
+        return legal;
     }
 }

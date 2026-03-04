@@ -24,6 +24,8 @@ public abstract class Pieza {
 
     public abstract void mover(int nuevaFila, int nuevaColumna);
 
+    public abstract boolean comprobarMovimiento(int fila, int columna);
+
     //Constructor por defecto necesario para serializar en JaxB
     public Pieza(){}
 
