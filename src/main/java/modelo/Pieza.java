@@ -159,18 +159,4 @@ public abstract class Pieza {
             return destinoDisponible;
     }
 
-
-
-
-
-    public boolean puedeMover(Pieza pieza, int nuevaFila, int nuevaColumna, Tablero tablero){
-
-        //si es posible el destino sigue el código
-        validarDestino(nuevaFila,nuevaColumna, tablero);
-
-        
-
-
-
-    }
 }
