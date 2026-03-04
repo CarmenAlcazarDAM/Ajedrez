@@ -3,10 +3,11 @@ package modelo;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.io.Serializable;
 import java.util.Objects;
 
 
-@XmlRootElement
+@XmlRootElement(name="pieza")
 @XmlAccessorType(XmlAccessType.FIELD)
 public abstract class Pieza {
 
@@ -21,11 +22,10 @@ public abstract class Pieza {
     private int columna;
     private int puntos;
 
-    public abstract void mover();
+    public abstract void mover(int nuevaFila, int nuevaColumna);
 
     //Constructor por defecto necesario para serializar en JaxB
-    public Pieza(){
-    }
+    public Pieza(){}
 
     public Pieza(Color color, String dibujo, int fila, int columna, int puntos) {
         filaValida(fila);
@@ -119,5 +119,27 @@ public abstract class Pieza {
     @Override
     public int hashCode() {
         return Objects.hash(color, puntos);
+    }
+
+
+    /*-------------------------------------*/
+
+    /**
+     * Método que valida si la pieza seleccionada puede moverse a la casilla de destino introducida,
+     * comprobando si hay una pieza del mismo color o es el rey
+     * @param nuevaFila --> número de fila donde está la casilla de destino seleccionada
+     * @param nuevaColumna --> número de columna donde está la casilla de destino seleccionada
+     * @param tablero --> clase donde se encuentran todas las casillas
+     */
+    public void validarDestino(int nuevaFila, int nuevaColumna, Tablero tablero){
+        Pieza destino = tablero.obtenerPiezaEnCasilla(nuevaFila, nuevaColumna);
+
+        if(destino!=null && destino.getColor()==this.color){
+            throw new IllegalArgumentException("No puedes matar una pieza de tu propio color.");
+        }
+
+        if(destino!=null && destino instanceof Rey){
+            throw new IllegalArgumentException("No se permite capturar al Rey.");
+        }
     }
 }
