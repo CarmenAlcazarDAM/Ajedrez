@@ -17,11 +17,9 @@ public class Torre extends Pieza{
 
     @Override
     public boolean comprobarMovimiento(int fila, int columna) {
-        int distanciaFila = this.getFila() - fila;
-        int distanciaColum = this.getColumna() - columna;
         boolean legal = false;
 
-        if (distanciaColum == 0 || distanciaFila == 0){
+        if (fila == 0 || columna == 0){
             legal = true;
         }
         return legal;
