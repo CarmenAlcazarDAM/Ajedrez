@@ -56,5 +56,22 @@ public class Tablero {
     }
 
 
+    public boolean hayPiezaIntermedia(int filaOrigen, int columnaOrigen, int filaDestino, int columnaDestino){
+        boolean hayPieza=false;
+        for (Pieza p : blancas){
+            if (p.getFila()+p.getColumna()==obtenerPiezaEnCasilla(filaDestino,columnaDestino).getColumna()+obtenerPiezaEnCasilla(filaDestino,columnaDestino).getFila())return true;
+            if ((p.getFila()+1 + p.getColumna()+1 == filaOrigen+1 + columnaOrigen+1) && ){
+
+            }
+
+
+        }
+        return hayPieza;
+
+    }
+
+
+
+
 }
 
