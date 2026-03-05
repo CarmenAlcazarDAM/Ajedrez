@@ -1,5 +1,8 @@
 package vista;
 
+import modelo.Pieza;
+import modelo.Tablero;
+
 public class VistaConsola {
     static final int FILA = 8;
     static final int COLUMNA = 8;
