@@ -1,6 +1,8 @@
 package modelo;
 
-public class Peon extends Pieza {
+import Interfaces.Atacadora;
+
+public class Peon extends Pieza implements Atacadora {
     private boolean primerMovimiento = true;
     private int contador = 0;
     public Peon(Color color, String dibujo, int fila, int columna, int puntos) {
@@ -31,5 +33,25 @@ public class Peon extends Pieza {
             }
         }
         return legal;
+    }
+
+    @Override
+    public void ataque(int fila, int columna) {
+        int distanciaFila = this.getFila() - fila;
+        int distanciaColum = this.getColumna() - columna;
+
+        if (this.getColor() == Color.BLANCA){
+            if(distanciaFila == 1 & distanciaColum == 1){
+                this.setFila(fila);
+                this.setColumna(columna);
+            }
+        }
+        if (this.getColor() == Color.NEGRA){
+            if (distanciaFila == -1 & distanciaColum == -1){
+                this.setFila(fila);
+                this.setColumna(columna);
+            }
+        }
+
     }
 }
