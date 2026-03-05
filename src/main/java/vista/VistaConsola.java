@@ -35,3 +35,14 @@ public class VistaConsola {
         if(color) return "░░";
         else  return "▓▓";
     }
+
+    static void linea(String izq, String mid, String der, int columnas) {
+        System.out.print(izq);
+        for (int i = 0; i < columnas; i++) {
+            System.out.print("════");
+            System.out.print(i < columnas - 1 ? mid : der);
+        }
+        System.out.println();
+    }
+
+}
