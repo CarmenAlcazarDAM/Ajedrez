@@ -54,4 +54,15 @@ public class Peon extends Pieza implements Atacadora {
         }
 
     }
+
+    @Override
+    public Pieza clonar() {
+        Peon clon = new Peon(this.getColor(), this.getDibujo(), this.getFila(),this.getColumna(),this.getPuntos());
+        clon.primerMovimiento = this.primerMovimiento;
+        clon.contador = this.contador;
+
+        return clon;
+    }
+
+    
 }

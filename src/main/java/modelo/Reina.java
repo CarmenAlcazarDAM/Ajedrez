@@ -36,4 +36,9 @@ public class Reina extends Pieza{
         }
         return legal;
     }
+
+    @Override
+    public Pieza clonar() {
+        return new Reina(this.getColor(),this.getDibujo(),this.getFila(),this.getColumna(),this.getPuntos());
+    }
 }

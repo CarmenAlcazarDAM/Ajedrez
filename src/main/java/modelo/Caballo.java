@@ -34,4 +34,9 @@ public class Caballo extends Pieza implements Saltadora {
         }
         return legal;
     }
+
+    @Override
+    public Pieza clonar() {
+        return new Caballo(this.getColor(),this.getDibujo(),this.getFila(),this.getColumna(),this.getPuntos());
+    }
 }

@@ -33,4 +33,9 @@ public class Rey extends Pieza{
 
         return legal;
     }
+
+    @Override
+    public Pieza clonar() {
+        return new Rey(this.getColor(),this.getDibujo(),this.getFila(),this.getColumna(),this.getPuntos());
+    }
 }

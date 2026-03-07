@@ -24,4 +24,9 @@ public class Torre extends Pieza{
         }
         return legal;
     }
+
+    @Override
+    public Pieza clonar() {
+        return new Torre(this.getColor(),this.getDibujo(),this.getFila(),this.getColumna(),this.getPuntos());
+    }
 }

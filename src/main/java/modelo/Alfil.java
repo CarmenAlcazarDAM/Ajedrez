@@ -32,4 +32,9 @@ public class Alfil extends Pieza{
         }
         return legal;
     }
+
+    @Override
+    public Pieza clonar() {
+        return new Alfil(this.getColor(),this.getDibujo(),this.getFila(),this.getColumna(),this.getPuntos());
+    }
 }

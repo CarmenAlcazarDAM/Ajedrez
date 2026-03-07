@@ -28,6 +28,12 @@ public abstract class Pieza {
 
     public abstract boolean comprobarMovimiento(int fila, int columna);
 
+    /**
+     * Método abstracto para que cada subclase se clone
+     * @return --> devuelve la pieza clonada
+     */
+    public abstract Pieza clonar();
+
     //Constructor por defecto necesario para serializar en JaxB
     public Pieza(){}
 
@@ -70,8 +76,6 @@ public abstract class Pieza {
     public int getColumna() {
         return columna;
     }
-
-
 
     public void setColumna(int columna) {
         columnaValida(columna);
@@ -172,5 +176,6 @@ public abstract class Pieza {
         }
         return true;
     }
+
 
 }
