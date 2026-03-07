@@ -86,7 +86,11 @@ public abstract class Pieza {
         this.puntos = puntos;
     }
 
-
+    @Override
+    public String toString() {
+        return "[" + this.getClass().getSimpleName().toUpperCase()+"] " + this.dibujo + " Posición: ("+ this.fila
+                + "," + this.columna+") | Puntos: " + this.puntos;
+    }
 
     /*-------------------------------------*/
 
