@@ -19,6 +19,11 @@ public class Main {
         Pieza torre = new Torre(Pieza.Color.BLANCA, "♖", 0, 0, 5);
         System.out.println(torre.toString());
 
+        tablero.listarBlancas();
+        tablero.listarNegras();
+        tablero.listarEliminadas();
+
+
         //--------------------------------------------
 
 
