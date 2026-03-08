@@ -138,5 +138,13 @@ public class Tablero {
         return suma;
     }
 
+    public void insertarPiezaenCasilla(Pieza p){
+        if (p.getColor() == Pieza.Color.BLANCA){
+            blancas.add(p);
+        } else {
+            negras.add(p);
+        }
+    }
+
 }
 
