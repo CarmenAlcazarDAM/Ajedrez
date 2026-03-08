@@ -122,5 +122,21 @@ public class Tablero {
         }
     }
 
+    public int obtenerPuntuacionBlancas(){
+        int suma = 0;
+        for (Pieza p : blancas){
+            suma += p.getPuntos();
+        }
+        return suma;
+    }
+
+    public int obtenerPuntuacionNegras(){
+        int suma = 0;
+        for (Pieza p : negras){
+            suma += p.getPuntos();
+        }
+        return suma;
+    }
+
 }
 
