@@ -21,7 +21,9 @@ public class ControllerPrincipal {
 
     public void gestionarPartida(int opcion){
         switch (opcion){
-            case 1 ->
+            case 1 -> seleccionar;
         }
     }
+
+
 }
