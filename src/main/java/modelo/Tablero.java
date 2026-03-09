@@ -88,9 +88,9 @@ public class Tablero {
      * Busco el rey entre los aliados.
      * Luego compruebo si entre las piezas enemigas hay alguna que pueda mover a la posicion en la qu ese encuentra el rey aliado
      *
-     * @param tablero
-     * @param color
-     * @return
+     * @param tablero el tablero
+     * @param color el color de la pieza
+     * @return si hay hay o no jaque
      */
     public static boolean comprobarJaque(Tablero tablero, Pieza.Color color) {
         List<Pieza> enemiga;
