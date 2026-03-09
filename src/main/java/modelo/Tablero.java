@@ -122,6 +122,10 @@ public class Tablero {
         }
     }
 
+    /**
+     * Metodo que devuelve la suma total de las piezas blancas vivas
+     * @return devuelve la suma total
+     */
     public int obtenerPuntuacionBlancas(){
         int suma = 0;
         for (Pieza p : blancas){
@@ -130,6 +134,10 @@ public class Tablero {
         return suma;
     }
 
+    /**
+     * Metodo que devuelve la suma total de las piezas negras vivas
+     * @return devuelve la suma total
+     */
     public int obtenerPuntuacionNegras(){
         int suma = 0;
         for (Pieza p : negras){
@@ -138,6 +146,10 @@ public class Tablero {
         return suma;
     }
 
+    /**
+     * Metodo que inserta una pieza segun el color
+     * @param p requiere de una pieza para poder insertarla
+     */
     public void insertarPiezaenCasilla(Pieza p){
         if (p.getColor() == Pieza.Color.BLANCA){
             blancas.add(p);
@@ -146,6 +158,11 @@ public class Tablero {
         }
     }
 
+    /**
+     * Metodo que clona un tablero
+     * @param t tablero del que se quiere sacar una copia
+     * @return devuelve la copia del tablero
+     */
     public static Tablero clonarTablero (Tablero t){
         Tablero copia = new Tablero();
         copia.vaciarPiezas();

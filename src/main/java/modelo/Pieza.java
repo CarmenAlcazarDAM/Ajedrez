@@ -24,8 +24,19 @@ public abstract class Pieza {
     private int columna;
     private int puntos;
 
+    /**
+     * Metodo que ejecuta el movimiento de una pieza si comprobarMovimiento devuelve true
+     * @param nuevaFila la fila a la que se va a mover
+     * @param nuevaColumna la columna a la que se va a mover
+     */
     public abstract void mover(int nuevaFila, int nuevaColumna);
 
+    /**
+     * Metodo que comprueba los movimientos de cada pieza y devuelve true o false si se puede o no ejecutar el movimiento
+     * @param fila a la que se quiere mover la pieza
+     * @param columna a la que se quiere mover la pieza
+     * @return devuelve true o false
+     */
     public abstract boolean comprobarMovimiento(int fila, int columna);
 
     /**
