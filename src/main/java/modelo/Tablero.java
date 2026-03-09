@@ -179,6 +179,8 @@ public class Tablero {
         Tablero copia = new Tablero();
         copia.vaciarPiezas();
 
+        copia.setContadorTurnos(t.getContadorTurnos());
+
         for (Pieza p : t.blancas) {
             copia.insertarPiezaenCasilla(p);
         }
