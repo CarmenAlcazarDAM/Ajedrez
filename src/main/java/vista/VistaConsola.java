@@ -48,4 +48,35 @@ public class VistaConsola {
         System.out.println();
     }
 
+    /**
+     * //////  MENUS ///////
+     */
+    // iniciar nuevo juego
+    // cargar tablero
+    /**
+     * ------------------>
+     */
+    // 1 seleccionar pieza --> mover , volver (if es peon atacar)
+    // 2 reiniciar tablero --> ¡Estas seguro?
+    // 3 guardar tablero
+    // 4 rendirse
+    // 5 dar tablas
+    // 6 Mostrar estado de la partida
+    // 0 finalizar programa --> ¡Estas seguro? (S/N)
+    /**
+     *
+     */
+    // 1 mostrar lista de fichas blancas
+    // 2 mostrar lista de fichas negras
+    // 3 mostrar lista de eliminadas totales ----> fichas negras eliminadas: alfil, peon, torre ---- fichas blancas eliminadas: peon, reina
+    // 4 obtener puntos de las fichas negras
+    // 5 obtener puntos de las fichas blancas
+    // 0 Volver
+
+
+    // metodo void que compruebe si es true or false (movimiento correcto, movimiento incorrecto)
+
+    // metodo que te diga el turno segun el parametro que le pasen, si es par dirá que mueven las negras y si es
+    // impar dirá que mueven las blancas, tambien dirá el numero de turno.
+
 }
