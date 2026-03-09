@@ -1,8 +1,13 @@
 package modelo;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.ArrayList;
 import java.util.List;
 
+@XmlRootElement(name="tablero")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Tablero {
     private static List<Pieza> blancas = new ArrayList<>();
     private static List<Pieza> negras = new ArrayList<>();
