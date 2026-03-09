@@ -85,7 +85,7 @@ public class Tablero {
     /**
      * Me traigo el tablero y el color de las piezas por parametro, hago un Arraylist de las piezas aliadas y enemigas
      * Luego determino si estamos jugando como blancas o como negras.
-     * Busco el rey entre los aliados.
+     * Busco el rey entre los aliados. ...
      * Luego compruebo si entre las piezas enemigas hay alguna que pueda mover a la posicion en la qu ese encuentra el rey aliado
      *
      * @param tablero el tablero
