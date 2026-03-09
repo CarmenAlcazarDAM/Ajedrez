@@ -146,5 +146,20 @@ public class Tablero {
         }
     }
 
+    public static Tablero clonarTablero (Tablero t){
+        Tablero copia = new Tablero();
+        copia.vaciarPiezas();
+
+        for (Pieza p : t.blancas) {
+            copia.insertarPiezaenCasilla(p);
+        }
+
+        for (Pieza p : t.negras) {
+            copia.insertarPiezaenCasilla(p);
+        }
+
+        return copia;
+    }
+
 }
 
