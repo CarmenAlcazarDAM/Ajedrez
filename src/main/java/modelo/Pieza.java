@@ -5,12 +5,14 @@ import Interfaces.Saltadora;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
-import java.io.Serializable;
+import javax.xml.bind.annotation.XmlSeeAlso;
 import java.util.Objects;
 
 
-@XmlRootElement(name="pieza")
+@XmlRootElement(name="piezas")
 @XmlAccessorType(XmlAccessType.FIELD)
+//Permite que jaxB identifique las subclases y las guarde también
+@XmlSeeAlso({Peon.class, Torre.class, Rey.class, Reina.class, Alfil.class, Caballo.class})
 public abstract class Pieza {
 
     public enum Color {
