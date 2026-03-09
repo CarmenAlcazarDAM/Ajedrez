@@ -8,6 +8,10 @@ public class Tablero {
     private static List<Pieza> negras = new ArrayList<>();
     private static List<Pieza> eliminadas = new ArrayList<>();
     private static List<Pieza> posicionInicial = new ArrayList<>();
+    private int contadorTurnos;
+
+    /* ///////////////// CONSTRUCTOR VACÍO POR DEFECTO ///////////////// */
+    public Tablero() {}
 
     public static List<Pieza> getBlancas() {
         return blancas;
@@ -29,6 +33,14 @@ public class Tablero {
         return eliminadas;
     }
 
+    public int getContadorTurnos() {
+        return contadorTurnos;
+    }
+
+    public void setContadorTurnos(int contadorTurnos) {
+        this.contadorTurnos = contadorTurnos;
+    }
+
     public static void vaciarPiezas() {
         blancas.clear();
         negras.clear();
@@ -36,7 +48,7 @@ public class Tablero {
     }
 
     /**
-     * metodo que verifica si una casilla está ocupada
+     * Método que verifica si una casilla está ocupada
      *
      * @param nuevaFila    fila que se recibe para verificar si la casilla está en la fila
      * @param nuevaColumna columna que se recibe para verificar si la casilla está en la columna
@@ -58,7 +70,7 @@ public class Tablero {
     }
 
     /**
-     * metodo que devuelve true si encuentra una ficha en el camino indicado
+     * Método que devuelve true si encuentra una ficha en el camino indicado
      *
      * @param filaOrigen     forma la posicion de origen junto con columnaOrigen
      * @param columnaOrigen  forma la posicion de origen junto con filaOrigen

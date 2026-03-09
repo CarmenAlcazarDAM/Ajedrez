@@ -1,6 +1,8 @@
 package controladores;
 
 public class ControllerPrincipal {
+
+    /*
     private static int contador = 1;
 
     public boolean contadorTurnos(){
@@ -11,6 +13,8 @@ public class ControllerPrincipal {
             return false;
         }
     }
+    */
+
 
     public void gestionarInicio(int opcion){
         switch (opcion){
