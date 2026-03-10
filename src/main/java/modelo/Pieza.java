@@ -9,7 +9,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 
-@XmlRootElement(name="pieza")
+@XmlRootElement(name = "pieza")
 @XmlAccessorType(XmlAccessType.FIELD)
 public abstract class Pieza {
 
@@ -26,14 +26,16 @@ public abstract class Pieza {
 
     /**
      * Metodo que ejecuta el movimiento de una pieza si comprobarMovimiento devuelve true
-     * @param nuevaFila la fila a la que se va a mover
+     *
+     * @param nuevaFila    la fila a la que se va a mover
      * @param nuevaColumna la columna a la que se va a mover
      */
     public abstract void mover(int nuevaFila, int nuevaColumna);
 
     /**
      * Metodo que comprueba los movimientos de cada pieza y devuelve true o false si se puede o no ejecutar el movimiento
-     * @param fila a la que se quiere mover la pieza
+     *
+     * @param fila    a la que se quiere mover la pieza
      * @param columna a la que se quiere mover la pieza
      * @return devuelve true o false
      */
@@ -41,12 +43,14 @@ public abstract class Pieza {
 
     /**
      * Método abstracto para que cada subclase se clone
+     *
      * @return --> devuelve la pieza clonada
      */
     public abstract Pieza clonar();
 
     //Constructor por defecto necesario para serializar en JaxB
-    public Pieza(){}
+    public Pieza() {
+    }
 
     public Pieza(Color color, String dibujo, int fila, int columna, int puntos) {
         filaValida(fila);
@@ -56,7 +60,7 @@ public abstract class Pieza {
         this.dibujo = dibujo;
         this.fila = fila;
         this.columna = columna;
-        this.puntos=puntos;
+        this.puntos = puntos;
     }
 
     public Color getColor() {
@@ -103,14 +107,15 @@ public abstract class Pieza {
 
     @Override
     public String toString() {
-        return "[" + this.getClass().getSimpleName().toUpperCase()+"] " + this.dibujo + " Posición: ("+ this.fila
-                + "," + this.columna+") | Puntos: " + this.puntos;
+        return "[" + this.getClass().getSimpleName().toUpperCase() + "] " + this.dibujo + " Posición: (" + this.fila
+                + "," + this.columna + ") | Puntos: " + this.puntos;
     }
 
     /*-------------------------------------*/
 
     /**
      * Método que valida si el número de fila introducido es correcto
+     *
      * @param fila --> número de fila a validar
      */
     private void filaValida(int fila) {
@@ -121,6 +126,7 @@ public abstract class Pieza {
 
     /**
      * Método que valida si el número de columna introducido es correcto
+     *
      * @param columna --> número de columna a validar
      */
     private void columnaValida(int columna) {
@@ -150,40 +156,48 @@ public abstract class Pieza {
     /**
      * Método que valida si la pieza seleccionada puede moverse a la casilla de destino introducida,
      * comprobando si hay una pieza del mismo color o es el rey
-     * @param nuevaFila --> número de fila donde está la casilla de destino seleccionada
+     *
+     * @param nuevaFila    --> número de fila donde está la casilla de destino seleccionada
      * @param nuevaColumna --> número de columna donde está la casilla de destino seleccionada
-     * @param tablero --> clase donde se encuentran todas las casillas
+     * @param tablero      --> clase donde se encuentran todas las casillas
      */
-    public void validarDestino(int nuevaFila, int nuevaColumna, Tablero tablero){
+    public void validarDestino(int nuevaFila, int nuevaColumna, Tablero tablero) {
         Pieza piezaEnCasillaDestino = tablero.obtenerPiezaEnCasilla(nuevaFila, nuevaColumna);
 
-            if(piezaEnCasillaDestino!=null && piezaEnCasillaDestino.getColor()==this.color){
-                throw new IllegalArgumentException("No puedes matar una pieza de tu propio color.");
-            }
+        if (piezaEnCasillaDestino != null && piezaEnCasillaDestino.getColor() == this.color) {
+            throw new IllegalArgumentException("No puedes matar una pieza de tu propio color.");
+        }
 
-            if(piezaEnCasillaDestino instanceof Rey){
-                throw new IllegalArgumentException("No se permite capturar al Rey.");
-            }
+        if (piezaEnCasillaDestino instanceof Rey) {
+            throw new IllegalArgumentException("No se permite capturar al Rey.");
+        }
 
     }
 
     /**
      * Método que comprueba si una pieza puede ser movida a una casilla de destino si la casilla está vacía o no hay pieza
      * del mismo color, si el movmiento es legal o si no hay una pieza intermedia en caso de no ser una pieza saltadora
-     * @param nuevaFila --> número de fila donde está la casilla de destino seleccionada
+     *
+     * @param nuevaFila    --> número de fila donde está la casilla de destino seleccionada
      * @param nuevaColumna --> número de columna donde está la casilla de destino seleccionada
-     * @param tablero --> clase donde se encuentran todas las casillas
+     * @param tablero      --> clase donde se encuentran todas las casillas
      * @return --> devuelve true si puede moverse a la casilla de destino, true si no puede moverse
      */
-    public boolean puedeMover(int nuevaFila, int nuevaColumna, Tablero tablero){
+    public boolean puedeMover(int nuevaFila, int nuevaColumna, Tablero tablero) {
         Pieza piezaEnCasillaDestino = tablero.obtenerPiezaEnCasilla(nuevaFila, nuevaColumna);
 
-        if(piezaEnCasillaDestino!=null && piezaEnCasillaDestino.getColor()==this.color){return false;}
+        if (piezaEnCasillaDestino != null && piezaEnCasillaDestino.getColor() == this.color) {
+            return false;
+        }
 
-        if(!comprobarMovimiento(nuevaFila,nuevaColumna)){ return false;}
+        if (!comprobarMovimiento(nuevaFila, nuevaColumna)) {
+            return false;
+        }
 
-        if(!(this instanceof Saltadora)){
-           if(tablero.hayPiezaIntermedia(this.fila, this.columna, nuevaFila,nuevaColumna)){return false;}
+        if (!(this instanceof Saltadora)) {
+            if (tablero.hayPiezaIntermedia(this.fila, this.columna, nuevaFila, nuevaColumna)) {
+                return false;
+            }
         }
         return true;
     }

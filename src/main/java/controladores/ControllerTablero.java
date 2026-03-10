@@ -1,8 +1,11 @@
 package controladores;
 
+import controladores.MenusNum.GestEstadoPartida;
+import controladores.MenusNum.GestMATKEnum;
 import modelo.*;
 
 public class ControllerTablero {
+
 
     public static void colocarPiezas() {
         // Colocar piezas blancas
@@ -62,12 +65,61 @@ public class ControllerTablero {
         Tablero.getNegras().add(new Rey(Pieza.Color.NEGRA, "♚", 7, 4, 100));
     }
 
-    public static void iniciarTablero(){
+    public static void iniciarTablero() {
         Tablero.vaciarPiezas();
         controladores.ControllerTablero.colocarPiezas();
     }
 
+    // crear el switch que llame a los métodos correspondientes y generar el orden de la partida, imprimir, contar puntos...;
+    public void gestionEstadoPartida(int opcion) {// ToDo
+        switch (GestEstadoPartida.gestEstadoFromIndex(opcion)) {
+            //Llamar para que imprima el menu ToDo
+            case MOSTRAR_FICHAS_BLANCAS:
+                Tablero.listarBlancas();
+                break;
+            case MOSTRAR_FICHAS_NEGRAS:
+                Tablero.listarNegras();
+                break;
+            case ELIMINADAS:
+                Tablero.listarEliminadas();
+                break;
+            case PUNTOS_FICHAS_BLANCAS:
+                int puntosBlancas = Tablero.obtenerPuntuacionBlancas();
+                // mensaje para imprimir los puntos ToDo
+                break;
+            case PUNTOS_FICHAS_NEGRAS:
+                int puntoNegras = Tablero.obtenerPuntuacionNegras();
+                // mensaje para imprimir los puntos ToDo
+                break;
+            case VOLVER:
+                break; //menuDeJuego;
+        }
+    }
 
+    public void gestionarMovimientosAtaques(int opcion, Pieza pieza,int filaDestino, int columnaDestino, Tablero tablero) {
+        switch (GestMATKEnum.gestorMATKFromIndex(opcion)) {
+            //Llamar para que imprima el menu ToDo
+            case MOVER:
+                moverP(pieza, filaDestino, columnaDestino, tablero);
+                break;
+            case ATACAR:
+                esPeon(pieza, filaDestino, columnaDestino);
+                break;
+            case VOLVER:
+                break; //menuDeJuego;
+        }
+    }
+
+    public void moverP(Pieza p, int nuevaFila, int nuevaColumna, Tablero t){
+        p.validarDestino(nuevaFila, nuevaColumna, t);
+        p.mover(nuevaFila, nuevaColumna);
+    }
+
+    public void esPeon(Pieza p, int fila, int columna){
+        if(p instanceof Peon peon){
+            peon.ataque(fila, columna);
+        } else System.out.println("Solo el peon puede realizar esta acción.");
+    }
 
 
 

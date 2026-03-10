@@ -12,18 +12,18 @@ public class ControllerPrincipal {
         }
     }
 
-    public void gestionarInicio(int opcion){
-        switch (opcion){
-            case 1 -> ControllerTablero.iniciarTablero();
-            case 2 -> //Aqui se carga una partida
-        }
-    }
-
-    public void gestionarPartida(int opcion){
-        switch (opcion){
-            case 1 -> seleccionar;
-        }
-    }
-
+//    public void gestionarInicio(int opcion){
+//        switch (opcion){
+//            case 1 -> ControllerTablero.iniciarTablero();
+//            case 2 -> //Aqui se carga una partida
+//        }
+//    }
+//
+//    public void gestionarPartida(int opcion){
+//        switch (opcion){
+//            case 1 -> seleccionar;
+//        }
+//    }
+//
 
 }
