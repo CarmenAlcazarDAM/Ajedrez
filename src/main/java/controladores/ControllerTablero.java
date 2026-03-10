@@ -96,32 +96,36 @@ public class ControllerTablero {
         }
     }
 
-    public void gestionarMovimientosAtaques(int opcion, Pieza pieza,int filaDestino, int columnaDestino, Tablero tablero) {
+    public void gestionarMovimientosAtaques(int opcion, int filaPieza, int columnaPieza,int filaDestino, int columnaDestino, Tablero tablero) {
         switch (GestMATKEnum.gestorMATKFromIndex(opcion)) {
             //Llamar para que imprima el menu ToDo
             case MOVER:
-                moverP(pieza, filaDestino, columnaDestino, tablero);
+                moverP(filaPieza, columnaPieza, filaDestino, columnaDestino, tablero);
                 break;
             case ATACAR:
-                esPeon(pieza, filaDestino, columnaDestino);
+                esPeon(filaPieza, columnaPieza, filaDestino, columnaDestino, tablero);
                 break;
             case VOLVER:
                 break; //menuDeJuego;
         }
     }
 
-    public void moverP(Pieza p, int nuevaFila, int nuevaColumna, Tablero t){
-        p.validarDestino(nuevaFila, nuevaColumna, t);
+    public void moverP(int filaPieza, int columnaPieza, int nuevaFila, int nuevaColumna, Tablero t ){
+        Pieza p = t.obtenerPiezaEnCasilla(filaPieza, columnaPieza);
+        p.validarDestino(nuevaFila,nuevaColumna, t);
+
+        System.out.println("Fila antes: " + p.getFila());
+        System.out.println("Columna antes: " + p.getColumna());
         p.mover(nuevaFila, nuevaColumna);
+
+        System.out.println("Fila después: " + p.getFila());
+        System.out.println("Columna después: " + p.getColumna());
     }
 
-    public void esPeon(Pieza p, int fila, int columna){
+    public void esPeon(int filaPieza, int columnaPieza, int fila, int columna, Tablero t){
+        Pieza p = t.obtenerPiezaEnCasilla(filaPieza, columnaPieza);
         if(p instanceof Peon peon){
             peon.ataque(fila, columna);
         } else System.out.println("Solo el peon puede realizar esta acción.");
     }
-
-
-
-
 }

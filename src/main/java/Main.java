@@ -23,12 +23,7 @@ public class Main {
 //        tablero.listarNegras();
 //        tablero.listarEliminadas();
 
-        controladorTablero.gestionarMovimientosAtaques(1, torre,2, 2, tablero);
-        for (int i = 1; i < 6; i++) {
-            controladorTablero.gestionEstadoPartida(i);
-        }
-
-
+        controladorTablero.gestionarMovimientosAtaques(1, 6,0, 5,0, tablero);
         vistaConsola.vistaTablero(tablero);
 
 

@@ -14,7 +14,9 @@ public class Peon extends Pieza implements Atacadora {
         if (this.comprobarMovimiento(nuevaFila,nuevaColumna)){
             this.setColumna(nuevaColumna);
             this.setFila(nuevaFila);
+            System.out.println("peon movido");
         }
+        System.out.println("peon no movido");
     }
 
     @Override
@@ -24,11 +26,11 @@ public class Peon extends Pieza implements Atacadora {
         boolean legal = false;
 
         if (this.getColor() == Color.BLANCA){
-            if (distanciaFila == 1 & distanciaColum == 0){
+            if (distanciaFila == -1 && distanciaColum == 0){
                 legal = true;
             }
         }else {
-            if (distanciaFila == -1 & distanciaColum == 0){
+            if (distanciaFila == 1 && distanciaColum == 0){
                 legal = true;
             }
         }
