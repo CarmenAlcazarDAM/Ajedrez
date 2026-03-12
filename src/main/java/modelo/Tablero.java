@@ -167,7 +167,7 @@ public class Tablero {
      * Metodo que inserta una pieza segun el color
      * @param p requiere de una pieza para poder insertarla
      */
-    public void insertarPiezaenCasilla(Pieza p){
+    public static void insertarPiezaenCasilla(Pieza p){
         if (p.getColor() == Pieza.Color.BLANCA){
             blancas.add(p);
         } else {
