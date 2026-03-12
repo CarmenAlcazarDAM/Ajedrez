@@ -7,45 +7,50 @@ public class VistaConsola {
     static final int FILA = 8;
     static final int COLUMNA = 8;
 
-    /**
-     * Imprime el tablero línea a línea basado en el número de fila y lieas.
-     * @param tablero
-     */
-    public static void vistaTablero(Tablero tablero){
-        for (int i = FILA - 1; i >= 0; i--) {
+    public static void estiloTablero(Tablero tablero) {
+        System.out.println("""
+                \n┌┐└┘├┬┴┼┤ │┆┊╎ ─ ╌ ┄ ┈ ╴╶ ╵ ╷
+                \n┍┑┕┙┝┯┷┿┥ │ ─
+                \n┎┒┖┚┠┰┸╂┨ ┃ ━
+                \n┏┓┗┛┣┳┻╋┫ ┃┇┋╏ ━ ╍ ┅ ┉ ╸╺ ╹ ╻
+                \n╔╗╚╝╠╦╩╬╣ ║ ═
+                \n╓╖╙╜╟╥╨╫╢ ║ ═
+                \n╒╕╘╛╞╤╧╪╡ │ ─
+                \n╭╮╰╯ │ ─
+                
+                """);
 
-             if (i == FILA - 1) linea("╔", "╦", "╗", COLUMNA);
-            System.out.print("║");
+        vistaTablero0(tablero, "    ┌─┬─┬─┬─┬─┬─┬─┬─┐", " │", "│", "│ ", "    ├─┼─┼─┼─┼─┼─┼─┼─┤", "    └─┴─┴─┴─┴─┴─┴─┴─┘");
+        vistaTablero0(tablero, "     ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▖" + "\n    ┌─┬─┬─┬─┬─┬─┬─┬─┐▌", " │", "│", "│▌ ", "    ├─┼─┼─┼─┼─┼─┼─┼─┤▌", "    └─┴─┴─┴─┴─┴─┴─┴─┘▘");
+        vistaTablero0(tablero, "    ╔═╦═╦═╦═╦═╦═╦═╦═╗", " ║", "║", "║ ", "    ╠═╬═╬═╬═╬═╬═╬═╬═╣", "    ╚═╩═╩═╩═╩═╩═╩═╩═╝");
+        vistaTablero0(tablero, "    ╔═╤═╤═╤═╤═╤═╤═╤═╗", " ║", "┃", "║ ", "    ╟─╋─╋─╋─╋─╋─╋─╋─╢", "    ╚═╧═╧═╧═╧═╧═╧═╧═╝");
+        vistaTablero0(tablero, "    ╔━┳━┳━┳━┳━┳━┳━┳━╗", " ┃", "┃", "┃ ", "    ┣━╋━╋━╋━╋━╋━╋━╋━┫", "    ╚━┻━┻━┻━┻━┻━┻━┻━╝");
+        vistaTablero0(tablero, "    ╔═╤═╤═╤═╤═╤═╤═╤═╗", " ║", "│", "║ ", "    ╟─┼─┼─┼─┼─┼─┼─┼─╢", "    ╚═╧═╧═╧═╧═╧═╧═╧═╝");
+        vistaTablero0(tablero, "    ╓─┬─┬─┬─┬─┬─┬─┬─╖", " ║", "│", "║ ", "    ╟─┼─┼─┼─┼─┼─┼─┼─╢", "    ╙─┴─┴─┴─┴─┴─┴─┴─╜");
+        vistaTablero0(tablero, "    ┌─┬─┬─┬─┬─┬─┬─┬─┐", " │", "│", "│ ", "    ╞═╪═╪═╪═╪═╪═╪═╪═╡", "    └─┴─┴─┴─┴─┴─┴─┴─┘");
+        }
+
+    public static void vistaTablero0(Tablero tablero, String top, String a, String b, String c, String mid, String bot) {
+        System.out.println(top); // Borde superior
+
+        for (int i = FILA - 1; i >= 0; i--) {
+            System.out.print("  " + (i) + a);
 
             for (int j = 0; j < COLUMNA; j++) {
-                Pieza t = tablero.obtenerPiezaEnCasilla(i,j);
-
-                if(t == null) System.out.printf(" %-2s ║", colorCasilla(i,j));
-                else System.out.printf(" %-2s ║", t.getDibujo());
+                Pieza t = tablero.obtenerPiezaEnCasilla(i, j);
+                String dibujo = (t == null) ? colorCasilla(i, j) : t.getDibujo();
+                System.out.print(dibujo + (j < COLUMNA - 1 ? b : ""));
             }
-            System.out.println();
 
-            if (i > 0) linea("╠", "╬", "╣", COLUMNA);
-            else linea("╚", "╩", "╝", COLUMNA);
+            System.out.println(c);
+            if (i != 0) System.out.println(mid);
+            else System.out.println(bot);
         }
+        System.out.println("      0   1   2   3   4   5   6   7\n");
     }
+
     public static String colorCasilla(int fila, int columna) {
-        boolean color;
-
-        if(fila % 2 == 0) color = columna % 2 == 0;
-        else color = columna % 2 != 0;
-
-        if(color) return "░░";
-        else  return "▓▓";
-    }
-
-    static void linea(String izq, String mid, String der, int columnas) {
-        System.out.print(izq);
-        for (int i = 0; i < columnas; i++) {
-            System.out.print("════");
-            System.out.print(i < columnas - 1 ? mid : der);
-        }
-        System.out.println();
+        return ((fila + columna) % 2 == 0) ? "▓" : "░";
     }
 
 }
