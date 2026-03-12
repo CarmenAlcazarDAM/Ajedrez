@@ -8,7 +8,7 @@ public  class Util {
     public static Scanner teclado = new Scanner(System.in);
 
 
-    public static int pideEntero(String msn) {
+    public static int pideEntero(String msn, String opcionNoValida) {
         int n = 0;
         boolean error = false;
         do {
