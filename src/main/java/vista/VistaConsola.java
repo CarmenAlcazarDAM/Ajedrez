@@ -7,24 +7,25 @@ import utils.Util;
 import java.util.Scanner;
 
 public class VistaConsola {
-    static Scanner sc=new Scanner(System.in);
+    static Scanner sc = new Scanner(System.in);
     static final int FILA = 8;
     static final int COLUMNA = 8;
 
     /**
      * Imprime el tablero línea a línea basado en el número de fila y lieas.
+     *
      * @param tablero
      */
-    public static void vistaTablero(Tablero tablero){
+    public static void vistaTablero(Tablero tablero) {
         for (int i = FILA - 1; i >= 0; i--) {
 
-             if (i == FILA - 1) linea("╔", "╦", "╗", COLUMNA);
+            if (i == FILA - 1) linea("╔", "╦", "╗", COLUMNA);
             System.out.print("║");
 
             for (int j = 0; j < COLUMNA; j++) {
-                Pieza t = tablero.obtenerPiezaEnCasilla(i,j);
+                Pieza t = tablero.obtenerPiezaEnCasilla(i, j);
 
-                if(t == null) System.out.printf(" %-2s ║", colorCasilla(i,j));
+                if (t == null) System.out.printf(" %-2s ║", colorCasilla(i, j));
                 else System.out.printf(" %-2s ║", t.getDibujo());
             }
             System.out.println();
@@ -33,14 +34,15 @@ public class VistaConsola {
             else linea("╚", "╩", "╝", COLUMNA);
         }
     }
+
     public static String colorCasilla(int fila, int columna) {
         boolean color;
 
-        if(fila % 2 == 0) color = columna % 2 == 0;
+        if (fila % 2 == 0) color = columna % 2 == 0;
         else color = columna % 2 != 0;
 
-        if(color) return "░░";
-        else  return "▓▓";
+        if (color) return "░░";
+        else return "▓▓";
     }
 
     static void linea(String izq, String mid, String der, int columnas) {
@@ -53,38 +55,37 @@ public class VistaConsola {
     }
 
     /**
-     * //////  MENUS ///////
+     * ///////////////////////  MENUS /////////////////////////////
      */
 
-public static int menuPrincipal() {
-    int opcion=0;
-    do {
-        System.out.println("╔══════════════════════════════╗");
-        System.out.println("║        MENÚ PRINCIPAL        ║");
-        System.out.println("╠══════════════════════════════╣");
-        System.out.println("   1 ▸ Iniciar nuevo juego");
-        System.out.println("   2 ▸ Cargar tablero");
-        System.out.println("   0 ▸ Salir");
-        System.out.println("╚══════════════════════════════╝");
-        opcion= Util.pideEntero("Introduce una opción: ","Opcion no valida");
-        return opcion;
-    } while (opcion!=0);
-}
     /**
-     * ------------------>
-     */
-    // 1 seleccionar casilla --> mover , volver (if es peon atacar) // si esta vacia que diga que esta vacia
-    // 2 reiniciar tablero --> ¡Estas seguro?
-    // 3 guardar tablero
-    // 4 rendirse
-    // 5 dar tablas
-    // 6 Mostrar estado de la partida
-    // 0 finalizar programa --> ¡Estas seguro? (S/N)
-    /**
+     * Muestra el menú principal del programa
      *
+     * @return opcion elegida por el usuario
      */
-    public int menuPartida(){
-        int opcion=0;
+    public static int menuPrincipal() {
+        int opcion = 0;
+        do {
+            System.out.println("╔══════════════════════════════╗");
+            System.out.println("║        MENÚ PRINCIPAL        ║");
+            System.out.println("╠══════════════════════════════╣");
+            System.out.println("   1 ▸ Iniciar nuevo juego");
+            System.out.println("   2 ▸ Cargar tablero");
+            System.out.println("   0 ▸ Salir");
+            System.out.println("╚══════════════════════════════╝");
+            opcion = Util.pideEntero("Introduce una opción: ", "Opcion no valida");
+            return opcion;
+        } while (opcion != 0);
+    }
+
+
+    /**
+     * Muestra el menú principal de la partida
+     *
+     * @return opcion elegida para el controlador
+     */
+    public int menuPartida() {
+        int opcion = 0;
         do {
             System.out.println("╔════════════════════════════════════╗");
             System.out.println("║            MENÚ PARTIDA            ║");
@@ -97,13 +98,21 @@ public static int menuPrincipal() {
             System.out.println("   6 ▸ Mostrar estado de la partida");
             System.out.println("   0 ▸ Salir");
             System.out.println("╚════════════════════════════════════╝");
-            opcion= Util.pideEntero("Introduce una opción: ","Opcion no valida");
+            opcion = Util.pideEntero("Introduce una opción: ", "Opcion no valida");
             return opcion;
-        } while (opcion!=0);
+        } while (opcion != 0);
     }
-    // 1 seleccionar casilla --> mover , volver (if es peon atacar) // si esta vacia que diga que esta vacia
-    public int menuSeleccionarCasilla(){
-        int opcion=0;
+
+
+// 1 seleccionar casilla --> mover , volver (if es peon atacar) // si esta vacia que diga que esta vacia
+
+    /**
+     * Muestra el menú para seleccionar una casilla normal
+     *
+     * @return opcion elegida por el usuario
+     */
+    public int menuSeleccionarCasilla() {
+        int opcion = 0;
         do {
             System.out.println("╔══════════════════════════════╗");
             System.out.println("║         MENÚ CASILLA         ║");
@@ -111,17 +120,19 @@ public static int menuPrincipal() {
             System.out.println("   1 ▸ elegir casilla");
             System.out.println("   0 ▸ volver");
             System.out.println("╚══════════════════════════════╝");
-            opcion= Util.pideEntero("Introduce una opción: ","Opcion no valida");
+            opcion = Util.pideEntero("Introduce una opción: ", "Opcion no valida");
             return opcion;
-        } while (opcion!=0);
+        } while (opcion != 0);
     }
+
 
     /**
      * Muestra el menú para elegir una casilla
+     *
      * @return opcion para el switch que usará el controlador
      */
-    public int menuSeleccionarCasillaPeon(){
-        int opcion=0;
+    public int menuSeleccionarCasillaPeon() {
+        int opcion = 0;
         do {
             System.out.println("╔══════════════════════════════╗");
             System.out.println("║         MENÚ CASILLA         ║");
@@ -130,12 +141,19 @@ public static int menuPrincipal() {
             System.out.println("   2 ▸ atacar");
             System.out.println("   0 ▸ volver");
             System.out.println("╚══════════════════════════════╝");
-            opcion= Util.pideEntero("Introduce una opción: ","Opcion no valida");
+            opcion = Util.pideEntero("Introduce una opción: ", "Opcion no valida");
             return opcion;
-        } while (opcion!=0);
+        } while (opcion != 0);
     }
-    public int mensajeReiniciar(){
-        int opcion=0;
+
+
+    /**
+     * Muestra el mensaje de confirmación para reiniciar el tablero
+     *
+     * @return opcion elegida por el usuario
+     */
+    public int mensajeReiniciar() {
+        int opcion = 0;
         do {
             System.out.println("╔════════════════════════════════╗");
             System.out.println("║           ¿REINICIAR?          ║");
@@ -143,13 +161,19 @@ public static int menuPrincipal() {
             System.out.println("   1 ▸ sí, estoy seguro de ello");
             System.out.println("   2 ▸ no, quiero volver");
             System.out.println("╚════════════════════════════════╝");
-            opcion= Util.pideEntero("Introduce una opción: ","Opcion no valida");
+            opcion = Util.pideEntero("Introduce una opción: ", "Opcion no valida");
             return opcion;
-        } while (opcion!=0);
+        } while (opcion != 0);
     }
 
-    public int mensajeFinalizar(){
-        int opcion=0;
+
+    /**
+     * Muestra el mensaje de confirmación para cerrar el programa
+     *
+     * @return opcion elegida por el usuario
+     */
+    public int mensajeFinalizar() {
+        int opcion = 0;
         do {
             System.out.println("╔══════════════════════════════════════╗");
             System.out.println("║           ¿CERRAR PROGRAMA?          ║");
@@ -157,21 +181,27 @@ public static int menuPrincipal() {
             System.out.println("   1 ▸ sí, acabemos con esto");
             System.out.println("   2 ▸ no, quiero volver a la partida");
             System.out.println("╚══════════════════════════════════════╝");
-            opcion= Util.pideEntero("Introduce una opción: ","Opcion no valida");
+            opcion = Util.pideEntero("Introduce una opción: ", "Opcion no valida");
             return opcion;
-        } while (opcion!=0);
+        } while (opcion != 0);
     }
 
 
+// comentarios originales se mantienen
+// 1 mostrar lista de fichas blancas
+// 2 mostrar lista de fichas negras
+// 3 mostrar lista de eliminadas totales
+// 4 obtener puntos de las fichas negras
+// 5 obtener puntos de las fichas blancas
+// 0 Volver
 
-    // 1 mostrar lista de fichas blancas
-    // 2 mostrar lista de fichas negras
-    // 3 mostrar lista de eliminadas totales ----> fichas negras eliminadas: alfil, peon, torre ---- fichas blancas eliminadas: peon, reina
-    // 4 obtener puntos de las fichas negras
-    // 5 obtener puntos de las fichas blancas
-    // 0 Volver
-    public int menuEstadoPartida(){
-        int opcion=0;
+    /**
+     * Muestra el menú de estado de la partida
+     *
+     * @return opcion elegida por el usuario
+     */
+    public int menuEstadoPartida() {
+        int opcion = 0;
         do {
             System.out.println("╔═══════════════════════════════════════════════╗");
             System.out.println("║                 MENÚ DE ESTADO                ║");
@@ -183,47 +213,84 @@ public static int menuPrincipal() {
             System.out.println("   5 ▸ obtener puntos de las fichas blancas");
             System.out.println("   0 ▸ Volver");
             System.out.println("╚═══════════════════════════════════════════════╝");
-            opcion= Util.pideEntero("Introduce una opción: ","Opcion no valida");
+            opcion = Util.pideEntero("Introduce una opción: ", "Opcion no valida");
             return opcion;
-        } while (opcion!=0);
+        } while (opcion != 0);
     }
 
-    public void mostrarCabeceraEliminadasTotales(){
+
+    /**
+     * Imprime la cabecera para mostrar las fichas eliminadas
+     */
+    public void mostrarCabeceraEliminadasTotales() {
 
         System.out.println("╔═══════════════════════════════════════════════╗");
         System.out.println("║            FICHAS ELIMINADAS TOTALES          ║");
         System.out.println("╠═══════════════════════════════════════════════╣");
 
     }
-    public static void imprimirLinea(){
+
+
+    /**
+     * Imprime la línea inferior del cuadro
+     */
+    public static void imprimirLinea() {
         System.out.println("╚═══════════════════════════════════════════════╝");
     }
 
 
-    public static void movimientoCorrectoOIncorrecto(boolean dato){
-        String result="";
-        if (dato==true){
-            result="Movimiento Correcto";
-        }else {
-            result="Movimiento Incorrecto";
+    /**
+     * Muestra si el movimiento ha sido correcto o incorrecto
+     *
+     * @param dato resultado del movimiento
+     */
+    public static void movimientoCorrectoOIncorrecto(boolean dato) {
+        String result = "";
+        if (dato == true) {
+            result = "Movimiento Correcto";
+        } else {
+            result = "Movimiento Incorrecto";
         }
         System.out.println(result);
     }
 
-    // metodo que te diga el turno segun el parametro que le pasen, si es par dirá que mueven las negras y si es
-    public static void turnoActual(int turno){
-        if (turno%2==0) System.out.println("Turno: "+ turno +", mueven las negras");
+
+    /**
+     * Muestra el turno actual según el número recibido
+     *
+     * @param turno número de turno actual
+     */
+    public static void turnoActual(int turno) {
+        if (turno % 2 == 0) System.out.println("Turno: " + turno + ", mueven las negras");
         else {
-            System.out.println("Turno: "+ turno +", mueven las blancas");
+            System.out.println("Turno: " + turno + ", mueven las blancas");
         }
 
     }
-    public static void mensajeFinal(){
-        System.out.println("Has decidido salir del programa.");
-        System.out.println("El equipo tecnico de: \n Antonio Jesus \n Daniel \n Kleopatra \n Amane (SM)");
-        System.out.println("Deseamos que vuelvas pronto por aquí, Hasta pronto 🙋🏻‍♂️🙋🏻‍♀️🙋🏻‍♂️🙋🏻‍♀️ ");
-    }
 
+
+    /**
+     * Metodo que imprime la despedida del programa
+     */
+    public static void mensajeFinal() {
+
+        System.out.println("╔═══════════════════════════════════════════════╗");
+        System.out.println("║               FIN DEL PROGRAMA                ║");
+        System.out.println("╠═══════════════════════════════════════════════╣");
+        System.out.println("  Has decidido salir del programa.");
+        System.out.println();
+        System.out.println("   ✦ Equipo técnico:");
+        System.out.println("   ▸ Antonio Jesus");
+        System.out.println("   ▸ Daniel");
+        System.out.println("   ▸ Kleopatra");
+        System.out.println("   ▸ Amane (SM)");
+        System.out.println();
+        System.out.println("  Gracias por usar nuestro programa.");
+        System.out.println("  Esperamos verte pronto por aquí.");
+        System.out.println("  Hasta pronto 🙋🏻‍♂️🙋🏻‍♀️🙋🏻‍♂️🙋🏻‍♀️");
+        System.out.println("╚═══════════════════════════════════════════════╝");
+
+    }
 
 
 }
