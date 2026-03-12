@@ -1,8 +1,10 @@
 package controladores;
 
 import modelo.Tablero;
+import utils.Util;
 
 public class ControllerPrincipal {
+    private Tablero t = new Tablero();
 
     /*
     private static int contador = 1;
@@ -18,19 +20,22 @@ public class ControllerPrincipal {
     */
 
 
-    public void gestionarMenuPrincipal(int opcion){
+    public static void gestionarMenuPrincipal(int opcion){
         switch (opcion){
             case 1 -> ControllerTablero.iniciarTablero();
-            case 2 -> //Aqui se carga una partida
+            case 2 -> //Util.cargarPartida();
         }
     }
 
-    public void gestionarMenuJuego(int opcion){
+    public static void gestionarMenuJuego(int opcion){
         switch (opcion){
             case 1 -> ;
             case 2 -> ControllerTablero.iniciarTablero();
-            case 2 -> Tablero.clonarTablero(Tablero t);
-            case 3 ->
+            case 3 -> Util.guardarPartida(t);
+            case 4 ->;
+            case 5 ->;
+            case 6 ->;
+            default -> System.out.println();
         }
     }
 
