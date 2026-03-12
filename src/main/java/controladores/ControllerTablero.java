@@ -1,5 +1,7 @@
 package controladores;
 
+import controladores.MenusNum.GestEstadoPartida;
+import controladores.MenusNum.GestMATKEnum;
 import modelo.*;
 
 public class ControllerTablero {
@@ -62,14 +64,90 @@ public class ControllerTablero {
         Tablero.getNegras().add(new Rey(Pieza.Color.NEGRA, "♚", 7, 4, 100));
     }
 
-    public void iniciarTablero(){
+    public static void iniciarTablero() {
         Tablero.vaciarPiezas();
         controladores.ControllerTablero.colocarPiezas();
     }
 
+    /**
+     * Crear el switch que llame a los métodos correspondientes y generar el orden de la partida, imprimir, contar puntos...;
+     *
+     * @param opcion introduction pro el usuario
+     */
+    public void gestionEstadoPartida(int opcion) {// ToDo
+        switch (GestEstadoPartida.gestEstadoFromIndex(opcion)) {
+            //Llamar para que imprima el menu ToDo
+            case MOSTRAR_FICHAS_BLANCAS:
+                Tablero.listarBlancas(); //necesito que sea estático o que este dentro de un metodo de estatico
+                break;
+            case MOSTRAR_FICHAS_NEGRAS:
+                Tablero.listarNegras(); //necesito que sea estático o que este dentro de un metodo de estatico
+                break;
+            case ELIMINADAS:
+                Tablero.listarEliminadas();//necesito que sea estático o que este dentro de un metodo de estatico
+                break;
+            case PUNTOS_FICHAS_BLANCAS:
+                int puntosBlancas = Tablero.obtenerPuntuacionBlancas();//necesito que sea estático o que este dentro de un metodo de estatico
+                // mensaje para imprimir los puntos ToDo
+                break;
+            case PUNTOS_FICHAS_NEGRAS:
+                int puntoNegras = Tablero.obtenerPuntuacionNegras();//necesito que sea estático o que este dentro de un metodo de estatico
+                // mensaje para imprimir los puntos ToDo
+                break;
+            case VOLVER:
+                break; //menuDeJuego;
+        }
+    }
 
+    public void gestionarMovimientosAtaques(int opcion, int filaPieza, int columnaPieza, int filaDestino, int columnaDestino, Tablero tablero) {
+        switch (GestMATKEnum.gestorMATKFromIndex(opcion)) {
+            //Llamar para que imprima el menu ToDo
+            case MOVER:
+                moverP(filaPieza, columnaPieza, filaDestino, columnaDestino, tablero);
+                break;
+            case ATACAR:
+                esPeon(filaPieza, columnaPieza, filaDestino, columnaDestino, tablero);
+                break;
+            case VOLVER:
+                break; //menuDeJuego;
+        }
+    }
 
+    /**
+     * Obtenemos la la pieza que de la casilla que ha introducido el usuario (en realidad la que metemos como parametro).
+     * Validamos el destino, pero no devuelve nada, solo imprime un mensaje
+     * Movemos la pieza.
+     *
+     * @param filaPieza    fila que introduzca el usuario
+     * @param columnaPieza columna que introduzca el usuario
+     * @param nuevaFila    fila del destino de la pieza
+     * @param nuevaColumna columna del destino de la pieza
+     * @param t            tablero
+     */
+    public void moverP(int filaPieza, int columnaPieza, int nuevaFila, int nuevaColumna, Tablero t) {
+        Pieza p = t.obtenerPiezaEnCasilla(filaPieza, columnaPieza);
+        p.validarDestino(nuevaFila, nuevaColumna, t);
+        p.mover(nuevaFila, nuevaColumna);
+    }
 
+    /**
+     * Obtenemos la la pieza que de la casilla que ha introducido el usuario (en realidad la que metemos como parametro).
+     * comprobamos que la pieza sea un peon.
+     * Si es peon, realiza el ataque en la fila columna destino.
+     * sino, imprime un mensaje.
+     *
+     * @param filaPieza
+     * @param columnaPieza
+     * @param filaDestino
+     * @param columnaDestino
+     * @param t
+     */
+    public void esPeon(int filaPieza, int columnaPieza, int filaDestino, int columnaDestino, Tablero t) {
+        Pieza p = t.obtenerPiezaEnCasilla(filaPieza, columnaPieza);
+        if (p instanceof Peon peon) {
+            peon.ataque(filaDestino, columnaDestino);
+        } else System.out.println("Solo el peon puede realizar esta acción.");
+    }
 
 
 }

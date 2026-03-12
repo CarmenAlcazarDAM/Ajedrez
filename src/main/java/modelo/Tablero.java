@@ -1,13 +1,22 @@
 package modelo;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.ArrayList;
 import java.util.List;
 
+@XmlRootElement(name="tablero")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Tablero {
     private static List<Pieza> blancas = new ArrayList<>();
     private static List<Pieza> negras = new ArrayList<>();
     private static List<Pieza> eliminadas = new ArrayList<>();
     private static List<Pieza> posicionInicial = new ArrayList<>();
+    private int contadorTurnos;
+
+    /* ///////////////// CONSTRUCTOR VACÍO POR DEFECTO ///////////////// */
+    public Tablero() {}
 
     public static List<Pieza> getBlancas() {
         return blancas;
@@ -29,6 +38,14 @@ public class Tablero {
         return eliminadas;
     }
 
+    public int getContadorTurnos() {
+        return contadorTurnos;
+    }
+
+    public void setContadorTurnos(int contadorTurnos) {
+        this.contadorTurnos = contadorTurnos;
+    }
+
     public static void vaciarPiezas() {
         blancas.clear();
         negras.clear();
@@ -36,7 +53,7 @@ public class Tablero {
     }
 
     /**
-     * metodo que verifica si una casilla está ocupada
+     * Método que verifica si una casilla está ocupada
      *
      * @param nuevaFila    fila que se recibe para verificar si la casilla está en la fila
      * @param nuevaColumna columna que se recibe para verificar si la casilla está en la columna
@@ -58,7 +75,7 @@ public class Tablero {
     }
 
     /**
-     * metodo que devuelve true si encuentra una ficha en el camino indicado
+     * Método que devuelve true si encuentra una ficha en el camino indicado
      *
      * @param filaOrigen     forma la posicion de origen junto con columnaOrigen
      * @param columnaOrigen  forma la posicion de origen junto con filaOrigen
@@ -88,7 +105,7 @@ public class Tablero {
     /**
      * Método que devuelve impreso el contenido del ArrayList blancas
      */
-    public void listarBlancas() {
+    public static void listarBlancas() {
         System.out.println("\nListado de BLANCAS:");
         for (Pieza p : blancas) {
             System.out.println(p.toString());
@@ -99,7 +116,7 @@ public class Tablero {
     /**
      * Método que devuelve impreso el contenido del ArrayList negras
      */
-    public void listarNegras() {
+    public static void listarNegras() {
         System.out.println("\nListado de NEGRAS:");
         for (Pieza p : negras) {
             System.out.println(p.toString());
@@ -110,7 +127,7 @@ public class Tablero {
     /**
      * Método que devuelve impreso el contenido del ArrayList eliminadas
      */
-    public void listarEliminadas() {
+    public static void listarEliminadas() {
         System.out.println("\nELIMINADAS:");
         if (eliminadas.size() == 0) {
             System.out.println("Actualmente no hay piezas eliminadas");
@@ -126,7 +143,7 @@ public class Tablero {
      * Metodo que devuelve la suma total de las piezas blancas vivas
      * @return devuelve la suma total
      */
-    public int obtenerPuntuacionBlancas(){
+    public static int obtenerPuntuacionBlancas(){
         int suma = 0;
         for (Pieza p : blancas){
             suma += p.getPuntos();
@@ -138,7 +155,7 @@ public class Tablero {
      * Metodo que devuelve la suma total de las piezas negras vivas
      * @return devuelve la suma total
      */
-    public int obtenerPuntuacionNegras(){
+    public static int obtenerPuntuacionNegras(){
         int suma = 0;
         for (Pieza p : negras){
             suma += p.getPuntos();
@@ -150,7 +167,7 @@ public class Tablero {
      * Metodo que inserta una pieza segun el color
      * @param p requiere de una pieza para poder insertarla
      */
-    public void insertarPiezaenCasilla(Pieza p){
+    public static void insertarPiezaenCasilla(Pieza p){
         if (p.getColor() == Pieza.Color.BLANCA){
             blancas.add(p);
         } else {
@@ -167,6 +184,8 @@ public class Tablero {
         Tablero copia = new Tablero();
         copia.vaciarPiezas();
 
+        copia.setContadorTurnos(t.getContadorTurnos());
+
         for (Pieza p : t.blancas) {
             copia.insertarPiezaenCasilla(p);
         }
@@ -177,6 +196,39 @@ public class Tablero {
 
         return copia;
     }
+
+    /**
+     * Me traigo el tablero y el color de las piezas por parametro, hago un Arraylist de las piezas aliadas y enemigas
+     * Luego determino si estamos jugando como blancas o como negras.
+     * Busco el rey entre los aliados. ...
+     * Luego compruebo si entre las piezas enemigas hay alguna que pueda mover a la posicion en la qu ese encuentra el rey aliado*
+     *
+     * @param tablero el tablero
+     * @param color   el color de la pieza
+     * @return si hay hay o no jaque
+     */
+    public static boolean comprobarJaque(Tablero tablero, Pieza.Color color) {
+        List<Pieza> enemiga;
+        List<Pieza> aliadas;
+        Pieza rey = null;
+
+        if (color == Pieza.Color.BLANCA) {
+            aliadas = Tablero.getBlancas();
+            enemiga = Tablero.getNegras();
+        } else {
+            aliadas = Tablero.getNegras();
+            enemiga = Tablero.getBlancas();
+        }
+
+        for (Pieza pieza : aliadas) if (pieza instanceof Rey) rey = pieza;
+
+        if (rey == null) throw new RuntimeException("Rey no encontrado");
+
+        for (Pieza pieza : enemiga) if (pieza.puedeMover(rey.getFila(), rey.getColumna(), tablero)) return true;
+
+        return false;
+    }
+
 
 }
 

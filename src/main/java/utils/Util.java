@@ -1,14 +1,25 @@
 package utils;
 
+import modelo.Tablero;
+
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
 import java.util.InputMismatchException;
-import java.util.Random;
 import java.util.Scanner;
+import java.io.File;
 
 public  class Util {
     public static Scanner teclado = new Scanner(System.in);
 
-
-    public static int pideEntero(String msn, String opcionNoValida) {
+    /**
+     * Pide un entero sin que me puedan poner otra cosa que no sea un entero
+     * @param msn Mensaje para pedir el entero
+     * @param msnError Mensaje de error si el usuario pone algo que no esta permitido
+     * @return devuelvo el entero recogido
+     */
+    public static int pideEntero(String msn, String msnError) {
         int n = 0;
         boolean error = false;
         do {
@@ -17,23 +28,7 @@ public  class Util {
                 n = teclado.nextInt();
                 error = false;
             } catch (InputMismatchException e) {
-                System.out.println("Valor no válido");
-                error = true;
-                teclado.next();
-            }
-        } while (error);
-        return n;
-    }
-    public static double pideDouble(String msn) {
-        double n = 0;
-        boolean error = false;
-        do {
-            try {
-                System.out.println(msn);
-                n = teclado.nextDouble();
-                error = false;
-            } catch (InputMismatchException e) {
-                System.out.println("Valor no válido");
+                System.out.println(msnError);
                 error = true;
                 teclado.next();
             }
@@ -41,15 +36,44 @@ public  class Util {
         return n;
     }
 
-    public static String pideString(String msn) {
-        String cadena=null;
-        System.out.println(msn);
-        cadena = teclado.next();
-        return cadena;
+    /**
+     * Método para serializar el programa y guardar la información en un archivo XML
+     * @param tablero --> Clase Tablero pasada por parámetro
+     * @return --> Devuelve true si se ha guardado la información correctamente
+     */
+    public static boolean guardarPartida(Tablero tablero){
+
+        try {
+            JAXBContext context = JAXBContext.newInstance(Tablero.class);
+            Marshaller marshaller = context.createMarshaller();
+            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT,true);
+            marshaller.marshal(tablero, new File("tableroXML"));
+            return true;
+        } catch (JAXBException e) {
+            throw new RuntimeException(e);
+        }
     }
 
-    public static int generateRandomNumber(int min, int max) {
-        Random r = new Random();
-        return r.nextInt((max - min) + 1) + min;
+    /**
+     * Método para leer la información de un archivo XML
+     * @param tablero --> Clase Tablero pasada por parámetro
+     * @return --> Devuelve un objeto tablero con la información del archivo
+     */
+    public static Tablero cargarPartida(Tablero tablero){
+        Tablero tableroDeserializada = tablero;
+        try {
+            JAXBContext context = JAXBContext.newInstance(tablero.getClass());
+            Unmarshaller unmarshaller = context.createUnmarshaller();
+            tableroDeserializada = (Tablero) unmarshaller.unmarshal(new File("tableroXML"));
+
+
+        } catch (JAXBException e) {
+            throw new RuntimeException(e);
+        }
+        return tableroDeserializada;
     }
+
+
+
+
 }
