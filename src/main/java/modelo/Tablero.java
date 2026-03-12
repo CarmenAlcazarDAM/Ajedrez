@@ -105,7 +105,7 @@ public class Tablero {
     /**
      * Método que devuelve impreso el contenido del ArrayList blancas
      */
-    public void listarBlancas() {
+    public static void listarBlancas() {
         System.out.println("\nListado de BLANCAS:");
         for (Pieza p : blancas) {
             System.out.println(p.toString());
@@ -116,7 +116,7 @@ public class Tablero {
     /**
      * Método que devuelve impreso el contenido del ArrayList negras
      */
-    public void listarNegras() {
+    public static void listarNegras() {
         System.out.println("\nListado de NEGRAS:");
         for (Pieza p : negras) {
             System.out.println(p.toString());
@@ -127,7 +127,7 @@ public class Tablero {
     /**
      * Método que devuelve impreso el contenido del ArrayList eliminadas
      */
-    public void listarEliminadas() {
+    public static void listarEliminadas() {
         System.out.println("\nELIMINADAS:");
         if (eliminadas.size() == 0) {
             System.out.println("Actualmente no hay piezas eliminadas");
@@ -143,7 +143,7 @@ public class Tablero {
      * Metodo que devuelve la suma total de las piezas blancas vivas
      * @return devuelve la suma total
      */
-    public int obtenerPuntuacionBlancas(){
+    public static int obtenerPuntuacionBlancas(){
         int suma = 0;
         for (Pieza p : blancas){
             suma += p.getPuntos();
@@ -155,7 +155,7 @@ public class Tablero {
      * Metodo que devuelve la suma total de las piezas negras vivas
      * @return devuelve la suma total
      */
-    public int obtenerPuntuacionNegras(){
+    public static int obtenerPuntuacionNegras(){
         int suma = 0;
         for (Pieza p : negras){
             suma += p.getPuntos();
