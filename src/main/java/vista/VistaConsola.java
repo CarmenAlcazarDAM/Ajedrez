@@ -74,8 +74,8 @@ public class VistaConsola {
             System.out.println("   0 ▸ Salir");
             System.out.println("╚══════════════════════════════╝");
             opcion = Util.pideEntero("Introduce una opción: ", "Opcion no valida");
-            return opcion;
         } while (opcion != 0);
+        return opcion;
     }
 
 
@@ -99,8 +99,8 @@ public class VistaConsola {
             System.out.println("   0 ▸ Salir");
             System.out.println("╚════════════════════════════════════╝");
             opcion = Util.pideEntero("Introduce una opción: ", "Opcion no valida");
-            return opcion;
         } while (opcion != 0);
+        return opcion;
     }
 
 
@@ -121,8 +121,8 @@ public class VistaConsola {
             System.out.println("   0 ▸ volver");
             System.out.println("╚══════════════════════════════╝");
             opcion = Util.pideEntero("Introduce una opción: ", "Opcion no valida");
-            return opcion;
         } while (opcion != 0);
+        return opcion;
     }
 
 
@@ -142,8 +142,8 @@ public class VistaConsola {
             System.out.println("   0 ▸ volver");
             System.out.println("╚══════════════════════════════╝");
             opcion = Util.pideEntero("Introduce una opción: ", "Opcion no valida");
-            return opcion;
         } while (opcion != 0);
+        return opcion;
     }
 
 
@@ -162,8 +162,8 @@ public class VistaConsola {
             System.out.println("   2 ▸ no, quiero volver");
             System.out.println("╚════════════════════════════════╝");
             opcion = Util.pideEntero("Introduce una opción: ", "Opcion no valida");
-            return opcion;
         } while (opcion != 0);
+        return opcion;
     }
 
 
@@ -182,8 +182,8 @@ public class VistaConsola {
             System.out.println("   2 ▸ no, quiero volver a la partida");
             System.out.println("╚══════════════════════════════════════╝");
             opcion = Util.pideEntero("Introduce una opción: ", "Opcion no valida");
-            return opcion;
         } while (opcion != 0);
+        return opcion;
     }
 
 
@@ -214,8 +214,8 @@ public class VistaConsola {
             System.out.println("   0 ▸ Volver");
             System.out.println("╚═══════════════════════════════════════════════╝");
             opcion = Util.pideEntero("Introduce una opción: ", "Opcion no valida");
-            return opcion;
         } while (opcion != 0);
+        return opcion;
     }
 
 
