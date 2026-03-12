@@ -7,20 +7,20 @@ import vista.VistaConsola;
 public class Main {
     public static void main(String[] args) {
 
-        System.out.println("AJEDREZ");
-        int opcion = 0;
-
-        do{
-
-
-
-        }while (opcion!=0);
-
-
-
-
-
-
+//        System.out.println("AJEDREZ");
+//        int opcion = 0;
+//
+//        do{
+//
+//
+//
+//        }while (opcion!=0);
+//
+//
+//
+//
+//
+//
 
 
 
@@ -31,14 +31,14 @@ public class Main {
         Tablero tablero = new Tablero();
 
         controladorTablero.iniciarTablero();
-        vistaConsola.vistaTablero(tablero);
-
-        Pieza torre = new Torre(Pieza.Color.BLANCA, "♖", 0, 0, 5);
-        System.out.println(torre.toString());
-
-        tablero.listarBlancas();
-        tablero.listarNegras();
-        tablero.listarEliminadas();
+        vistaConsola.estiloTablero(tablero);
+//
+//        Pieza torre = new Torre(Pieza.Color.BLANCA, "♖", 0, 0, 5);
+//        System.out.println(torre.toString());
+//
+//        tablero.listarBlancas();
+//        tablero.listarNegras();
+//        tablero.listarEliminadas();
 
 
         //--------------------------------------------
