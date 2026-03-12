@@ -28,15 +28,21 @@ public class ControllerPrincipal {
     }
 
     public static void gestionarMenuJuego(int opcion){
-        switch (opcion){
-            case 1 -> ;
-            case 2 -> ControllerTablero.iniciarTablero();
-            case 3 -> Util.guardarPartida(t);
-            case 4 ->;
-            case 5 ->;
-            case 6 ->;
-            default -> System.out.println();
-        }
+        do {
+
+            switch (opcion) {
+                case 1 -> ;
+                case 2 -> ControllerTablero.iniciarTablero();
+                case 3 -> Util.guardarPartida(t);
+                case 4 -> finalizarPartida();
+                case 5 -> finalizarPartida();
+                case 6 -> {
+                    int op = Util.pideEntero("Selecciona una opcion", "Error opcion no valida");
+                    ControllerTablero.gestionEstadoPartida(op);
+                }
+                case 0 -> System.out.println("Has elegido salir del programa");
+            }
+        }while (opcion == 0);
     }
 
 
