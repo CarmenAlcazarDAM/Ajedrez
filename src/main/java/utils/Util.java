@@ -39,16 +39,15 @@ public  class Util {
     /**
      * Método para serializar el programa y guardar la información en un archivo XML
      * @param tablero --> Clase Tablero pasada por parámetro
-     * @param fileName --> Nombre del archivo de destino
      * @return --> Devuelve true si se ha guardado la información correctamente
      */
-    public static boolean serializarXML(Tablero tablero, String fileName){
+    public static boolean guardarPartida(Tablero tablero){
 
         try {
             JAXBContext context = JAXBContext.newInstance(Tablero.class);
             Marshaller marshaller = context.createMarshaller();
             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT,true);
-            marshaller.marshal(tablero, new File(fileName));
+            marshaller.marshal(tablero, new File("tableroXML"));
             return true;
         } catch (JAXBException e) {
             throw new RuntimeException(e);
@@ -58,15 +57,14 @@ public  class Util {
     /**
      * Método para leer la información de un archivo XML
      * @param tablero --> Clase Tablero pasada por parámetro
-     * @param fileName --> Nombre del archivo de destino
      * @return --> Devuelve un objeto tablero con la información del archivo
      */
-    public static Tablero deserializarXML(Tablero tablero, String fileName){
+    public static Tablero cargarPartida(Tablero tablero){
         Tablero tableroDeserializada = tablero;
         try {
             JAXBContext context = JAXBContext.newInstance(tablero.getClass());
             Unmarshaller unmarshaller = context.createUnmarshaller();
-            tableroDeserializada = (Tablero) unmarshaller.unmarshal(new File(fileName));
+            tableroDeserializada = (Tablero) unmarshaller.unmarshal(new File("tableroXML"));
 
 
         } catch (JAXBException e) {
