@@ -1,7 +1,14 @@
 package utils;
 
+import modelo.Tablero;
+
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import java.io.File;
 
 public  class Util {
     public static Scanner teclado = new Scanner(System.in);
@@ -28,4 +35,46 @@ public  class Util {
         } while (error);
         return n;
     }
+
+    /**
+     * Método para serializar el programa y guardar la información en un archivo XML
+     * @param tablero --> Clase Tablero pasada por parámetro
+     * @param fileName --> Nombre del archivo de destino
+     * @return --> Devuelve true si se ha guardado la información correctamente
+     */
+    public static boolean serializarXML(Tablero tablero, String fileName){
+
+        try {
+            JAXBContext context = JAXBContext.newInstance(Tablero.class);
+            Marshaller marshaller = context.createMarshaller();
+            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT,true);
+            marshaller.marshal(tablero, new File(fileName));
+            return true;
+        } catch (JAXBException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * Método para leer la información de un archivo XML
+     * @param tablero --> Clase Tablero pasada por parámetro
+     * @param fileName --> Nombre del archivo de destino
+     * @return --> Devuelve un objeto tablero con la información del archivo
+     */
+    public static Tablero deserializarXML(Tablero tablero, String fileName){
+        Tablero tableroDeserializada = tablero;
+        try {
+            JAXBContext context = JAXBContext.newInstance(tablero.getClass());
+            Unmarshaller unmarshaller = context.createUnmarshaller();
+            tableroDeserializada = (Tablero) unmarshaller.unmarshal(new File(fileName));
+
+
+        } catch (JAXBException e) {
+            throw new RuntimeException(e);
+        }
+        return tableroDeserializada;
+    }
+
+
+
 }
