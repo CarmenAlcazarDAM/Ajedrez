@@ -74,7 +74,7 @@ public class ControllerTablero {
      *
      * @param opcion introduction pro el usuario
      */
-    public void gestionEstadoPartida(int opcion) {// ToDo
+    public static void gestionEstadoPartida(int opcion) {// ToDo
         switch (GestEstadoPartida.gestEstadoFromIndex(opcion)) {
             //Llamar para que imprima el menu ToDo
             case MOSTRAR_FICHAS_BLANCAS:
