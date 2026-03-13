@@ -5,7 +5,7 @@ public enum GestMATKEnum {
     ATACAR(2),
     VOLVER(0);
 
-    private int index;
+    private final int index;
 
     GestMATKEnum(int index) {
         this.index = index;
