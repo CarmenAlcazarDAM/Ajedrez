@@ -142,11 +142,11 @@ public class ControllerPrincipal {
 
         } while (!puedeUsarPieza);
 
-        gestionarMovimientos(p, tablero);
+        opcionesMovimientos(p, tablero);
 
     }
 
-    public static void gestionarMovimientos(Pieza p, Tablero tablero){
+    public static void opcionesMovimientos(Pieza p, Tablero tablero){
         int opcion=-1;
         if (p instanceof Peon) {
             opcion= VistaConsola.menuSeleccionarCasillaPeon();
@@ -155,31 +155,62 @@ public class ControllerPrincipal {
             opcion=VistaConsola.menuSeleccionarCasilla();
         }
         switch (opcion){
-            case 1:
-                boolean movimientoRealizado = false;
-
-                do {
-                    try {
-                        int nuevaFila = Util.pideEnteroRango("Fila destino: ", "Error 0-7", 0, 7);
-                        int nuevaColumna = Util.pideEnteroRango("Columna destino: ", "Error 0-7", 0, 7);
-
-                        p.validarDestino(nuevaFila, nuevaColumna, tablero);
-
-                        if (p.puedeMover(nuevaFila, nuevaColumna, tablero)) {
-                            p.mover( nuevaFila, nuevaColumna);
-                            movimientoRealizado = true;
-                            VistaConsola.movimientoCorrectoOIncorrecto(movimientoRealizado);
-                        } else {
-                            VistaConsola.movimientoCorrectoOIncorrecto(movimientoRealizado);
-                        }
-
-                    } catch (IllegalArgumentException e) {
-                        System.out.println("ERROR: " + e.getMessage());
-                    }
-
-                } while (!movimientoRealizado);
+            case 1 -> mover(p, tablero);
+            case 2-> p.ataque();
         }
 
+    }
+
+    public static void mover(Pieza p, Tablero tablero){
+        boolean movimientoRealizado = false;
+
+        do {
+            try {
+                int nuevaFila = Util.pideEnteroRango("Fila destino: ", "Error, debe ser entre 0 y 7", 0, 7);
+                int nuevaColumna = Util.pideEnteroRango("Columna destino: ", "Error, debe ser entre 0 y 7", 0, 7);
+
+                p.validarDestino(nuevaFila, nuevaColumna, tablero);
+
+                if (p.puedeMover(nuevaFila, nuevaColumna, tablero)) {
+                    p.mover( nuevaFila, nuevaColumna);
+                    movimientoRealizado = true;
+                    VistaConsola.movimientoCorrectoOIncorrecto(movimientoRealizado);
+                } else {
+                    VistaConsola.movimientoCorrectoOIncorrecto(movimientoRealizado);
+                }
+
+            } catch (IllegalArgumentException e) {
+                System.out.println("ERROR: " + e.getMessage());
+            }
+
+        } while (!movimientoRealizado);
+    }
+
+    public static void atacar(Pieza p, Tablero tablero){
+        boolean ataqueRealizado = false;
+        if (p instanceof Peon) { Peon peon = (Peon) p; }
+
+        do {
+            try {
+                int nuevaFila = Util.pideEnteroRango("Fila destino: ", "Error, debe ser entre 0 y 7", 0, 7);
+                int nuevaColumna = Util.pideEnteroRango("Columna destino: ", "Error, debe ser entre 0 y 7", 0, 7);
+
+                peon.validarDestino(nuevaFila, nuevaColumna, tablero);
+
+                if (p.puedeMover(nuevaFila, nuevaColumna, tablero)) {
+                    peon.ataque( nuevaFila, nuevaColumna);
+                    ataqueRealizado = true;
+                    VistaConsola.movimientoCorrectoOIncorrecto(ataqueRealizado);
+                } else {
+                    VistaConsola.movimientoCorrectoOIncorrecto(ataqueRealizado);
+                }
+
+            } catch (IllegalArgumentException e) {
+                System.out.println("ERROR: " + e.getMessage());
+            }
+
+        } while (!ataqueRealizado);
+    }
     }
 
 
