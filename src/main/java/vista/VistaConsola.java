@@ -292,10 +292,10 @@ public class VistaConsola {
         System.out.println("  Has decidido salir del programa.");
         System.out.println();
         System.out.println("   ✦ Equipo técnico:");
-        System.out.println("   ▸ Antonio Jesus");
+        System.out.println("   ▸ Carmen (SM)");
+        System.out.println("   ▸ Antonio Jesús");
         System.out.println("   ▸ Daniel");
         System.out.println("   ▸ Kleopatra");
-        System.out.println("   ▸ Amane (SM)");
         System.out.println();
         System.out.println("  Gracias por usar nuestro programa.");
         System.out.println("  Esperamos verte pronto por aquí.");
