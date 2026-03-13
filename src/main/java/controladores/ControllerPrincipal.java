@@ -23,7 +23,7 @@ public class ControllerPrincipal {
     public static void gestionarMenuPrincipal(int opcion){
         switch (opcion){
             case 1 -> ControllerTablero.iniciarTablero();
-            case 2 -> //Util.cargarPartida();
+            case 2 ->Util.cargarPartida();
         }
     }
 
