@@ -88,7 +88,7 @@ public class ControllerTablero {
      */
     public static void gestionEstadoPartida(int opcion) {// ToDo
         while (true) {
-            vista.menuEstadoPartida();
+
             switch (GestEstadoPartida.gestEstadoFromIndex(opcion)) {
                 case MOSTRAR_FICHAS_BLANCAS:
                     Tablero.listarBlancas();

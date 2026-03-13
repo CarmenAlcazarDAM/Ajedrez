@@ -75,9 +75,9 @@ public class VistaConsola {
      *
      * @return opcion elegida por el usuario
      */
-    public static int menuPrincipal() {
-        int opcion = 0;
-        do {
+    public static void menuPrincipal() {
+
+
             System.out.println("╔══════════════════════════════╗");
             System.out.println("║        MENÚ PRINCIPAL        ║");
             System.out.println("╠══════════════════════════════╣");
@@ -85,9 +85,7 @@ public class VistaConsola {
             System.out.println("   2 ▸ Cargar tablero");
             System.out.println("   0 ▸ Salir");
             System.out.println("╚══════════════════════════════╝");
-            opcion = Util.pideEntero("Introduce una opción: ", "Opcion no valida");
-        } while (opcion != 0);
-        return opcion;
+
     }
 
 
@@ -96,9 +94,8 @@ public class VistaConsola {
      *
      * @return opcion elegida para el controlador
      */
-    public int menuPartida() {
-        int opcion = 0;
-        do {
+    public static int menuPartida() {
+
             System.out.println("╔════════════════════════════════════╗");
             System.out.println("║            MENÚ PARTIDA            ║");
             System.out.println("╠════════════════════════════════════╣");
@@ -110,8 +107,8 @@ public class VistaConsola {
             System.out.println("   6 ▸ Mostrar estado de la partida");
             System.out.println("   0 ▸ Salir");
             System.out.println("╚════════════════════════════════════╝");
-            opcion = Util.pideEntero("Introduce una opción: ", "Opcion no valida");
-        } while (opcion != 0);
+            int opcion = Util.pideEnteroRango("Introduce una opción: ", "Error, debe ser una opción entre 0 y 6", 0,6);
+
         return opcion;
     }
 
@@ -123,17 +120,16 @@ public class VistaConsola {
      *
      * @return opcion elegida por el usuario
      */
-    public int menuSeleccionarCasilla() {
-        int opcion = 0;
-        do {
+    public static int menuSeleccionarCasilla() {
+
             System.out.println("╔══════════════════════════════╗");
             System.out.println("║         MENÚ CASILLA         ║");
             System.out.println("╠══════════════════════════════╣");
-            System.out.println("   1 ▸ elegir casilla");
+            System.out.println("   1 ▸ mover");
             System.out.println("   0 ▸ volver");
             System.out.println("╚══════════════════════════════╝");
-            opcion = Util.pideEntero("Introduce una opción: ", "Opcion no valida");
-        } while (opcion != 0);
+           int opcion = Util.pideEnteroRango("Introduce una opción: ", "Error, debe ser una opción 0 o 1",0,1);
+
         return opcion;
     }
 
@@ -143,18 +139,17 @@ public class VistaConsola {
      *
      * @return opcion para el switch que usará el controlador
      */
-    public int menuSeleccionarCasillaPeon() {
-        int opcion = 0;
-        do {
+    public static int menuSeleccionarCasillaPeon() {
+
             System.out.println("╔══════════════════════════════╗");
             System.out.println("║         MENÚ CASILLA         ║");
             System.out.println("╠══════════════════════════════╣");
-            System.out.println("   1 ▸ elegir casilla");
+            System.out.println("   1 ▸ mover");
             System.out.println("   2 ▸ atacar");
             System.out.println("   0 ▸ volver");
             System.out.println("╚══════════════════════════════╝");
-            opcion = Util.pideEntero("Introduce una opción: ", "Opcion no valida");
-        } while (opcion != 0);
+            int opcion = Util.pideEnteroRango("Introduce una opción: ", "Error, debe ser una opción entre 0 y 2",0,2);
+
         return opcion;
     }
 
@@ -164,17 +159,16 @@ public class VistaConsola {
      *
      * @return opcion elegida por el usuario
      */
-    public int mensajeReiniciar() {
-        int opcion = 0;
-        do {
+    public static int mensajeReiniciar() {
+
             System.out.println("╔════════════════════════════════╗");
             System.out.println("║           ¿REINICIAR?          ║");
             System.out.println("╠════════════════════════════════╣");
             System.out.println("   1 ▸ sí, estoy seguro de ello");
             System.out.println("   2 ▸ no, quiero volver");
             System.out.println("╚════════════════════════════════╝");
-            opcion = Util.pideEntero("Introduce una opción: ", "Opcion no valida");
-        } while (opcion != 0);
+            int opcion = Util.pideEnteroRango("Introduce una opción: ", "Error, debe ser una opción 1 o 2", 1,2);
+
         return opcion;
     }
 
@@ -184,17 +178,17 @@ public class VistaConsola {
      *
      * @return opcion elegida por el usuario
      */
-    public int mensajeFinalizar() {
-        int opcion = 0;
-        do {
+    public static int mensajeFinalizar() {
+
+
             System.out.println("╔══════════════════════════════════════╗");
             System.out.println("║           ¿CERRAR PROGRAMA?          ║");
             System.out.println("╠══════════════════════════════════════╣");
             System.out.println("   1 ▸ sí, acabemos con esto");
             System.out.println("   2 ▸ no, quiero volver a la partida");
             System.out.println("╚══════════════════════════════════════╝");
-            opcion = Util.pideEntero("Introduce una opción: ", "Opcion no valida");
-        } while (opcion != 0);
+            int opcion = Util.pideEnteroRango("Introduce una opción: ", "Error, debe ser una opción 1 0 2",1,2);
+
         return opcion;
     }
 
@@ -212,9 +206,8 @@ public class VistaConsola {
      *
      * @return opcion elegida por el usuario
      */
-    public int menuEstadoPartida() {
-        int opcion = 0;
-        do {
+    public static int menuEstadoPartida() {
+
             System.out.println("╔═══════════════════════════════════════════════╗");
             System.out.println("║                 MENÚ DE ESTADO                ║");
             System.out.println("╠═══════════════════════════════════════════════╣");
@@ -225,8 +218,8 @@ public class VistaConsola {
             System.out.println("   5 ▸ obtener puntos de las fichas blancas");
             System.out.println("   0 ▸ Volver");
             System.out.println("╚═══════════════════════════════════════════════╝");
-            opcion = Util.pideEntero("Introduce una opción: ", "Opcion no valida");
-        } while (opcion != 0);
+            int opcion = Util.pideEnteroRango("Introduce una opción: ", "Error, debe ser una opción entre 0 y 5",0,5);
+
         return opcion;
     }
 
@@ -234,7 +227,7 @@ public class VistaConsola {
     /**
      * Imprime la cabecera para mostrar las fichas eliminadas
      */
-    public void mostrarCabeceraEliminadasTotales() {
+    public static void mostrarCabeceraEliminadasTotales() {
 
         System.out.println("╔═══════════════════════════════════════════════╗");
         System.out.println("║            FICHAS ELIMINADAS TOTALES          ║");
@@ -289,7 +282,6 @@ public class VistaConsola {
         System.out.println("╔═══════════════════════════════════════════════╗");
         System.out.println("║               FIN DEL PROGRAMA                ║");
         System.out.println("╠═══════════════════════════════════════════════╣");
-        System.out.println("  Has decidido salir del programa.");
         System.out.println();
         System.out.println("   ✦ Equipo técnico:");
         System.out.println("   ▸ Antonio Jesus");

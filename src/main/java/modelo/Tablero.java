@@ -13,7 +13,7 @@ public class Tablero {
     private static List<Pieza> negras = new ArrayList<>();
     private static List<Pieza> eliminadas = new ArrayList<>();
     private static List<Pieza> posicionInicial = new ArrayList<>();
-    private int contadorTurnos;
+    private static int contadorTurnos=1;
 
     /* ///////////////// CONSTRUCTOR VACÍO POR DEFECTO ///////////////// */
     public Tablero() {}
