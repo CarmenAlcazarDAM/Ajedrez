@@ -2,7 +2,6 @@ package controladores.MenusNum;
 
 public enum GestMATKEnum {
     MOVER(1),
-    ATACAR(2),
     VOLVER(0);
 
     private final int index;

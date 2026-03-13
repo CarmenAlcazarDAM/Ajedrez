@@ -5,16 +5,14 @@ import controladores.MenusNum.GestMATKEnum;
 import modelo.*;
 import vista.VistaConsola;
 
+import java.util.Scanner;
+
 public class ControllerTablero {
-    int filaPieza, columnaPieza, filaDestino, columnaDestino;
     private final static VistaConsola vista = new VistaConsola();
-    private final Pieza pOrigen;
-    private final Pieza pDestino;
     private final Tablero tab;
+    Scanner sc = new Scanner(System.in); // Medida temporal
 
     public ControllerTablero(Tablero tablero) {
-        this.pOrigen = tablero.obtenerPiezaEnCasilla(filaPieza, columnaPieza);
-        this.pDestino = tablero.obtenerPiezaEnCasilla(filaDestino, columnaDestino);
         this.tab = tablero;
     }
 
@@ -83,77 +81,134 @@ public class ControllerTablero {
 
     /**
      * Crear el switch que llame a los métodos correspondientes y generar el orden de la partida, imprimir, contar puntos...;
-     *
-     * @param opcion introduction pro el usuario
      */
-    public static void gestionEstadoPartida(int opcion) {// ToDo
-        while (true) {
-            vista.menuEstadoPartida();
-            switch (GestEstadoPartida.gestEstadoFromIndex(opcion)) {
-                case MOSTRAR_FICHAS_BLANCAS:
-                    Tablero.listarBlancas();
-                    break;
-                case MOSTRAR_FICHAS_NEGRAS:
-                    Tablero.listarNegras();
-                    break;
-                case ELIMINADAS:
-                    Tablero.listarEliminadas();
-                    vista.mostrarCabeceraEliminadasTotales();
-                    break;
-                case PUNTOS_FICHAS_BLANCAS:
-                    int puntosBlancas = Tablero.obtenerPuntuacionBlancas();
-                    // mensaje para imprimir los puntos ToDo
-                    break;
-                case PUNTOS_FICHAS_NEGRAS:
-                    int puntoNegras = Tablero.obtenerPuntuacionNegras();
-                    // mensaje para imprimir los puntos ToDo
-                    break;
-                case VOLVER:
-                    return;
-            }
+    public void gestionEstadoPartida() {
+        vista.menuEstadoPartida();// ToDo
+        GestEstadoPartida opcion = GestEstadoPartida.gestEstadoFromIndex((readInt(GestEstadoPartida.values().length)));
+        switch (opcion) {
+            case MOSTRAR_FICHAS_BLANCAS:
+                tab.listarBlancas();
+                break;
+            case MOSTRAR_FICHAS_NEGRAS:
+                tab.listarNegras();
+                break;
+            case ELIMINADAS:
+                tab.listarEliminadas();
+                vista.mostrarCabeceraEliminadasTotales();
+                break;
+            case PUNTOS_FICHAS_BLANCAS:
+                System.out.println("Puntos de las fichas blancas: " + tab.obtenerPuntuacionBlancas());
+                break;
+            case PUNTOS_FICHAS_NEGRAS:
+                System.out.println("Puntos de las fichas negras: " + tab.obtenerPuntuacionNegras());
+                break;
+            case VOLVER:
+                return;
         }
-
+    }
+    public void gestionarMovimientosAtaques() {
+        vista.menuSeleccionarCasilla();
+        GestMATKEnum opcion = GestMATKEnum.gestorMATKFromIndex(readInt(GestMATKEnum.values().length));
+        switch (opcion) {
+            case MOVER:
+                moverP();
+                break;
+            case VOLVER:
+                return;
+        }
     }
 
-    public void gestionarMovimientosAtaques(int opcion) {
-        while (true) {
-            esPeonMensaje();
-            switch (GestMATKEnum.gestorMATKFromIndex(opcion)) {
-                case MOVER -> moverP();
-                case ATACAR -> esPeon();
-                case VOLVER -> {
-                    return;
-                }
-            }
-        }
-
-    }
+    // MEDIDAS TEMPORALES HASTA QUE ESTE HECHA LA LÓGICA
+    // ############### CONTIENE SPOILERS #####################
 
     /**
      * Validamos el destino, pero no devuelve nada, solo imprime un mensaje
      * usamos el metodo movimiento correcto para imprimir el mensaje
      * Movemos la pieza si es true.
      */
-    public void moverP() {
-        pOrigen.validarDestino(filaDestino, columnaDestino, tab);
-        VistaConsola.movimientoCorrectoOIncorrecto(pDestino == null);
+    public void moverP() { // Medida temporal debe gestionarse en CONTROLADOR PRINCIPAL
+        Pieza pOrigen = getPiezaOrigen();
+        if (pOrigen == null) return;
 
-        if (pDestino == null) pOrigen.mover(filaDestino, columnaDestino);
-        VistaConsola.estiloTablero(tab);
+        //Pedir por pantalla las coordenadas de destino
+        int filaDestino = pedirCoordenadas("Introduce la fila de destino: ");
+        int columnaDestino = pedirCoordenadas("Introduce la columna de destino: ");
+
+        if (filaDestino == pOrigen.getFila() && columnaDestino == pOrigen.getColumna()) return;
+        if (!validarMovimiento(pOrigen, filaDestino, columnaDestino)) return;
+        if (!destinoValido(pOrigen, filaDestino, columnaDestino)) return;
+
+        esPeon(pOrigen, filaDestino, columnaDestino);
+
+        vista.estiloTablero(tab);
     }
 
-    /**
-     * Comprobamos que la pieza sea un peon.
-     * Si es peon, realiza el ataque en la fila columna destino.
-     * si no, imprime un mensaje.
-     */
-    public void esPeon() {
-        if (pOrigen instanceof Peon peon) peon.ataque(filaDestino, columnaDestino);
-        else System.out.println("[!] Solo el [ peon ] puede realizar esta acción.");
+    private void esPeon(Pieza pOrigen, int filaDestino, int columnaDestino) { // Medida Temporal debe gestionarse en PIEZA
+        if (pOrigen instanceof Peon peon) {
+            if (esAtaquePeon(peon, filaDestino, columnaDestino)) peon.ataque(filaDestino, columnaDestino);
+            else peon.mover(filaDestino, columnaDestino);
+        } else pOrigen.mover(filaDestino, columnaDestino);
     }
 
-    public void esPeonMensaje() {
-        if (pOrigen instanceof Peon) vista.menuSeleccionarCasillaPeon();
-        else vista.menuSeleccionarCasilla();
+    private Pieza getPiezaOrigen() { // Medida Temporal debe gestionarse en Pieza/Utils
+        // Pedir por pantalla las coordenadas de la pieza
+        int filaPieza = pedirCoordenadas("Introduce la fila de origen: ");
+        int columnaPieza = pedirCoordenadas("Introduce la columna de origen: ");
+
+        Pieza pOrigen = tab.obtenerPiezaEnCasilla(filaPieza, columnaPieza);
+        if (pOrigen == null) {
+            System.out.println("No hay pieza en la casilla de origen.");
+            return null;
+        }
+        return pOrigen;
+    }
+
+    public int pedirCoordenadas(String mensaje){ // Medida temporal, debe gestionarse en Utils
+        System.out.print(mensaje);
+        return sc.nextInt();
+    }
+
+    private boolean validarMovimiento(Pieza pOrigen, int dFila, int dCol) { // Medida temporal, debe gestionarse en PIEZA
+        boolean valido = pOrigen.validarDestino(dFila, dCol, tab);
+        vista.movimientoCorrectoOIncorrecto(valido);
+        return valido;
+    }
+
+    private boolean destinoValido(Pieza pOrigen, int dFila , int dCol) { // Medida temporal, debe gestionarse en CONTROLADORPRINCIPAL
+        Pieza pDestino = tab.obtenerPiezaEnCasilla(dFila, dCol);
+
+        if (pDestino != null) {
+            if (pDestino.getColor() == pOrigen.getColor()){
+                System.out.println("La casilla de destino ya está ocupada por una pieza aliada.");
+                return false;
+            } else return true;
+        }
+        return true;
+    }
+
+    private boolean esAtaquePeon(Peon peon, int filaDestino, int columnaDestino) { // Medida temporal, debe gestionarse en PEON
+        int avanceFila;
+
+        if (peon.getColor() == Pieza.Color.BLANCA) avanceFila = 1;
+        else avanceFila = -1;
+
+        boolean filaCorrecta = peon.getFila() + avanceFila == filaDestino;
+        boolean columnaCorrecta = Math.abs(peon.getColumna() - columnaDestino) == 1;
+
+        return filaCorrecta && columnaCorrecta;
+    }
+
+    public int readInt(int max) { // Medida Temporal
+        while (true) {
+            if (!sc.hasNextInt()) {
+                System.out.println("Numero invalido. Vuelve a introducir un numero.");
+                sc.nextLine();
+            } else {
+                int num = sc.nextInt();
+                sc.nextLine();
+                if (num >= 0 && num <= max) return num;
+                else System.out.println("Numero fuera de rango. Vuelve a introducir un numero.");
+            }
+        }
     }
 }
