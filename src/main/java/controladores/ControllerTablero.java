@@ -3,8 +3,20 @@ package controladores;
 import controladores.MenusNum.GestEstadoPartida;
 import controladores.MenusNum.GestMATKEnum;
 import modelo.*;
+import vista.VistaConsola;
 
 public class ControllerTablero {
+    int filaPieza, columnaPieza, filaDestino, columnaDestino;
+    private final static VistaConsola vista = new VistaConsola();
+    private final Pieza pOrigen;
+    private final Pieza pDestino;
+    private final Tablero tab;
+
+    public ControllerTablero(Tablero tablero) {
+        this.pOrigen = tablero.obtenerPiezaEnCasilla(filaPieza, columnaPieza);
+        this.pDestino = tablero.obtenerPiezaEnCasilla(filaDestino, columnaDestino);
+        this.tab = tablero;
+    }
 
     public static void colocarPiezas() {
         // Colocar piezas blancas
@@ -75,79 +87,73 @@ public class ControllerTablero {
      * @param opcion introduction pro el usuario
      */
     public static void gestionEstadoPartida(int opcion) {// ToDo
-        switch (GestEstadoPartida.gestEstadoFromIndex(opcion)) {
-            //Llamar para que imprima el menu ToDo
-            case MOSTRAR_FICHAS_BLANCAS:
-                Tablero.listarBlancas(); //necesito que sea estático o que este dentro de un metodo de estatico
-                break;
-            case MOSTRAR_FICHAS_NEGRAS:
-                Tablero.listarNegras(); //necesito que sea estático o que este dentro de un metodo de estatico
-                break;
-            case ELIMINADAS:
-                Tablero.listarEliminadas();//necesito que sea estático o que este dentro de un metodo de estatico
-                break;
-            case PUNTOS_FICHAS_BLANCAS:
-                int puntosBlancas = Tablero.obtenerPuntuacionBlancas();//necesito que sea estático o que este dentro de un metodo de estatico
-                // mensaje para imprimir los puntos ToDo
-                break;
-            case PUNTOS_FICHAS_NEGRAS:
-                int puntoNegras = Tablero.obtenerPuntuacionNegras();//necesito que sea estático o que este dentro de un metodo de estatico
-                // mensaje para imprimir los puntos ToDo
-                break;
-            case VOLVER:
-                break; //menuDeJuego;
+        while (true) {
+            vista.menuEstadoPartida();
+            switch (GestEstadoPartida.gestEstadoFromIndex(opcion)) {
+                case MOSTRAR_FICHAS_BLANCAS:
+                    Tablero.listarBlancas();
+                    break;
+                case MOSTRAR_FICHAS_NEGRAS:
+                    Tablero.listarNegras();
+                    break;
+                case ELIMINADAS:
+                    Tablero.listarEliminadas();
+                    vista.mostrarCabeceraEliminadasTotales();
+                    break;
+                case PUNTOS_FICHAS_BLANCAS:
+                    int puntosBlancas = Tablero.obtenerPuntuacionBlancas();
+                    // mensaje para imprimir los puntos ToDo
+                    break;
+                case PUNTOS_FICHAS_NEGRAS:
+                    int puntoNegras = Tablero.obtenerPuntuacionNegras();
+                    // mensaje para imprimir los puntos ToDo
+                    break;
+                case VOLVER:
+                    return;
+            }
         }
+
     }
 
-    public void gestionarMovimientosAtaques(int opcion, int filaPieza, int columnaPieza, int filaDestino, int columnaDestino, Tablero tablero) {
-        switch (GestMATKEnum.gestorMATKFromIndex(opcion)) {
-            //Llamar para que imprima el menu ToDo
-            case MOVER:
-                moverP(filaPieza, columnaPieza, filaDestino, columnaDestino, tablero);
-                break;
-            case ATACAR:
-                esPeon(filaPieza, columnaPieza, filaDestino, columnaDestino, tablero);
-                break;
-            case VOLVER:
-                break; //menuDeJuego;
+    public void gestionarMovimientosAtaques(int opcion) {
+        while (true) {
+            esPeonMensaje();
+            switch (GestMATKEnum.gestorMATKFromIndex(opcion)) {
+                case MOVER -> moverP();
+                case ATACAR -> esPeon();
+                case VOLVER -> {
+                    return;
+                }
+            }
         }
+
     }
 
     /**
-     * Obtenemos la la pieza que de la casilla que ha introducido el usuario (en realidad la que metemos como parametro).
      * Validamos el destino, pero no devuelve nada, solo imprime un mensaje
-     * Movemos la pieza.
-     *
-     * @param filaPieza    fila que introduzca el usuario
-     * @param columnaPieza columna que introduzca el usuario
-     * @param nuevaFila    fila del destino de la pieza
-     * @param nuevaColumna columna del destino de la pieza
-     * @param t            tablero
+     * usamos el metodo movimiento correcto para imprimir el mensaje
+     * Movemos la pieza si es true.
      */
-    public void moverP(int filaPieza, int columnaPieza, int nuevaFila, int nuevaColumna, Tablero t) {
-        Pieza p = t.obtenerPiezaEnCasilla(filaPieza, columnaPieza);
-        p.validarDestino(nuevaFila, nuevaColumna, t);
-        p.mover(nuevaFila, nuevaColumna);
+    public void moverP() {
+        pOrigen.validarDestino(filaDestino, columnaDestino, tab);
+        VistaConsola.movimientoCorrectoOIncorrecto(pDestino == null);
+
+        if (pDestino == null) pOrigen.mover(filaDestino, columnaDestino);
+        VistaConsola.estiloTablero(tab);
     }
 
     /**
-     * Obtenemos la la pieza que de la casilla que ha introducido el usuario (en realidad la que metemos como parametro).
-     * comprobamos que la pieza sea un peon.
+     * Comprobamos que la pieza sea un peon.
      * Si es peon, realiza el ataque en la fila columna destino.
-     * sino, imprime un mensaje.
-     *
-     * @param filaPieza
-     * @param columnaPieza
-     * @param filaDestino
-     * @param columnaDestino
-     * @param t
+     * si no, imprime un mensaje.
      */
-    public void esPeon(int filaPieza, int columnaPieza, int filaDestino, int columnaDestino, Tablero t) {
-        Pieza p = t.obtenerPiezaEnCasilla(filaPieza, columnaPieza);
-        if (p instanceof Peon peon) {
-            peon.ataque(filaDestino, columnaDestino);
-        } else System.out.println("Solo el peon puede realizar esta acción.");
+    public void esPeon() {
+        if (pOrigen instanceof Peon peon) peon.ataque(filaDestino, columnaDestino);
+        else System.out.println("[!] Solo el [ peon ] puede realizar esta acción.");
     }
 
-
+    public void esPeonMensaje() {
+        if (pOrigen instanceof Peon) vista.menuSeleccionarCasillaPeon();
+        else vista.menuSeleccionarCasilla();
+    }
 }

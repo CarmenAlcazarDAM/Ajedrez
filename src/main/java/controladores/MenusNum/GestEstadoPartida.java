@@ -11,7 +11,7 @@ public enum GestEstadoPartida{
     PUNTOS_FICHAS_NEGRAS(5),
     VOLVER(0);
 
-    private int index;
+    private final int index;
 
     GestEstadoPartida(int index) {
         this.index = index;
