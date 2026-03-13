@@ -56,16 +56,19 @@ public  class Util {
 
     /**
      * Método para leer la información de un archivo XML
-     * @param tablero --> Clase Tablero pasada por parámetro
      * @return --> Devuelve un objeto tablero con la información del archivo
      */
-    public static Tablero cargarPartida(Tablero tablero){
-        Tablero tableroDeserializada = tablero;
+    public static Tablero cargarPartida(){
+        Tablero tableroDeserializada;
         try {
-            JAXBContext context = JAXBContext.newInstance(tablero.getClass());
+            JAXBContext context = JAXBContext.newInstance(Tablero.class);
             Unmarshaller unmarshaller = context.createUnmarshaller();
             tableroDeserializada = (Tablero) unmarshaller.unmarshal(new File("tableroXML"));
 
+            if(tableroDeserializada == null){
+                System.out.println("Error: no existe partida guardada.");
+                return null;
+            }
 
         } catch (JAXBException e) {
             throw new RuntimeException(e);
