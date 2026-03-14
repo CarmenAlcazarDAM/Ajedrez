@@ -4,20 +4,6 @@ import modelo.Tablero;
 import utils.Util;
 
 public class ControllerPrincipal {
-    private Tablero t = new Tablero();
-
-    /*
-    private static int contador = 1;
-
-    public boolean contadorTurnos(){
-        contador ++;
-        if (this.contador/2 == 0 ){
-            return true;
-        } else {
-            return false;
-        }
-    }
-    */
 
 
     public static void gestionarMenuPrincipal(int opcion){
@@ -27,22 +13,18 @@ public class ControllerPrincipal {
         }
     }
 
-    public static void gestionarMenuJuego(int opcion){
-        do {
-
-            switch (opcion) {
-                case 1 -> ;
-                case 2 -> ControllerTablero.iniciarTablero();
-                case 3 -> Util.guardarPartida(t);
-                case 4 -> finalizarPartida();
-                case 5 -> finalizarPartida();
-                case 6 -> {
-                    int op = Util.pideEntero("Selecciona una opcion", "Error opcion no valida");
-                    ControllerTablero.gestionEstadoPartida(op);
-                }
-                case 0 -> System.out.println("Has elegido salir del programa");
-            }
-        }while (opcion == 0);
+    public static boolean gestionarMenuJuego(int opcion, Tablero tablero) {
+        boolean continuar = true;
+        switch (opcion) {
+            case 1 -> gestionarMenuMover(tablero);
+            case 2 -> ControllerTablero.iniciarTablero();
+            case 3 -> Util.guardarPartida(tablero);
+            case 4 -> continuar = rendirse(tablero); //rendirse
+            case 5 -> continuar = tablas(tablero); //tablas
+            case 6 -> ejecutarMenuEstado();
+            case 0 -> continuar = deseaFinalizar();
+        }
+        return continuar;
     }
 
 
