@@ -24,11 +24,17 @@ public class Peon extends Pieza implements Atacadora {
         boolean legal = false;
 
         if (this.getColor() == Color.BLANCA){
-            if (distanciaFila == 1 && distanciaColum == 0){
+            if (distanciaFila == -1 && distanciaColum == 0){
+                legal = true;
+            }
+            if (primerMovimiento && distanciaFila == -2){
                 legal = true;
             }
         }else {
-            if (distanciaFila == -1 && distanciaColum == 0){
+            if (distanciaFila == 1 && distanciaColum == 0){
+                legal = true;
+            }
+            if (primerMovimiento && distanciaFila == 2){
                 legal = true;
             }
         }
