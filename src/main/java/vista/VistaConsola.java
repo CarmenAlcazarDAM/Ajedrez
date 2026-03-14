@@ -25,7 +25,7 @@ public class VistaConsola {
      */
 
 
-    public void vistaTablero(Tablero tablero) {
+    public static void  vistaTablero(Tablero tablero) {
         // Hecho por mi - inicio
         System.out.println("    ╔═╦═╦═╦═╦═╦═╦═╦═╗");
 
@@ -45,7 +45,7 @@ public class VistaConsola {
         System.out.println("      0   1   2   3   4   5   6   7\n");
     }
 
-    public String colorCasilla(int fila, int columna) {
+    public static String colorCasilla(int fila, int columna) {
         return ((fila + columna) % 2 == 0) ? "▓" : "░";
     }
 

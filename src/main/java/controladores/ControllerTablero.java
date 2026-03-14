@@ -79,29 +79,30 @@ public class ControllerTablero {
     /**
      * Crear el switch que llame a los métodos correspondientes y generar el orden de la partida, imprimir, contar puntos...;
      */
-    public void gestionEstadoPartida() {
-        VistaConsola.menuEstadoPartida();// ToDo
-        switch (GestEstadoPartida.getGestEstadoPartida()) {
-            case MOSTRAR_FICHAS_BLANCAS:
+    public static boolean gestionEstadoPartida(int opcion) {
+boolean seguirJugando=true;
+        switch (opcion) {
+            case 1:
                 Tablero.listarBlancas();
                 break;
-            case MOSTRAR_FICHAS_NEGRAS:
+            case 2:
                 Tablero.listarNegras();
                 break;
-            case ELIMINADAS:
+            case 3:
                 VistaConsola.mostrarCabeceraEliminadasTotales();
                 Tablero.listarEliminadas();
                 VistaConsola.imprimirLinea();
                 break;
-            case PUNTOS_FICHAS_NEGRAS:
+            case 4:
                 System.out.println("Puntos de las fichas negras: " + Tablero.obtenerPuntuacionNegras());
                 break;
-            case PUNTOS_FICHAS_BLANCAS:
+            case 5:
                 System.out.println("Puntos de las fichas blancas: " + Tablero.obtenerPuntuacionBlancas());
                 break;
-            case VOLVER:
-                return;
+            case 0:
+                seguirJugando=false;
         }
+        return seguirJugando;
     }
 
     public void gestionarMovimientosAtaques() {
