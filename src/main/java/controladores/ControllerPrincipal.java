@@ -12,29 +12,35 @@ import java.util.SortedMap;
 public class ControllerPrincipal {
 
 
-    public static void ejecutarMenuEstado() {
+    public static void ejecutarMenuEstado(Tablero tablero) {
         int opcion = -1;
         do {
             opcion = VistaConsola.menuEstadoPartida();
-            ControllerTablero.gestionEstadoPartida(opcion);
+            ControllerTablero.gestionEstadoPartida(tablero,opcion);
             VistaConsola.imprimirLinea();
 
         } while (opcion != 0);
     }
 
 
-    public static Tablero gestionarMenuPrincipal(Tablero tablero) {
+    public static Tablero gestionarMenuPrincipal() {
         int opcion = 0;
+        Tablero tablero = new Tablero();
+        Tablero cargado = null;
 
 
         opcion = Util.pideEnteroRango("Introduce una opción: ", "Error, debe ser una opción entre 0 y 2", 0, 2);
         switch (opcion) {
-            case 1 -> {
-                return tablero;
-            }
-            case 2 -> tablero = Util.cargarPartida();
+            case 1:
+                cargado=tablero;
+                tablero.iniciarTablero();
+                break;
+
+            case 2:
+                cargado = Util.cargarPartida();
+                break;
         }
-        return tablero;
+        return cargado;
 
     }
 
@@ -42,11 +48,11 @@ public class ControllerPrincipal {
         boolean continuar = true;
         switch (opcion) {
             case 1 -> gestionarMenuMover(tablero);
-            case 2 -> Tablero.iniciarTablero();
+            case 2 -> tablero.iniciarTablero();
             case 3 -> Util.guardarPartida(tablero);
             case 4 -> continuar = rendirse(tablero); //rendirse
             case 5 -> continuar = tablas(tablero); //tablas
-            case 6 -> ejecutarMenuEstado();
+            case 6 -> ejecutarMenuEstado(tablero);
             case 0 -> continuar = deseaFinalizar();
         }
         return continuar;
