@@ -1,9 +1,8 @@
 package controladores.MenusNum;
 
-import controladores.ControllerTablero;
-
 public enum GestMATKEnum {
     MOVER(1),
+    ATACAR(2),
     VOLVER(0);
 
     private final int index;
@@ -12,7 +11,7 @@ public enum GestMATKEnum {
         this.index = index;
     }
 
-    public static GestMATKEnum getGestMATKEnum(){
+    public static GestMATKEnum getGestMATKEnum() {
         return GestMATKEnum.fromIndex(ControllerTablero.readInt(GestMATKEnum.values().length));
     }
 
