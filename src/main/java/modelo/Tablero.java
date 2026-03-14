@@ -229,6 +229,20 @@ public class Tablero {
         return false;
     }
 
+    public static void matarPieza(Pieza victima){
+
+        if(victima!=null){
+                eliminadas.add(victima);
+            if(victima.getColor()== Pieza.Color.BLANCA){
+                blancas.remove(victima);
+            }else{
+                negras.remove(victima);
+            }
+
+        }
+
+    }
+
 
 }
 
