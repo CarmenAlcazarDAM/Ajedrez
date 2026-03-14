@@ -73,5 +73,18 @@ public class ControllerPrincipal {
         return false;
     }
 
+    public static boolean rendirse(Tablero tablero) {
+
+        if (esTurnoBlancas(tablero)) {
+            System.out.println("¡BLANCAS SE HA RENDIDO!");
+        } else {
+            System.out.println("¡NEGRAS SE HA RENDIDO!");
+        }
+
+        VistaConsola.mensajeFinal();
+        return false;
+    }
+
+
 
 }
