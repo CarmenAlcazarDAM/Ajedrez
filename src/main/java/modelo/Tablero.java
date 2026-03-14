@@ -13,7 +13,7 @@ public class Tablero {
     private static List<Pieza> negras = new ArrayList<>();
     private static List<Pieza> eliminadas = new ArrayList<>();
     private static List<Pieza> posicionInicial = new ArrayList<>();
-    private int contadorTurnos;
+    private static int contadorTurnos=1;
 
     /* ///////////////// CONSTRUCTOR VACÍO POR DEFECTO ///////////////// */
     public Tablero() {}
@@ -91,7 +91,7 @@ public class Tablero {
         int columnaActual = columnaOrigen + columnaDireccion;
 
 
-        while (filaActual != filaDestino + filaDireccion || columnaActual != columnaDestino + columnaDireccion) {
+        while (filaActual != filaDestino || columnaActual != columnaDestino) {
             if (obtenerPiezaEnCasilla(filaActual, columnaActual) != null) {
                 return true;
             }
@@ -227,6 +227,20 @@ public class Tablero {
         for (Pieza pieza : enemiga) if (pieza.puedeMover(rey.getFila(), rey.getColumna(), tablero)) return true;
 
         return false;
+    }
+
+    public static void matarPieza(Pieza victima){
+
+        if(victima!=null){
+                eliminadas.add(victima);
+            if(victima.getColor() == Pieza.Color.BLANCA){
+                blancas.remove(victima);
+            }else{
+                negras.remove(victima);
+            }
+
+        }
+
     }
 
 

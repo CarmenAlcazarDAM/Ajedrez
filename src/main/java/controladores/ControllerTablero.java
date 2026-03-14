@@ -8,11 +8,16 @@ import vista.VistaConsola;
 import java.util.Scanner;
 
 public class ControllerTablero {
+    int filaPieza, columnaPieza, filaDestino, columnaDestino;
     private final static VistaConsola vista = new VistaConsola();
+    private final Pieza pOrigen;
+    private final Pieza pDestino;
     private final Tablero tab;
     static Scanner sc = new Scanner(System.in); // Medida temporal
 
     public ControllerTablero(Tablero tablero) {
+        this.pOrigen = tablero.obtenerPiezaEnCasilla(filaPieza, columnaPieza);
+        this.pDestino = tablero.obtenerPiezaEnCasilla(filaDestino, columnaDestino);
         this.tab = tablero;
     }
 
@@ -81,6 +86,8 @@ public class ControllerTablero {
 
     /**
      * Crear el switch que llame a los métodos correspondientes y generar el orden de la partida, imprimir, contar puntos...;
+     *
+     * @param opcion introduction pro el usuario
      */
     public void gestionEstadoPartida() {
         vista.menuEstadoPartida();// ToDo

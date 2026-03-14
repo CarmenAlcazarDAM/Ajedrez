@@ -7,6 +7,9 @@ import vista.VistaConsola;
 public class Main {
     public static void main(String[] args) {
         VistaConsola vistaConsola = new VistaConsola();
+
+        ControllerPrincipal CP= new ControllerPrincipal();
+        VistaConsola  vista = new VistaConsola();
         Tablero tablero = new Tablero();
         ControllerTablero controladorTablero = new ControllerTablero(tablero);
         controladorTablero.iniciarTablero();
@@ -32,8 +35,20 @@ public class Main {
 //        tablero.listarNegras();
 //        tablero.listarEliminadas();
 
+        System.out.println("AJEDREZ");
+        VistaConsola.menuPrincipal();
+        boolean seguirJugando=true;
 
-        //--------------------------------------------
+        CP.gestionarMenuPrincipal();
+        int opcion=-1;
+
+
+        while (seguirJugando){
+            vista.estiloTablero(tablero);
+            VistaConsola.turnoActual(tablero.getContadorTurnos());
+            opcion = VistaConsola.menuPartida();
+            seguirJugando=CP.gestionarMenuJuego(opcion, tablero);
+        }
 
 
     }
