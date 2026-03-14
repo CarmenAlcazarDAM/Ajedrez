@@ -5,6 +5,11 @@ import Interfaces.Atacadora;
 public class Peon extends Pieza implements Atacadora {
     private boolean primerMovimiento = true;
     private int contador = 0;
+
+    public Peon() {
+        super();
+    }
+
     public Peon(Color color, String dibujo, int fila, int columna, int puntos) {
         super(color, dibujo, fila, columna, puntos);
     }
