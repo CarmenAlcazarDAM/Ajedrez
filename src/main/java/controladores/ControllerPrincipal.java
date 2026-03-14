@@ -52,6 +52,26 @@ public class ControllerPrincipal {
             }
         }while (opcion == 0);
     }
+    public static boolean tablas(Tablero tablero) {
+
+        if (esTurnoBlancas(tablero)) {
+            System.out.println("¡BLANCAS HA DECLARADO TABLAS!");
+        } else {
+            System.out.println("¡NEGRAS HA DECLARADO TABLAS!");
+        }
+
+        VistaConsola.mensajeFinal();
+        return false;
+    }
+    public static boolean esTurnoBlancas(Tablero tablero) {
+        int numeroTurno = tablero.getContadorTurnos();
+
+        //si el numero es impar es turno de las blancas
+        if (numeroTurno % 2 != 0) {
+            return true;
+        }
+        return false;
+    }
 
 
 }
