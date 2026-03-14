@@ -35,7 +35,7 @@ public class ControllerPrincipal {
         return tablero;
 
     }
-
+//ya funciona
     public static boolean gestionarMenuJuego(int opcion, Tablero tablero) {
         boolean continuar = true;
         switch (opcion) {
