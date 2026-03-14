@@ -98,7 +98,57 @@ public class ControllerPrincipal {
         }
         return seguirJugando;
     }
+    public static void gestionarMenuMover(Tablero tablero) {
+        boolean seguirJugando = true;
+        Pieza p = null;
+        int fila;
+        int columna;
+        boolean puedeUsarPieza = false;
+        do {
+            fila = Util.pideEnteroRango("Fila: ", "Error, debe ser entre 0 y 7", 0, 7);
+            columna = Util.pideEnteroRango("Columna: ", "Error, debe ser entre 0 y 7", 0, 7);
 
+            p = tablero.obtenerPiezaEnCasilla(fila, columna);
+
+            if (p == null) {
+                System.out.println("La casilla está vacía.");
+
+            } else {
+
+                boolean esBlanca = (p.getColor() == Pieza.Color.BLANCA);
+                boolean turnoBlancas = esTurnoBlancas(tablero);
+
+                if (turnoBlancas && !esBlanca) {
+
+                    System.out.println("No puedes mover una pieza NEGRA en el turno de las BLANCAS.");
+                } else if (!turnoBlancas && esBlanca) {
+
+                    System.out.println("No puedes mover una pieza BLANCA en el turno de las NEGRAS.");
+                } else {
+
+                    puedeUsarPieza = true;
+                }
+            }
+
+        } while (!puedeUsarPieza);
+
+        opcionesMovimientos(p, tablero);
+
+    }
+    public static void opcionesMovimientos(Pieza p, Tablero tablero) {
+        int opcion = -1;
+        if (p instanceof Peon) {
+            opcion = VistaConsola.menuSeleccionarCasillaPeon();
+
+        } else {
+            opcion = VistaConsola.menuSeleccionarCasilla();
+        }
+        switch (opcion) {
+            case 1 -> mover(p, tablero);
+            case 2 -> atacaPeon(p, tablero);
+        }
+
+    }
 
 
 }
