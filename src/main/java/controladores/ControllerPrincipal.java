@@ -23,11 +23,16 @@ public class ControllerPrincipal {
         } while (opcion != 0);
     }
 
-    public static void gestionarMenuPrincipal(int opcion){
+    public static Tablero gestionarMenuPrincipal(int opcion){
+        int opcion = 0;
+        Tablero tablero = new Tablero();
+
+        opcion = Util.pideEnteroRango("Introduce una opción: ", "Error, debe ser una opción entre 0 y 2", 0, 2);
         switch (opcion){
             case 1 -> ControllerTablero.iniciarTablero();
-            case 2 -> //Util.cargarPartida();
+            case 2 -> tablero = Util.cargarPartida();
         }
+        return tablero;
     }
 
     public static void gestionarMenuJuego(int opcion){
