@@ -1,24 +1,27 @@
 package controladores;
 
+
+import Interfaces.Atacadora;
+import modelo.Peon;
+import modelo.Pieza;
 import modelo.Tablero;
 import utils.Util;
+import vista.VistaConsola;
+
+import java.util.SortedMap;
 
 public class ControllerPrincipal {
-    private Tablero t = new Tablero();
 
-    /*
-    private static int contador = 1;
 
-    public boolean contadorTurnos(){
-        contador ++;
-        if (this.contador/2 == 0 ){
-            return true;
-        } else {
-            return false;
-        }
+    public static void ejecutarMenuEstado() {
+        int opcion = -1;
+        do {
+            opcion = VistaConsola.menuEstadoPartida();
+            ControllerTablero.gestionEstadoPartida(opcion);
+            VistaConsola.imprimirLinea();
+
+        } while (opcion != 0);
     }
-    */
-
 
     public static void gestionarMenuPrincipal(int opcion){
         switch (opcion){
