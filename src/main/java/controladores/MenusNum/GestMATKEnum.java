@@ -1,5 +1,7 @@
 package controladores.MenusNum;
 
+import controladores.ControllerTablero;
+
 public enum GestMATKEnum {
     MOVER(1),
     VOLVER(0);
@@ -10,7 +12,11 @@ public enum GestMATKEnum {
         this.index = index;
     }
 
-    public static GestMATKEnum gestorMATKFromIndex(int index) {
+    public static GestMATKEnum getGestMATKEnum(){
+        return GestMATKEnum.fromIndex(ControllerTablero.readInt(GestMATKEnum.values().length));
+    }
+
+    public static GestMATKEnum fromIndex(int index) {
         for (GestMATKEnum gestor : values()) if (gestor.index == index) return gestor;
         throw new IllegalArgumentException("Opción Invalida");
     }

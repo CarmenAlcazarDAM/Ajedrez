@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class ControllerTablero {
     private final static VistaConsola vista = new VistaConsola();
     private final Tablero tab;
-    Scanner sc = new Scanner(System.in); // Medida temporal
+    static Scanner sc = new Scanner(System.in); // Medida temporal
 
     public ControllerTablero(Tablero tablero) {
         this.tab = tablero;
@@ -84,8 +84,7 @@ public class ControllerTablero {
      */
     public void gestionEstadoPartida() {
         vista.menuEstadoPartida();// ToDo
-        GestEstadoPartida opcion = GestEstadoPartida.gestEstadoFromIndex((readInt(GestEstadoPartida.values().length)));
-        switch (opcion) {
+        switch (GestEstadoPartida.getGestEstadoPartida()) {
             case MOSTRAR_FICHAS_BLANCAS:
                 tab.listarBlancas();
                 break;
@@ -106,10 +105,10 @@ public class ControllerTablero {
                 return;
         }
     }
+
     public void gestionarMovimientosAtaques() {
         vista.menuSeleccionarCasilla();
-        GestMATKEnum opcion = GestMATKEnum.gestorMATKFromIndex(readInt(GestMATKEnum.values().length));
-        switch (opcion) {
+        switch (GestMATKEnum.getGestMATKEnum()) {
             case MOVER:
                 moverP();
                 break;
@@ -140,7 +139,7 @@ public class ControllerTablero {
 
         esPeon(pOrigen, filaDestino, columnaDestino);
 
-        vista.estiloTablero(tab);
+        vista.vistaTablero(tab);
     }
 
     private void esPeon(Pieza pOrigen, int filaDestino, int columnaDestino) { // Medida Temporal debe gestionarse en PIEZA
@@ -198,7 +197,7 @@ public class ControllerTablero {
         return filaCorrecta && columnaCorrecta;
     }
 
-    public int readInt(int max) { // Medida Temporal
+    public static int readInt(int max) { // Medida Temporal
         while (true) {
             if (!sc.hasNextInt()) {
                 System.out.println("Numero invalido. Vuelve a introducir un numero.");
