@@ -136,9 +136,10 @@ public abstract class Pieza {
     //Una pieza será igual que otra si tiene el mismo color y puntos
     @Override
     public boolean equals(Object o) {
+        if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Pieza pieza = (Pieza) o;
-        return puntos == pieza.puntos && color == pieza.color;
+        return fila == pieza.fila && columna == pieza.columna && color == pieza.color;
     }
 
     @Override
