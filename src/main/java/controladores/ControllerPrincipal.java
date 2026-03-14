@@ -23,7 +23,7 @@ public class ControllerPrincipal {
         } while (opcion != 0);
     }
 
-    public static Tablero gestionarMenuPrincipal(int opcion){
+    public static Tablero gestionarMenuPrincipal(){
         int opcion = 0;
         Tablero tablero = new Tablero();
 
