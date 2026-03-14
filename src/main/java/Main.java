@@ -16,7 +16,7 @@ public class Main {
         VistaConsola.menuPrincipal();
         boolean seguirJugando=true;
 
-        tablero=CP.gestionarMenuPrincipal();
+        CP.gestionarMenuPrincipal();
         int opcion=-1;
 
 
