@@ -24,7 +24,9 @@ public class VistaConsola {
      * ⦀ ⦙ ⦚ ⧘ ⧙ ⧚ ⧛
      */
 
+
     public void vistaTablero(Tablero tablero) {
+        // Hecho por mi - inicio
         System.out.println("    ╔═╦═╦═╦═╦═╦═╦═╦═╗");
 
         for (int i = FILA - 1; i >= 0; i--) {

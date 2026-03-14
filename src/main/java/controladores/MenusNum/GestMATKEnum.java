@@ -1,6 +1,9 @@
 package controladores.MenusNum;
 
+import utils.Util;
+
 public enum GestMATKEnum {
+    // hecho por mi entero
     MOVER(1),
     ATACAR(2),
     VOLVER(0);
@@ -12,7 +15,9 @@ public enum GestMATKEnum {
     }
 
     public static GestMATKEnum getGestMATKEnum() {
-        return GestMATKEnum.fromIndex(ControllerTablero.readInt(GestMATKEnum.values().length));
+        return GestMATKEnum.fromIndex(Util.pideEnteroRango(
+                "", "Numero invalido. Vuelve a introducir un numero.", 1, GestMATKEnum.values().length) );
+
     }
 
     public static GestMATKEnum fromIndex(int index) {
