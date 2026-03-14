@@ -229,6 +229,10 @@ public class Tablero {
         return false;
     }
 
+    /**
+     * Método que lleva la pieza victima al array de eliminadas y quita la pieza del array de su color
+     * @param victima--> pieza víctima pasada por parametro la cual vamos a llevar al array de eliminas
+     */
     public static void matarPieza(Pieza victima){
 
         if(victima!=null){
