@@ -85,6 +85,20 @@ public class ControllerPrincipal {
         return false;
     }
 
+    public static boolean deseaFinalizar() {
+        boolean seguirJugando = true;
+        int opcion = VistaConsola.mensajeFinalizar();
+        switch (opcion) {
+            case 1:
+                seguirJugando = false;
+                break;
+            case 2:
+                seguirJugando = true;
+                break;
+        }
+        return seguirJugando;
+    }
+
 
 
 }
