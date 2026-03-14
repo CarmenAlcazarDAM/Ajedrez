@@ -8,31 +8,23 @@ import vista.VistaConsola;
 public class Main {
     public static void main(String[] args) {
 
-        ControllerPrincipal cp = new ControllerPrincipal();
-        VistaConsola vista = new VistaConsola();
+        ControllerPrincipal CP= new ControllerPrincipal();
+        VistaConsola  vista = new VistaConsola();
         Tablero tablero = new Tablero();
 
         System.out.println("AJEDREZ");
-        boolean seguirJugando = true;
+        VistaConsola.menuPrincipal();
+        boolean seguirJugando=true;
+
+        CP.gestionarMenuPrincipal();
+        int opcion=-1;
 
 
-        try {
-            VistaConsola.menuPrincipal();
-            cp.gestionarMenuPrincipal();
-
-        } catch (NullPointerException e) {
-            System.out.println("Error:" + e.getMessage());
-
-        }
-
-        int opcion = -1;
-
-
-        while (seguirJugando) {
+        while (seguirJugando){
             vista.estiloTablero(tablero);
             VistaConsola.turnoActual(tablero.getContadorTurnos());
             opcion = VistaConsola.menuPartida();
-            seguirJugando = cp.gestionarMenuJuego(opcion, tablero);
+            seguirJugando=CP.gestionarMenuJuego(opcion, tablero);
         }
 
 
