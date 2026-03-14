@@ -3,21 +3,13 @@ package controladores;
 import controladores.MenusNum.GestEstadoPartida;
 import controladores.MenusNum.GestMATKEnum;
 import modelo.*;
+import utils.Util;
 import vista.VistaConsola;
 
-import java.util.Scanner;
-
 public class ControllerTablero {
-    int filaPieza, columnaPieza, filaDestino, columnaDestino;
-    private final static VistaConsola vista = new VistaConsola();
-    private final Pieza pOrigen;
-    private final Pieza pDestino;
-    private final Tablero tab;
-    static Scanner sc = new Scanner(System.in); // Medida temporal
+    Tablero tab;
 
     public ControllerTablero(Tablero tablero) {
-        this.pOrigen = tablero.obtenerPiezaEnCasilla(filaPieza, columnaPieza);
-        this.pDestino = tablero.obtenerPiezaEnCasilla(filaDestino, columnaDestino);
         this.tab = tablero;
     }
 
@@ -86,27 +78,26 @@ public class ControllerTablero {
 
     /**
      * Crear el switch que llame a los métodos correspondientes y generar el orden de la partida, imprimir, contar puntos...;
-     *
-     * @param opcion introduction pro el usuario
      */
     public void gestionEstadoPartida() {
-        vista.menuEstadoPartida();// ToDo
+        VistaConsola.menuEstadoPartida();// ToDo
         switch (GestEstadoPartida.getGestEstadoPartida()) {
             case MOSTRAR_FICHAS_BLANCAS:
-                tab.listarBlancas();
+                Tablero.listarBlancas();
                 break;
             case MOSTRAR_FICHAS_NEGRAS:
-                tab.listarNegras();
+                Tablero.listarNegras();
                 break;
             case ELIMINADAS:
-                tab.listarEliminadas();
-                vista.mostrarCabeceraEliminadasTotales();
-                break;
-            case PUNTOS_FICHAS_BLANCAS:
-                System.out.println("Puntos de las fichas blancas: " + tab.obtenerPuntuacionBlancas());
+                VistaConsola.mostrarCabeceraEliminadasTotales();
+                Tablero.listarEliminadas();
+                VistaConsola.imprimirLinea();
                 break;
             case PUNTOS_FICHAS_NEGRAS:
-                System.out.println("Puntos de las fichas negras: " + tab.obtenerPuntuacionNegras());
+                System.out.println("Puntos de las fichas negras: " + Tablero.obtenerPuntuacionNegras());
+                break;
+            case PUNTOS_FICHAS_BLANCAS:
+                System.out.println("Puntos de las fichas blancas: " + Tablero.obtenerPuntuacionBlancas());
                 break;
             case VOLVER:
                 return;
@@ -114,10 +105,16 @@ public class ControllerTablero {
     }
 
     public void gestionarMovimientosAtaques() {
-        vista.menuSeleccionarCasilla();
+        Pieza pOrigen = mostrarMenuSegunPieza();
+        if (pOrigen == null) return;
+
         switch (GestMATKEnum.getGestMATKEnum()) {
             case MOVER:
-                moverP();
+                ControllerPrincipal.mover(pOrigen, tab);
+                break;
+            case ATACAR:
+                if (pOrigen instanceof Peon) ControllerPrincipal.atacaPeon(pOrigen, tab);
+                else System.out.println("Solo los peones pueden usar la opción atacar.");
                 break;
             case VOLVER:
                 return;
@@ -126,95 +123,23 @@ public class ControllerTablero {
 
     // MEDIDAS TEMPORALES HASTA QUE ESTE HECHA LA LÓGICA
     // ############### CONTIENE SPOILERS #####################
-
-    /**
-     * Validamos el destino, pero no devuelve nada, solo imprime un mensaje
-     * usamos el metodo movimiento correcto para imprimir el mensaje
-     * Movemos la pieza si es true.
-     */
-    public void moverP() { // Medida temporal debe gestionarse en CONTROLADOR PRINCIPAL
-        Pieza pOrigen = getPiezaOrigen();
-        if (pOrigen == null) return;
-
-        //Pedir por pantalla las coordenadas de destino
-        int filaDestino = pedirCoordenadas("Introduce la fila de destino: ");
-        int columnaDestino = pedirCoordenadas("Introduce la columna de destino: ");
-
-        if (filaDestino == pOrigen.getFila() && columnaDestino == pOrigen.getColumna()) return;
-        if (!validarMovimiento(pOrigen, filaDestino, columnaDestino)) return;
-        if (!destinoValido(pOrigen, filaDestino, columnaDestino)) return;
-
-        esPeon(pOrigen, filaDestino, columnaDestino);
-
-        vista.vistaTablero(tab);
-    }
-
-    private void esPeon(Pieza pOrigen, int filaDestino, int columnaDestino) { // Medida Temporal debe gestionarse en PIEZA
-        if (pOrigen instanceof Peon peon) {
-            if (esAtaquePeon(peon, filaDestino, columnaDestino)) peon.ataque(filaDestino, columnaDestino);
-            else peon.mover(filaDestino, columnaDestino);
-        } else pOrigen.mover(filaDestino, columnaDestino);
-    }
-
     private Pieza getPiezaOrigen() { // Medida Temporal debe gestionarse en Pieza/Utils
         // Pedir por pantalla las coordenadas de la pieza
-        int filaPieza = pedirCoordenadas("Introduce la fila de origen: ");
-        int columnaPieza = pedirCoordenadas("Introduce la columna de origen: ");
+        int filaPieza = Util.pideEnteroRango("Introduce la fila de origen: ", "Error, debe ser entre 0 y 7", 0, 7);
+        int columnaPieza = Util.pideEnteroRango("Introduce la columna de origen: ", "Error, debe ser entre 0 y 7", 0, 7);
 
         Pieza pOrigen = tab.obtenerPiezaEnCasilla(filaPieza, columnaPieza);
-        if (pOrigen == null) {
-            System.out.println("No hay pieza en la casilla de origen.");
-            return null;
-        }
+
+        if (pOrigen == null) System.out.println("No hay pieza en la casilla de origen.");
+
         return pOrigen;
     }
 
-    public int pedirCoordenadas(String mensaje){ // Medida temporal, debe gestionarse en Utils
-        System.out.print(mensaje);
-        return sc.nextInt();
-    }
-
-    private boolean validarMovimiento(Pieza pOrigen, int dFila, int dCol) { // Medida temporal, debe gestionarse en PIEZA
-        boolean valido = pOrigen.validarDestino(dFila, dCol, tab);
-        vista.movimientoCorrectoOIncorrecto(valido);
-        return valido;
-    }
-
-    private boolean destinoValido(Pieza pOrigen, int dFila , int dCol) { // Medida temporal, debe gestionarse en CONTROLADORPRINCIPAL
-        Pieza pDestino = tab.obtenerPiezaEnCasilla(dFila, dCol);
-
-        if (pDestino != null) {
-            if (pDestino.getColor() == pOrigen.getColor()){
-                System.out.println("La casilla de destino ya está ocupada por una pieza aliada.");
-                return false;
-            } else return true;
-        }
-        return true;
-    }
-
-    private boolean esAtaquePeon(Peon peon, int filaDestino, int columnaDestino) { // Medida temporal, debe gestionarse en PEON
-        int avanceFila;
-
-        if (peon.getColor() == Pieza.Color.BLANCA) avanceFila = 1;
-        else avanceFila = -1;
-
-        boolean filaCorrecta = peon.getFila() + avanceFila == filaDestino;
-        boolean columnaCorrecta = Math.abs(peon.getColumna() - columnaDestino) == 1;
-
-        return filaCorrecta && columnaCorrecta;
-    }
-
-    public static int readInt(int max) { // Medida Temporal
-        while (true) {
-            if (!sc.hasNextInt()) {
-                System.out.println("Numero invalido. Vuelve a introducir un numero.");
-                sc.nextLine();
-            } else {
-                int num = sc.nextInt();
-                sc.nextLine();
-                if (num >= 0 && num <= max) return num;
-                else System.out.println("Numero fuera de rango. Vuelve a introducir un numero.");
-            }
-        }
+    private Pieza mostrarMenuSegunPieza() {
+        Pieza pOrigen = getPiezaOrigen();
+        if (pOrigen == null) return null;
+        if (pOrigen instanceof Peon) VistaConsola.menuSeleccionarCasillaPeon();
+        else VistaConsola.menuSeleccionarCasilla();
+        return pOrigen;
     }
 }
