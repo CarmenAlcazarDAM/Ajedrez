@@ -91,7 +91,7 @@ public class Tablero {
         int columnaActual = columnaOrigen + columnaDireccion;
 
 
-        while (filaActual != filaDestino + filaDireccion || columnaActual != columnaDestino + columnaDireccion) {
+        while (filaActual != filaDestino || columnaActual != columnaDestino) {
             if (obtenerPiezaEnCasilla(filaActual, columnaActual) != null) {
                 return true;
             }
@@ -233,7 +233,7 @@ public class Tablero {
 
         if(victima!=null){
                 eliminadas.add(victima);
-            if(victima.getColor()== Pieza.Color.BLANCA){
+            if(victima.getColor() == Pieza.Color.BLANCA){
                 blancas.remove(victima);
             }else{
                 negras.remove(victima);

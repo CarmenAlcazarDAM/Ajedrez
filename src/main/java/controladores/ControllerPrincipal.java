@@ -154,7 +154,7 @@ public class ControllerPrincipal {
 
     public static void mover(Pieza p, Tablero tablero) {
         boolean movimientoRealizado = false;
-        System.out.println("Intentando mover " + p.getClass().getSimpleName() + "(" + p.getFila()+","+p.getColumna()+")");
+        System.out.println("Intentando mover " + p.getClass().getSimpleName() + "(" + p.getFila() + "," + p.getColumna() + ")");
         while (!movimientoRealizado) {
             try {
                 int nuevaFila = Util.pideEnteroRango("Fila destino: ", "Error, debe ser entre 0 y 7", 0, 7);
@@ -166,13 +166,12 @@ public class ControllerPrincipal {
                 System.out.println("Intentando mover " + p.getClass().getSimpleName() + " a (" + nuevaFila + "," + nuevaColumna + ")");
                 System.out.println("Moviendo...");
                 if (p.puedeMover(nuevaFila, nuevaColumna, tablero)) {
-                    //La casilla de destino estaría vacía
-                    if (victima == null) {
+
+                    if (victima != null) {
+                        movimientoRealizado = atacarEnMovimiento(p, victima, tablero, nuevaFila, nuevaColumna);
+                    } else {
                         p.mover(nuevaFila, nuevaColumna);
                         movimientoRealizado = true;
-                    } else {
-                        //casilla de destino ocupada por color contrario
-                        movimientoRealizado = atacarEnMovimiento(p, victima, tablero, nuevaFila, nuevaColumna);
                     }
                 }
                 VistaConsola.movimientoCorrectoOIncorrecto(movimientoRealizado);
@@ -193,6 +192,7 @@ public class ControllerPrincipal {
             tablero.matarPieza(victima);
             p.mover(fila, columna);
             return true;
+
         }
         return false;
     }
