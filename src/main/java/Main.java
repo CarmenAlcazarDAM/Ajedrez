@@ -18,11 +18,10 @@ public class Main {
 
         try {
             VistaConsola.menuPrincipal();
-            cp.gestionarMenuPrincipal();
+            cp.gestionarMenuPrincipal(tablero);
 
-        } catch (NullPointerException e) {
+        } catch (RuntimeException e) {
             System.out.println("Error:" + e.getMessage());
-
         }
 
         int opcion = -1;

@@ -23,13 +23,15 @@ public class ControllerPrincipal {
     }
 
 
-    public static Tablero gestionarMenuPrincipal() {
+    public static Tablero gestionarMenuPrincipal(Tablero tablero) {
         int opcion = 0;
-        Tablero tablero = new Tablero();
+
 
         opcion = Util.pideEnteroRango("Introduce una opción: ", "Error, debe ser una opción entre 0 y 2", 0, 2);
         switch (opcion) {
-            case 1 -> ControllerTablero.iniciarTablero();
+            case 1 -> {
+                return tablero;
+            }
             case 2 -> tablero = Util.cargarPartida();
         }
         return tablero;
@@ -40,7 +42,7 @@ public class ControllerPrincipal {
         boolean continuar = true;
         switch (opcion) {
             case 1 -> gestionarMenuMover(tablero);
-            case 2 -> ControllerTablero.iniciarTablero();
+            case 2 -> Tablero.iniciarTablero();
             case 3 -> Util.guardarPartida(tablero);
             case 4 -> continuar = rendirse(tablero); //rendirse
             case 5 -> continuar = tablas(tablero); //tablas
