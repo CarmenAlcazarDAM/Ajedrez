@@ -178,6 +178,18 @@ public class ControllerPrincipal {
 
                 if (movimientoRealizado) {
                     tablero.setContadorTurnos(tablero.getContadorTurnos() + 1);
+
+                    Pieza.Color colorOponente;
+
+                    if (p.getColor() == Pieza.Color.BLANCA){
+                        colorOponente = Pieza.Color.NEGRA;
+                    } else {
+                        colorOponente = Pieza.Color.BLANCA;
+                    }
+
+                    if (Tablero.comprobarJaque(tablero, colorOponente)){
+                        System.out.println("El rey "+ colorOponente+"esta en jaque");
+                    }
                 }
 
             } catch (IllegalArgumentException e) {
