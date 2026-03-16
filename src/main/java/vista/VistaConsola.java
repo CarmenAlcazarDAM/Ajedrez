@@ -62,7 +62,7 @@ public class VistaConsola {
 
 
             System.out.println("╔══════════════════════════════╗");
-            System.out.println("║        MENÚ PRINCIPAL        ║");
+            System.out.println("║                       MENÚ PRINCIPAL                       ║");
             System.out.println("╠══════════════════════════════╣");
             System.out.println("   1 ▸ Iniciar nuevo juego");
             System.out.println("   2 ▸ Cargar tablero");
@@ -80,7 +80,7 @@ public class VistaConsola {
     public static int menuPartida() {
 
             System.out.println("╔════════════════════════════════════╗");
-            System.out.println("║            MENÚ PARTIDA            ║");
+            System.out.println("║                              MENÚ PARTIDA                              ║");
             System.out.println("╠════════════════════════════════════╣");
             System.out.println("   1 ▸ seleccionar casilla");
             System.out.println("   2 ▸ reiniciar tablero");
@@ -106,7 +106,7 @@ public class VistaConsola {
     public static int menuSeleccionarCasilla() {
 
             System.out.println("╔══════════════════════════════╗");
-            System.out.println("║         MENÚ CASILLA         ║");
+            System.out.println("║                         MENÚ CASILLA                       ║");
             System.out.println("╠══════════════════════════════╣");
             System.out.println("   1 ▸ mover");
             System.out.println("   0 ▸ volver");
@@ -125,7 +125,7 @@ public class VistaConsola {
     public static int menuSeleccionarCasillaPeon() {
 
             System.out.println("╔══════════════════════════════╗");
-            System.out.println("║         MENÚ CASILLA         ║");
+            System.out.println("║                         MENÚ CASILLA                       ║");
             System.out.println("╠══════════════════════════════╣");
             System.out.println("   1 ▸ mover");
             System.out.println("   2 ▸ atacar");
@@ -145,7 +145,7 @@ public class VistaConsola {
     public static int mensajeReiniciar() {
 
             System.out.println("╔════════════════════════════════╗");
-            System.out.println("║           ¿REINICIAR?          ║");
+            System.out.println("║                             ¿REINICIAR?                            ║");
             System.out.println("╠════════════════════════════════╣");
             System.out.println("   1 ▸ sí, estoy seguro de ello");
             System.out.println("   2 ▸ no, quiero volver");
@@ -165,7 +165,7 @@ public class VistaConsola {
 
 
             System.out.println("╔══════════════════════════════════════╗");
-            System.out.println("║           ¿CERRAR PROGRAMA?          ║");
+            System.out.println("║                             ¿CERRAR PROGRAMA?                            ║");
             System.out.println("╠══════════════════════════════════════╣");
             System.out.println("   1 ▸ sí, acabemos con esto");
             System.out.println("   2 ▸ no, quiero volver a la partida");
@@ -192,7 +192,7 @@ public class VistaConsola {
     public static int menuEstadoPartida() {
 
             System.out.println("╔═══════════════════════════════════════════════╗");
-            System.out.println("║                 MENÚ DE ESTADO                ║");
+            System.out.println("║                          MENÚ DE ESTADO                         ║");
             System.out.println("╠═══════════════════════════════════════════════╣");
             System.out.println("   1 ▸ mostrar lista de fichas blancas");
             System.out.println("   2 ▸ mostrar lista de fichas negras");
@@ -213,7 +213,7 @@ public class VistaConsola {
     public static void mostrarCabeceraEliminadasTotales() {
 
         System.out.println("╔═══════════════════════════════════════════════╗");
-        System.out.println("║            FICHAS ELIMINADAS TOTALES          ║");
+        System.out.println("║                              FICHAS ELIMINADAS TOTALES                            ║");
         System.out.println("╠═══════════════════════════════════════════════╣");
 
     }
@@ -263,7 +263,7 @@ public class VistaConsola {
     public static void mensajeFinal() {
 
         System.out.println("╔═══════════════════════════════════════════════╗");
-        System.out.println("║               FIN DEL PROGRAMA                ║");
+        System.out.println("║                                       FIN DEL PROGRAMA                                       ║");
         System.out.println("╠═══════════════════════════════════════════════╣");
         System.out.println();
         System.out.println("   ✦ Equipo técnico:");
