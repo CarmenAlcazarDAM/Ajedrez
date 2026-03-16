@@ -12,17 +12,16 @@ public class Main {
         VistaConsola vista = new VistaConsola();
         Tablero tablero = new Tablero();
 
+
         System.out.println("AJEDREZ");
         boolean seguirJugando = true;
 
-
         try {
             VistaConsola.menuPrincipal();
-            cp.gestionarMenuPrincipal();
+            tablero=cp.gestionarMenuPrincipal();
 
-        } catch (NullPointerException e) {
+        } catch (RuntimeException e) {
             System.out.println("Error:" + e.getMessage());
-
         }
 
         int opcion = -1;
@@ -34,7 +33,5 @@ public class Main {
             opcion = VistaConsola.menuPartida();
             seguirJugando = cp.gestionarMenuJuego(opcion, tablero);
         }
-
-
     }
 }

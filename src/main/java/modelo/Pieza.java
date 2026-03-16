@@ -25,6 +25,7 @@ public abstract class Pieza {
     private int fila;
     private int columna;
     private int puntos;
+    public Pieza(){}
 
     /**
      * Metodo que ejecuta el movimiento de una pieza si comprobarMovimiento devuelve true
@@ -48,7 +49,6 @@ public abstract class Pieza {
     public abstract Pieza clonar();
 
     //Constructor por defecto necesario para serializar en JaxB
-    public Pieza(){}
 
     public Pieza(Color color, String dibujo, int fila, int columna, int puntos) {
         filaValida(fila);

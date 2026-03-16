@@ -17,7 +17,7 @@ public class ControllerPrincipal {
         do {
             opcion = VistaConsola.menuEstadoPartida();
             ControllerTablero.gestionEstadoPartida(opcion);
-
+            VistaConsola.imprimirLinea();
 
         } while (opcion != 0);
     }

@@ -3,7 +3,7 @@ package modelo;
 import Interfaces.Saltadora;
 
 public class Caballo extends Pieza implements Saltadora {
-
+    public Caballo(){super();}
     public Caballo(Color color, String dibujo, int fila, int columna, int puntos) {
         super(color, dibujo, fila, columna, puntos);
     }
