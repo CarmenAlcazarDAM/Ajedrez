@@ -42,7 +42,7 @@ public  class Util {
      * @return --> Devuelve true si se ha guardado la información correctamente
      */
     public static boolean guardarPartida(Tablero tablero){
-           Tablero clon = Tablero.clonarTablero(tablero);
+           Tablero clon = tablero.clonarTablero(tablero);
         try {
             JAXBContext context = JAXBContext.newInstance(Tablero.class);
             Marshaller marshaller = context.createMarshaller();
