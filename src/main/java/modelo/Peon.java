@@ -19,6 +19,7 @@ public class Peon extends Pieza implements Atacadora {
         if (this.comprobarMovimiento(nuevaFila,nuevaColumna)){
             this.setColumna(nuevaColumna);
             this.setFila(nuevaFila);
+            this.primerMovimiento = false;
         }
     }
 
@@ -32,17 +33,15 @@ public class Peon extends Pieza implements Atacadora {
             if (distanciaFila == -1 && distanciaColum == 0){
                 legal = true;
             }
-            if (primerMovimiento && distanciaFila == -2){
+            if (primerMovimiento && distanciaFila == -2 && distanciaColum == 0){
                 legal = true;
-                this.primerMovimiento = false;
             }
         }else {
             if (distanciaFila == 1 && distanciaColum == 0){
                 legal = true;
             }
-            if (primerMovimiento && distanciaFila == 2){
+            if (primerMovimiento && distanciaFila == 2 && distanciaColum == 0){
                 legal = true;
-                this.primerMovimiento = false;
             }
         }
         return legal;
