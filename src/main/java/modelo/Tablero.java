@@ -11,36 +11,34 @@ import java.util.List;
 @XmlRootElement(name="tablero")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Tablero {
-    private static List<Pieza> blancas = new ArrayList<>();
-    private static List<Pieza> negras = new ArrayList<>();
-    private static List<Pieza> eliminadas = new ArrayList<>();
-    private static List<Pieza> posicionInicial = new ArrayList<>();
-    private static int contadorTurnos=1;
+    private  List<Pieza> blancas = new ArrayList<>();
+    private  List<Pieza> negras = new ArrayList<>();
+    private  List<Pieza> eliminadas = new ArrayList<>();
+    private  List<Pieza> posicionInicial = new ArrayList<>();
+    private  int contadorTurnos=1;
 
     /* ///////////////// CONSTRUCTOR VACÍO POR DEFECTO ///////////////// */
     public Tablero() {
-        iniciarTablero();
+
     }
 
-
-
-    public static List<Pieza> getBlancas() {
+    public  List<Pieza> getBlancas() {
         return blancas;
     }
 
     public void setBlancas(List<Pieza> blancas) {
-        Tablero.blancas = blancas;
+        this.blancas = blancas;
     }
 
-    public static List<Pieza> getNegras() {
+    public  List<Pieza> getNegras() {
         return negras;
     }
 
     public void setNegras(List<Pieza> negras) {
-        Tablero.negras = negras;
+        this.negras = negras;
     }
 
-    public static List<Pieza> getEliminadas() {
+    public  List<Pieza> getEliminadas() {
         return eliminadas;
     }
 
@@ -52,12 +50,12 @@ public class Tablero {
         this.contadorTurnos = contadorTurnos;
     }
 
-    public static void vaciarPiezas() {
+    public  void vaciarPiezas() {
         blancas.clear();
         negras.clear();
         eliminadas.clear();
     }
-    public static void colocarPiezas() {
+    public  void colocarPiezas() {
         // Colocar piezas blancas
         colocarPiezasBlancas();
 
@@ -65,57 +63,57 @@ public class Tablero {
         colocarPiezasNegras();
     }
 
-    public static void colocarPiezasBlancas() {
+    public  void colocarPiezasBlancas() {
         // Peones blancos en fila 1
         for (int columna = 0; columna < 8; columna++) {
-            Tablero.getBlancas().add(new Peon(Pieza.Color.BLANCA, "♙", 1, columna, 1));
+            blancas.add(new Peon(Pieza.Color.BLANCA, "♙", 1, columna, 1));
         }
 
         // Torres blancas
-        Tablero.getBlancas().add(new Torre(Pieza.Color.BLANCA, "♖", 0, 0, 5));
-        Tablero.getBlancas().add(new Torre(Pieza.Color.BLANCA, "♖", 0, 7, 5));
+        blancas.add(new Torre(Pieza.Color.BLANCA, "♖", 0, 0, 5));
+        blancas.add(new Torre(Pieza.Color.BLANCA, "♖", 0, 7, 5));
 
         // Caballos blancos
-        Tablero.getBlancas().add(new Caballo(Pieza.Color.BLANCA, "♘", 0, 1, 3));
-        Tablero.getBlancas().add(new Caballo(Pieza.Color.BLANCA, "♘", 0, 6, 3));
+        blancas.add(new Caballo(Pieza.Color.BLANCA, "♘", 0, 1, 3));
+        blancas.add(new Caballo(Pieza.Color.BLANCA, "♘", 0, 6, 3));
 
         // Alfiles blancos
-        Tablero.getBlancas().add(new Alfil(Pieza.Color.BLANCA, "♗", 0, 2, 3));
-        Tablero.getBlancas().add(new Alfil(Pieza.Color.BLANCA, "♗", 0, 5, 3));
+        blancas.add(new Alfil(Pieza.Color.BLANCA, "♗", 0, 2, 3));
+        blancas.add(new Alfil(Pieza.Color.BLANCA, "♗", 0, 5, 3));
 
         // Reina blanca
-        Tablero.getBlancas().add(new Reina(Pieza.Color.BLANCA, "♕", 0, 3, 9));
+        blancas.add(new Reina(Pieza.Color.BLANCA, "♕", 0, 3, 9));
 
         // Rey blanco
-        Tablero.getBlancas().add(new Rey(Pieza.Color.BLANCA, "♔", 0, 4, 100));
+        blancas.add(new Rey(Pieza.Color.BLANCA, "♔", 0, 4, 100));
     }
 
-    private static void colocarPiezasNegras() {
+    private void colocarPiezasNegras() {
         // Peones negros en fila 6
         for (int columna = 0; columna < 8; columna++) {
-            Tablero.getNegras().add(new Peon(Pieza.Color.NEGRA, "♟", 6, columna, 1));
+            negras.add(new Peon(Pieza.Color.NEGRA, "♟", 6, columna, 1));
         }
 
         // Torres negras
-        Tablero.getNegras().add(new Torre(Pieza.Color.NEGRA, "♜", 7, 0, 5));
-        Tablero.getNegras().add(new Torre(Pieza.Color.NEGRA, "♜", 7, 7, 5));
+        negras.add(new Torre(Pieza.Color.NEGRA, "♜", 7, 0, 5));
+        negras.add(new Torre(Pieza.Color.NEGRA, "♜", 7, 7, 5));
 
         // Caballos negros
-        Tablero.getNegras().add(new Caballo(Pieza.Color.NEGRA, "♞", 7, 1, 3));
-        Tablero.getNegras().add(new Caballo(Pieza.Color.NEGRA, "♞", 7, 6, 3));
+        negras.add(new Caballo(Pieza.Color.NEGRA, "♞", 7, 1, 3));
+        negras.add(new Caballo(Pieza.Color.NEGRA, "♞", 7, 6, 3));
 
         // Alfiles negros
-        Tablero.getNegras().add(new Alfil(Pieza.Color.NEGRA, "♝", 7, 2, 3));
-        Tablero.getNegras().add(new Alfil(Pieza.Color.NEGRA, "♝", 7, 5, 3));
+        negras.add(new Alfil(Pieza.Color.NEGRA, "♝", 7, 2, 3));
+        negras.add(new Alfil(Pieza.Color.NEGRA, "♝", 7, 5, 3));
 
         // Reina negra
-        Tablero.getNegras().add(new Reina(Pieza.Color.NEGRA, "♛", 7, 3, 9));
+        negras.add(new Reina(Pieza.Color.NEGRA, "♛", 7, 3, 9));
 
         // Rey negro
-        Tablero.getNegras().add(new Rey(Pieza.Color.NEGRA, "♚", 7, 4, 100));
+        negras.add(new Rey(Pieza.Color.NEGRA, "♚", 7, 4, 100));
     }
 
-    public static void iniciarTablero() {
+    public void iniciarTablero() {
         vaciarPiezas();
         colocarPiezas();
     }
@@ -173,7 +171,7 @@ public class Tablero {
     /**
      * Método que devuelve impreso el contenido del ArrayList blancas
      */
-    public static void listarBlancas() {
+    public void listarBlancas() {
         System.out.println("\nListado de BLANCAS:");
         for (Pieza p : blancas) {
             System.out.println(p.toString());
@@ -184,7 +182,7 @@ public class Tablero {
     /**
      * Método que devuelve impreso el contenido del ArrayList negras
      */
-    public static void listarNegras() {
+    public void listarNegras() {
         System.out.println("\nListado de NEGRAS:");
         for (Pieza p : negras) {
             System.out.println(p.toString());
@@ -195,7 +193,7 @@ public class Tablero {
     /**
      * Método que devuelve impreso el contenido del ArrayList eliminadas
      */
-    public static void listarEliminadas() {
+    public void listarEliminadas() {
         System.out.println("\nELIMINADAS:");
         if (eliminadas.size() == 0) {
             System.out.println("Actualmente no hay piezas eliminadas");
@@ -211,7 +209,7 @@ public class Tablero {
      * Metodo que devuelve la suma total de las piezas blancas vivas
      * @return devuelve la suma total
      */
-    public static int obtenerPuntuacionBlancas(){
+    public int obtenerPuntuacionBlancas(){
         int suma = 0;
         for (Pieza p : blancas){
             suma += p.getPuntos();
@@ -223,7 +221,7 @@ public class Tablero {
      * Metodo que devuelve la suma total de las piezas negras vivas
      * @return devuelve la suma total
      */
-    public static int obtenerPuntuacionNegras(){
+    public int obtenerPuntuacionNegras(){
         int suma = 0;
         for (Pieza p : negras){
             suma += p.getPuntos();
@@ -235,7 +233,7 @@ public class Tablero {
      * Metodo que inserta una pieza segun el color
      * @param p requiere de una pieza para poder insertarla
      */
-    public static void insertarPiezaenCasilla(Pieza p){
+    public void insertarPiezaenCasilla(Pieza p){
         if (p.getColor() == Pieza.Color.BLANCA){
             blancas.add(p);
         } else {
@@ -248,7 +246,7 @@ public class Tablero {
      * @param t tablero del que se quiere sacar una copia
      * @return devuelve la copia del tablero
      */
-    public static Tablero clonarTablero (Tablero t){
+    public Tablero clonarTablero (Tablero t){
         Tablero copia = new Tablero();
         copia.vaciarPiezas();
 
@@ -275,17 +273,17 @@ public class Tablero {
      * @param color   el color de la pieza
      * @return si hay hay o no jaque
      */
-    public static boolean comprobarJaque(Tablero tablero, Pieza.Color color) {
+    public boolean comprobarJaque(Tablero tablero, Pieza.Color color) {
         List<Pieza> enemiga;
         List<Pieza> aliadas;
         Pieza rey = null;
 
         if (color == Pieza.Color.BLANCA) {
-            aliadas = Tablero.getBlancas();
-            enemiga = Tablero.getNegras();
+            aliadas = getBlancas();
+            enemiga = getNegras();
         } else {
-            aliadas = Tablero.getNegras();
-            enemiga = Tablero.getBlancas();
+            aliadas = getNegras();
+            enemiga = getBlancas();
         }
 
         for (Pieza pieza : aliadas) if (pieza instanceof Rey) rey = pieza;
@@ -297,7 +295,7 @@ public class Tablero {
         return false;
     }
 
-    public static void matarPieza(Pieza victima){
+    public void matarPieza(Pieza victima){
 
         if(victima!=null){
                 eliminadas.add(victima);
@@ -310,7 +308,6 @@ public class Tablero {
         }
 
     }
-
 
 }
 

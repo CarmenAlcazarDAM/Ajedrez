@@ -13,30 +13,28 @@ public class ControllerTablero {
         this.tab = tablero;
     }
 
-
-
     /**
      * Crear el switch que llame a los métodos correspondientes y generar el orden de la partida, imprimir, contar puntos...;
      */
-    public static boolean gestionEstadoPartida(int opcion) {
+    public static boolean gestionEstadoPartida(int opcion, Tablero tablero) {
 boolean seguirJugando=true;
         switch (opcion) {
             case 1:
-                Tablero.listarBlancas();
+                tablero.listarBlancas();
                 break;
             case 2:
-                Tablero.listarNegras();
+                tablero.listarNegras();
                 break;
             case 3:
                 VistaConsola.mostrarCabeceraEliminadasTotales();
-                Tablero.listarEliminadas();
+                tablero.listarEliminadas();
                 VistaConsola.imprimirLinea();
                 break;
             case 4:
-                System.out.println("Puntos de las fichas negras: " + Tablero.obtenerPuntuacionNegras());
+                System.out.println("Puntos de las fichas negras: " + tablero.obtenerPuntuacionNegras());
                 break;
             case 5:
-                System.out.println("Puntos de las fichas blancas: " + Tablero.obtenerPuntuacionBlancas());
+                System.out.println("Puntos de las fichas blancas: " + tablero.obtenerPuntuacionBlancas());
                 break;
             case 0:
                 seguirJugando=false;

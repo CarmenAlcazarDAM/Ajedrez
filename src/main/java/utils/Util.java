@@ -1,6 +1,5 @@
 package utils;
 
-import dataAccess.XMLManagerTablero;
 import modelo.Tablero;
 
 import javax.xml.bind.JAXBContext;
@@ -11,13 +10,12 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.io.File;
 
-public class Util {
+public  class Util {
     public static Scanner teclado = new Scanner(System.in);
 
     /**
      * Pide un entero sin que me puedan poner otra cosa que no sea un entero
-     *
-     * @param msn      Mensaje para pedir el entero
+     * @param msn Mensaje para pedir el entero
      * @param msnError Mensaje de error si el usuario pone algo que no esta permitido
      * @return devuelvo el entero recogido
      */
@@ -38,6 +36,45 @@ public class Util {
         return n;
     }
 
+    /**
+     * Método para serializar el programa y guardar la información en un archivo XML
+     * @param tablero --> Clase Tablero pasada por parámetro
+     * @return --> Devuelve true si se ha guardado la información correctamente
+     */
+    public static boolean guardarPartida(Tablero tablero){
+           Tablero clon = tablero.clonarTablero(tablero);
+        try {
+            JAXBContext context = JAXBContext.newInstance(Tablero.class);
+            Marshaller marshaller = context.createMarshaller();
+            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT,true);
+            marshaller.marshal(clon, new File("tableroXML"));
+            return true;
+        } catch (JAXBException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * Método para leer la información de un archivo XML
+     * @return --> Devuelve un objeto tablero con la información del archivo
+     */
+    public static Tablero cargarPartida(){
+        Tablero tableroDeserializada;
+        try {
+            JAXBContext context = JAXBContext.newInstance(Tablero.class);
+            Unmarshaller unmarshaller = context.createUnmarshaller();
+            tableroDeserializada = (Tablero) unmarshaller.unmarshal(new File("tableroXML"));
+
+            if(tableroDeserializada == null){
+                System.out.println("Error: no existe partida guardada.");
+                return null;
+            }
+
+        } catch (JAXBException e) {
+            throw new RuntimeException(e);
+        }
+        return tableroDeserializada;
+    }
 
     /**
      * Método para pedir un número dentro de un rango de opciones y comprobar si el número entero es correcto
@@ -73,33 +110,7 @@ public class Util {
         return numero;
     }
 
-    /**
-     * Método que guarda la partida actual y controla que no se pare el código por una RuntimeException
-     *
-     * @param tablero --> estado actual de la partida en curso
-     * @return --> devuelve true si se ha guardado correctamente, false si no lo hace
-     */
-    public static boolean guardarPartida(Tablero tablero) {
-        boolean estaGuardada = false;
-        try {
-            Tablero clon = Tablero.clonarTablero(tablero);
-            estaGuardada = XMLManagerTablero.writeXML(clon, "tablero.xml");
-        } catch (RuntimeException e) {
-            System.out.println("Error al guardar la partida: " + e.getMessage());
-            return false;
-        }
-        return estaGuardada;
-    }
 
-    public static Tablero cargarPartida() {
-        Tablero cargado = null;
-        try {
-            cargado = XMLManagerTablero.readXML("tablero.xml");
 
-        } catch (RuntimeException e) {
-            System.out.println("Error al cargar la partida: " + e.getMessage());
-            return null;
-        }
-        return cargado;
-    }
+
 }
