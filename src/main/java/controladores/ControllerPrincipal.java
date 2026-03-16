@@ -120,11 +120,12 @@ public class ControllerPrincipal {
                 boolean turnoBlancas = esTurnoBlancas(tablero);
 
                 if (turnoBlancas && !esBlanca) {
-
                     System.out.println("No puedes mover una pieza NEGRA en el turno de las BLANCAS.");
+                    return;
                 } else if (!turnoBlancas && esBlanca) {
 
                     System.out.println("No puedes mover una pieza BLANCA en el turno de las NEGRAS.");
+                    return;
                 } else {
 
                     puedeUsarPieza = true;
@@ -194,6 +195,8 @@ public class ControllerPrincipal {
 
             } catch (IllegalArgumentException e) {
                 System.out.println("ERROR: " + e.getMessage());
+                return;
+
             }
 
         }
@@ -234,6 +237,7 @@ public class ControllerPrincipal {
 
             } catch (IllegalArgumentException e) {
                 System.out.println("ERROR: " + e.getMessage());
+                return;
             }
 
         } while (!ataqueRealizado);
