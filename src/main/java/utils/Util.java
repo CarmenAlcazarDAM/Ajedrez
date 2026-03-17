@@ -1,5 +1,6 @@
 package utils;
 
+import dataAccess.XMLManagerTablero;
 import modelo.Tablero;
 
 import javax.xml.bind.JAXBContext;
