@@ -302,7 +302,7 @@ public class ControllerPrincipal {
     public static boolean atacaPeon(Pieza p, Tablero tablero) {
         boolean ataqueRealizado = false;
 
-        do {
+
             try {
                 int nuevaFila = Util.pideEnteroRango("Fila destino: ", "Error, debe ser entre 0 y 7", 0, 7);
                 int nuevaColumna = Util.pideEnteroRango("Columna destino: ", "Error, debe ser entre 0 y 7", 0, 7);
@@ -352,9 +352,10 @@ public class ControllerPrincipal {
 
             } catch (IllegalArgumentException e) {
                 VistaConsola.imprimirEnVista("ERROR: " + e.getMessage());
+
             }
 
-        } while (!ataqueRealizado);
+
         return ataqueRealizado;
     }
 
