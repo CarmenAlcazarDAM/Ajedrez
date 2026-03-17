@@ -45,7 +45,7 @@ public  class Util {
     public static boolean guardarPartida(Tablero tablero) {
         boolean estaGuardada = false;
         try {
-            Tablero clon = Tablero.clonarTablero(tablero);
+            Tablero clon = tablero.clonarTablero(tablero);
             estaGuardada = XMLManagerTablero.writeXML(clon, "tablero.xml");
         } catch (RuntimeException e) {
             System.out.println("Error al guardar la partida: " + e.getMessage());
