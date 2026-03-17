@@ -27,13 +27,14 @@ public class ControllerPrincipal {
         int opcion = 0;
         Tablero tablero = new Tablero();
 
-        boolean continuar=true;
+        boolean continuar = true;
 
         opcion = Util.pideEnteroRango("Introduce una opción: ", "Error, debe ser una opción entre 0 y 2", 0, 2);
         switch (opcion) {
             case 1 -> tablero.iniciarTablero();
             case 2 -> tablero = Util.cargarPartida();
-            case 0-> {  tablero=null;
+            case 0 -> {
+                tablero = null;
                 VistaConsola.mensajeFinal();
             }
         }
@@ -187,14 +188,14 @@ public class ControllerPrincipal {
 
                     Pieza.Color colorOponente;
 
-                    if (p.getColor() == Pieza.Color.BLANCA){
+                    if (p.getColor() == Pieza.Color.BLANCA) {
                         colorOponente = Pieza.Color.NEGRA;
                     } else {
                         colorOponente = Pieza.Color.BLANCA;
                     }
 
-                    if (tablero.comprobarJaque(tablero, colorOponente)){
-                        System.out.println("El rey "+ colorOponente+"esta en jaque");
+                    if (tablero.comprobarJaque(tablero, colorOponente)) {
+                        System.out.println("El rey " + colorOponente + "esta en jaque");
                     }
                 }
 
@@ -218,7 +219,7 @@ public class ControllerPrincipal {
     }
 
 
-    public static void atacaPeon(Pieza p, Tablero tablero) {
+    public static boolean atacaPeon(Pieza p, Tablero tablero) {
         boolean ataqueRealizado = false;
 
         do {
@@ -236,18 +237,30 @@ public class ControllerPrincipal {
                     ataqueRealizado = true;
                 }
                 VistaConsola.movimientoCorrectoOIncorrecto(ataqueRealizado);
+
                 if (ataqueRealizado) {
                     tablero.setContadorTurnos(tablero.getContadorTurnos() + 1);
+
+                    Pieza.Color colorOponente;
+
+                    if (p.getColor() == Pieza.Color.BLANCA) {
+                        colorOponente = Pieza.Color.NEGRA;
+                    } else {
+                        colorOponente = Pieza.Color.BLANCA;
+                    }
+
+                    if (tablero.comprobarJaque(tablero, colorOponente)) {
+                        System.out.println("El rey " + colorOponente + "esta en jaque");
+                    }
                 }
 
-            } catch (IllegalArgumentException e) {
-                System.out.println("ERROR: " + e.getMessage());
-                return;
-            }
+                } catch(IllegalArgumentException e){
+                    System.out.println("ERROR: " + e.getMessage());
+                }
 
-        } while (!ataqueRealizado);
+            } while (!ataqueRealizado) ;
+            return ataqueRealizado;
+        }
+
 
     }
-
-
-}
