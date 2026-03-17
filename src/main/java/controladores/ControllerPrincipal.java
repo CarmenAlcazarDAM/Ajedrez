@@ -170,6 +170,10 @@ public class ControllerPrincipal {
 
                     if (victima != null) {
                         movimientoRealizado = atacarEnMovimiento(p, victima, tablero, nuevaFila, nuevaColumna);
+                        if (p instanceof Atacadora){
+                            movimientoRealizado = false;
+                            System.out.println("El peon no puede comer a una pieza de delante");
+                        }
                     } else {
                         p.mover(nuevaFila, nuevaColumna);
                         movimientoRealizado = true;
