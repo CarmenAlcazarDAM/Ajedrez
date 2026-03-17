@@ -1,4 +1,5 @@
 package controladores;
+
 import Interfaces.Atacadora;
 import modelo.Peon;
 import modelo.Pieza;
@@ -11,6 +12,7 @@ public class ControllerPrincipal {
 
     /**
      * Gestiona las opciones del menú de estado de la partida, donde podremos ver las listas y puntos de cada color
+     *
      * @param tablero --> tablero en el que se va a realizar la accion
      */
     public static void ejecutarMenuEstado(Tablero tablero) {
@@ -25,6 +27,7 @@ public class ControllerPrincipal {
 
     /**
      * Gestiona las opciones del menú para iniciar una partida o cargar ya una existente
+     *
      * @return --> devuelve un tablero iniciado o el tablero guardado en el xml
      */
     public static Tablero gestionarMenuPrincipal() {
@@ -48,7 +51,8 @@ public class ControllerPrincipal {
 
     /**
      * Gestiona el menú de juego una vez establecido el tablero en el que se va a jugar
-     * @param opcion --> el número de opcion elegida por el usuario
+     *
+     * @param opcion  --> el número de opcion elegida por el usuario
      * @param tablero --> tablero en el que se va a realizar la accion
      * @return --> devuelve true si la partida continua, false si se ha acabado
      */
@@ -68,6 +72,7 @@ public class ControllerPrincipal {
 
     /**
      * Declara el final de la partida por tablas (empate)
+     *
      * @param tablero --> tablero en el que se va a realizar la accion
      * @return --> devuelve false porque no se desea seguir jugando la partida
      */
@@ -80,6 +85,7 @@ public class ControllerPrincipal {
 
     /**
      * Declara el final de la partida por rendición del color y muestra el mensaje de quien se ha rendido
+     *
      * @param tablero --> tablero en el que se va a realizar la accion
      * @return --> devuelve false porque no se desea seguir jugando la partida por rendición
      */
@@ -97,6 +103,7 @@ public class ControllerPrincipal {
     /**
      * Determina si el turno actual corresponde al jugador de las piezas blancas, siendo los turnos impares para las
      * piezas blancas y los pares para las negras. El contador inicia en 1
+     *
      * @param tablero --> tablero en el que se va a realizar la accion--> tablero sobre el que se va a realizar la acción
      * @return --> devuelve true si es el turno de las blancas, false si es el de las negras
      */
@@ -113,6 +120,7 @@ public class ControllerPrincipal {
 
     /**
      * Muestra un mensaje al usuario para confirmar si desea cerrar la aplicación o volver al menú
+     *
      * @return --> devuelve false si se desea finalizar la partida, true si quiere seguir
      */
     public static boolean deseaFinalizar() {
@@ -134,6 +142,7 @@ public class ControllerPrincipal {
      * Gestiona la selección de una pieza en el tablero para realizar un movimiento.
      * Solicita introducir los datos de fila y columna al usuario, valida si la casilla de destino está vacía
      * y que la pieza seleccionada para mover sea del color del turno correspondiente
+     *
      * @param tablero --> tablero en el que se va a realizar la acción
      */
     public static void gestionarMenuMover(Tablero tablero) {
@@ -178,7 +187,8 @@ public class ControllerPrincipal {
 
     /**
      * Muestra las acciones disponibles para cada tipo de pieza
-     * @param p --> pieza seleccionada sobre la que se va a realizar la acción
+     *
+     * @param p       --> pieza seleccionada sobre la que se va a realizar la acción
      * @param tablero --> tablero en el que se va a realizar la acción
      */
     public static void opcionesMovimientos(Pieza p, Tablero tablero) {
@@ -202,10 +212,10 @@ public class ControllerPrincipal {
      * que la pieza víctima no sea del mismo color o un rey, gestión de ataques, actualización del contador de turnos y
      * comprobación de situaciones de Jaque al oponente.
      *
-     * @param p --> pieza seleccionada sobre la que se va a realizar la acción
+     * @param p       --> pieza seleccionada sobre la que se va a realizar la acción
      * @param tablero --> tablero en el que se va a realizar la acción
      */
-    public static void mover(Pieza p, Tablero tablero) {
+    public static boolean mover(Pieza p, Tablero tablero) {
         boolean movimientoRealizado = false;
         System.out.println("Intentando mover " + p.getClass().getSimpleName() + "(" + p.getFila() + "," + p.getColumna() + ")");
         while (!movimientoRealizado) {
@@ -221,9 +231,9 @@ public class ControllerPrincipal {
                 if (p.puedeMover(nuevaFila, nuevaColumna, tablero)) {
 
                     if (victima != null) {
-                        movimientoRealizado = atacarEnMovimiento(p, victima, tablero, nuevaFila, nuevaColumna);
-                        if (p instanceof Atacadora){
-                            movimientoRealizado = false;
+                        if (!(p instanceof Atacadora)) {
+                            movimientoRealizado = atacarEnMovimiento(p, victima, tablero, nuevaFila, nuevaColumna);
+
                             System.out.println("El peon no puede comer a una pieza de delante");
                         }
                     } else {
@@ -247,24 +257,27 @@ public class ControllerPrincipal {
                     if (tablero.comprobarJaque(tablero, colorOponente)) {
                         System.out.println("El rey " + colorOponente + "esta en jaque");
                     }
+                } else {
+                    return false;
                 }
 
             } catch (IllegalArgumentException e) {
                 System.out.println("ERROR: " + e.getMessage());
-                return;
+                return false;
 
             }
-
         }
+        return movimientoRealizado;
     }
 
     /**
      * Realiza la acción de capturar una pieza enemiga y ocupar su posición, llevando la pieza víctima al
      * array de eliminadas
-     * @param p --> pieza seleccionada sobre la que se va a realizar la acción
+     *
+     * @param p       --> pieza seleccionada sobre la que se va a realizar la acción
      * @param victima --> pieza que va a ser capturada
      * @param tablero --> tablero en el que se va a realizar la acción
-     * @param fila --> fila donde se encontraba la víctima
+     * @param fila    --> fila donde se encontraba la víctima
      * @param columna --> columna donde se encontraba la víctima
      * @return --> devuelve true si ha podido realizar el ataque, false si no lo ha hecho
      */
@@ -283,7 +296,8 @@ public class ControllerPrincipal {
      * Solicita las coordenadas de la casilla de destino, valida las reglas de cada pieza para saber si puede realizar el movimiento,
      * que la pieza víctima no sea del mismo color o un rey, gestión de ataques, actualización del contador de turnos y
      * comprobación de situaciones de Jaque al oponente.
-     * @param p --> pieza seleccionada sobre la que se va a realizar la acción
+     *
+     * @param p       --> pieza seleccionada sobre la que se va a realizar la acción
      * @param tablero --> tablero en el que se va a realizar la acción
      * @return --> devuelve true si ha podido realizar el ataque, false si no lo ha hecho
      */
@@ -322,13 +336,13 @@ public class ControllerPrincipal {
                     }
                 }
 
-                } catch(IllegalArgumentException e){
-                    System.out.println("ERROR: " + e.getMessage());
-                }
+            } catch (IllegalArgumentException e) {
+                System.out.println("ERROR: " + e.getMessage());
+            }
 
-            } while (!ataqueRealizado) ;
-            return ataqueRealizado;
-        }
-
-
+        } while (!ataqueRealizado);
+        return ataqueRealizado;
     }
+
+
+}
