@@ -47,11 +47,19 @@ public class Tablero {
         this.contadorTurnos = contadorTurnos;
     }
 
+
+    /**
+     * Elimina todas las piezas de los arrays
+     */
     public  void vaciarPiezas() {
         blancas.clear();
         negras.clear();
         eliminadas.clear();
     }
+
+    /**
+     * Coloca todas las piezas en el tablero
+     */
     public  void colocarPiezas() {
         // Colocar piezas blancas
         colocarPiezasBlancas();
@@ -60,6 +68,9 @@ public class Tablero {
         colocarPiezasNegras();
     }
 
+    /**
+     * Crea y configura todas las piezas blancas.
+     */
     public  void colocarPiezasBlancas() {
         // Peones blancos en fila 1
         for (int columna = 0; columna < 8; columna++) {
@@ -85,6 +96,9 @@ public class Tablero {
         blancas.add(new Rey(Pieza.Color.BLANCA, "♔", 0, 4, 100));
     }
 
+    /**
+     * Crea y configura todas las piezas negras.
+     */
     private void colocarPiezasNegras() {
         // Peones negros en fila 6
         for (int columna = 0; columna < 8; columna++) {
@@ -110,6 +124,10 @@ public class Tablero {
         negras.add(new Rey(Pieza.Color.NEGRA, "♚", 7, 4, 100));
     }
 
+    /**
+     * Inicializa el tablero para una nueva partida. Limpia el estado previo de los arrays, vuelve a colocar
+     * todas las piezas en sus casillas iniciales y reinicia el contador
+     */
     public void iniciarTablero() {
         vaciarPiezas();
         colocarPiezas();
@@ -293,6 +311,10 @@ public class Tablero {
         return false;
     }
 
+    /**
+     * Elimina la pieza del array de su color correspondiente y la lleva al array de eliminadas
+     * @param victima --> pieza que va a ser modificada y llevada al array de eliminadas
+     */
     public void matarPieza(Pieza victima){
 
         if(victima!=null){
