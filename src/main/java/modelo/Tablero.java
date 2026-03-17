@@ -19,6 +19,7 @@ public class Tablero {
 
     }
 
+    /* ///////////////// GET Y SET  ///////////////// */
     public  List<Pieza> getBlancas() {
         return blancas;
     }
@@ -47,6 +48,8 @@ public class Tablero {
         this.contadorTurnos = contadorTurnos;
     }
 
+
+    /* ///////////////// MÉTODOS  ///////////////// */
 
     /**
      * Elimina todas las piezas de los arrays

@@ -25,8 +25,12 @@ public abstract class Pieza {
     private int fila;
     private int columna;
     private int puntos;
+
+    /* ///////////////// CONSTRUCTOR VACÍO POR DEFECTO ///////////////// */
     public Pieza(){}
 
+
+    /* ///////////////// MÉTODOS ABSTRACTOS  ///////////////// */
     /**
      * Metodo que ejecuta el movimiento de una pieza si comprobarMovimiento devuelve true
      * @param nuevaFila la fila a la que se va a mover
@@ -48,7 +52,10 @@ public abstract class Pieza {
      */
     public abstract Pieza clonar();
 
-    //Constructor por defecto necesario para serializar en JaxB
+    //-------------------------------------------------------------------
+
+
+    /* ///////////////// CONSTRUCTOR  ///////////////// */
 
     public Pieza(Color color, String dibujo, int fila, int columna, int puntos) {
         filaValida(fila);
@@ -60,6 +67,8 @@ public abstract class Pieza {
         this.columna = columna;
         this.puntos=puntos;
     }
+
+    /* ///////////////// GET Y SET  ///////////////// */
 
     public Color getColor() {
         return color;
@@ -133,7 +142,7 @@ public abstract class Pieza {
 
     /*-------------------------------------*/
 
-    //Una pieza será igual que otra si tiene el mismo color y puntos
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
