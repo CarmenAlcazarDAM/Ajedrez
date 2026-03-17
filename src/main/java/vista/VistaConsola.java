@@ -292,5 +292,9 @@ public class VistaConsola {
 
     }
 
+    public static void imprimirEnVista(String frase) {
+        System.out.println(frase);
+    }
+
 
 }
