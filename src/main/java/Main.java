@@ -37,7 +37,6 @@ public class Main {
             opcion = VistaConsola.menuPartida();
             seguirJugando = cp.gestionarMenuJuego(opcion, tablero);
         }
-        vista.mensajeFinal();
         }
     }
 }
