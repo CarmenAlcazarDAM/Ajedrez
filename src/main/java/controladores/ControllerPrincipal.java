@@ -313,7 +313,22 @@ public class ControllerPrincipal {
 
                 p.validarDestino(nuevaFila, nuevaColumna, tablero);
 
-                if (victima != null) {
+                int distanciaFila = p.getFila() - nuevaFila;
+                int distanciaColum = p.getColumna() - nuevaColumna;
+                boolean rangoCorrecto = false;
+
+                if (p.getColor() == Pieza.Color.BLANCA){
+                    if(distanciaFila == -1 && (distanciaColum == 1 || distanciaColum == -1)){
+                        rangoCorrecto = true;
+                    }
+                }
+                if (p.getColor() == Pieza.Color.NEGRA) {
+                    if (distanciaFila == 1 && (distanciaColum == -1 || distanciaColum == 1)) {
+                        rangoCorrecto = true;
+                    }
+                }
+
+                if (victima != null && rangoCorrecto) {
                     ((Atacadora) p).ataque(nuevaFila, nuevaColumna);
                     tablero.matarPieza(victima);
 
