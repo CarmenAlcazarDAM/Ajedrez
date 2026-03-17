@@ -1,4 +1,6 @@
 package modelo;
+import vista.VistaConsola;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -191,9 +193,9 @@ public class Tablero {
      * Método que devuelve impreso el contenido del ArrayList blancas
      */
     public void listarBlancas() {
-        System.out.println("\nListado de BLANCAS:");
+        VistaConsola.imprimirEnVista("\nListado de BLANCAS:");
         for (Pieza p : blancas) {
-            System.out.println(p.toString());
+            VistaConsola.imprimirEnVista(p.toString());
 
         }
     }
@@ -202,9 +204,9 @@ public class Tablero {
      * Método que devuelve impreso el contenido del ArrayList negras
      */
     public void listarNegras() {
-        System.out.println("\nListado de NEGRAS:");
+        VistaConsola.imprimirEnVista("\nListado de NEGRAS:");
         for (Pieza p : negras) {
-            System.out.println(p.toString());
+            VistaConsola.imprimirEnVista(p.toString());
 
         }
     }
@@ -213,12 +215,12 @@ public class Tablero {
      * Método que devuelve impreso el contenido del ArrayList eliminadas
      */
     public void listarEliminadas() {
-        System.out.println("\nELIMINADAS:");
+        VistaConsola.imprimirEnVista("\nELIMINADAS:");
         if (eliminadas.size() == 0) {
-            System.out.println("Actualmente no hay piezas eliminadas");
+            VistaConsola.imprimirEnVista("Actualmente no hay piezas eliminadas");
         } else {
             for (Pieza p : eliminadas) {
-                System.out.println(p.toString());
+                VistaConsola.imprimirEnVista(p.toString());
 
             }
         }

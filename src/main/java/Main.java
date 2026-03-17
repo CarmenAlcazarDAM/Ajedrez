@@ -10,7 +10,7 @@ public class Main {
         Tablero tablero = new Tablero();
 
 
-        System.out.println("AJEDREZ");
+        VistaConsola.imprimirEnVista("AJEDREZ");
         boolean seguirJugando = true;
 
 
@@ -19,7 +19,7 @@ public class Main {
             tablero = cp.gestionarMenuPrincipal();
 
         } catch (RuntimeException e) {
-            System.out.println("Error:" + e.getMessage());
+            VistaConsola.imprimirEnVista("Error:" + e.getMessage());
         }
 
 

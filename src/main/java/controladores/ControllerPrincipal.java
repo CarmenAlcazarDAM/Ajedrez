@@ -77,8 +77,7 @@ public class ControllerPrincipal {
      * @return --> devuelve false porque no se desea seguir jugando la partida
      */
     public static boolean tablas(Tablero tablero) {
-
-        System.out.println("SE HAN DECLARADO EN TABLAS!");
+        VistaConsola.imprimirEnVista("SE HAN DECLARADO EN TABLAS!");
 
         return false;
     }
@@ -92,10 +91,9 @@ public class ControllerPrincipal {
     public static boolean rendirse(Tablero tablero) {
 
         if (esTurnoBlancas(tablero)) {
-            System.out.println("¡LAS BLANCAS SE HAN RENDIDO!");
+            VistaConsola.imprimirEnVista("¡LAS BLANCAS SE HAN RENDIDO!");
         } else {
-            System.out.println("¡LAS NEGRAS SE HAN RENDIDO!");
-        }
+            VistaConsola.imprimirEnVista("¡LAS NEGRAS SE HAN RENDIDO!");        }
 
         return false;
     }
@@ -158,7 +156,7 @@ public class ControllerPrincipal {
             p = tablero.obtenerPiezaEnCasilla(fila, columna);
 
             if (p == null) {
-                System.out.println("La casilla está vacía.");
+                VistaConsola.imprimirEnVista("La casilla está vacía.");
 
             } else {
 
@@ -166,11 +164,11 @@ public class ControllerPrincipal {
                 boolean turnoBlancas = esTurnoBlancas(tablero);
 
                 if (turnoBlancas && !esBlanca) {
-                    System.out.println("No puedes mover una pieza NEGRA en el turno de las BLANCAS.");
+
+                    VistaConsola.imprimirEnVista("No puedes mover una pieza NEGRA en el turno de las BLANCAS.");
                     return;
                 } else if (!turnoBlancas && esBlanca) {
-
-                    System.out.println("No puedes mover una pieza BLANCA en el turno de las NEGRAS.");
+                    VistaConsola.imprimirEnVista("No puedes mover una pieza BLANCA en el turno de las NEGRAS.");
                     return;
                 } else {
 
@@ -217,7 +215,7 @@ public class ControllerPrincipal {
      */
     public static boolean mover(Pieza p, Tablero tablero) {
         boolean movimientoRealizado = false;
-        System.out.println("Intentando mover " + p.getClass().getSimpleName() + "(" + p.getFila() + "," + p.getColumna() + ")");
+        VistaConsola.imprimirEnVista("Intentando mover " + p.getClass().getSimpleName() + "(" + p.getFila() + "," + p.getColumna() + ")");
         while (!movimientoRealizado) {
             try {
                 int nuevaFila = Util.pideEnteroRango("Fila destino: ", "Error, debe ser entre 0 y 7", 0, 7);
@@ -225,9 +223,8 @@ public class ControllerPrincipal {
 
                 p.validarDestino(nuevaFila, nuevaColumna, tablero);
                 Pieza victima = tablero.obtenerPiezaEnCasilla(nuevaFila, nuevaColumna);
-
-                System.out.println("Intentando mover " + p.getClass().getSimpleName() + " a (" + nuevaFila + "," + nuevaColumna + ")");
-                System.out.println("Moviendo...");
+                VistaConsola.imprimirEnVista("Intentando mover " + p.getClass().getSimpleName() + " a (" + nuevaFila + "," + nuevaColumna + ")");
+                VistaConsola.imprimirEnVista("Moviendo...");
                 if (p.puedeMover(nuevaFila, nuevaColumna, tablero)) {
 
                     if (victima != null) {
@@ -235,7 +232,7 @@ public class ControllerPrincipal {
                             movimientoRealizado = atacarEnMovimiento(p, victima, tablero, nuevaFila, nuevaColumna);
 
                         }else{
-                            System.out.println("El peon no puede comer a una pieza de delante");
+                            VistaConsola.imprimirEnVista("El peon no puede comer a una pieza de delante");
                         }
                     } else {
                         p.mover(nuevaFila, nuevaColumna);
@@ -256,14 +253,14 @@ public class ControllerPrincipal {
                     }
 
                     if (tablero.comprobarJaque(tablero, colorOponente)) {
-                        System.out.println("El rey " + colorOponente + "esta en jaque");
+                        VistaConsola.imprimirEnVista("El rey " + colorOponente + "esta en jaque");
                     }
                 } else {
                     return false;
                 }
 
             } catch (IllegalArgumentException e) {
-                System.out.println("ERROR: " + e.getMessage());
+                VistaConsola.imprimirEnVista("ERROR: " + e.getMessage());
                 return false;
 
             }
@@ -348,12 +345,13 @@ public class ControllerPrincipal {
                     }
 
                     if (tablero.comprobarJaque(tablero, colorOponente)) {
-                        System.out.println("El rey " + colorOponente + " esta en jaque");
+
+                        VistaConsola.imprimirEnVista("El rey " + colorOponente + " esta en jaque");
                     }
                 }
 
             } catch (IllegalArgumentException e) {
-                System.out.println("ERROR: " + e.getMessage());
+                VistaConsola.imprimirEnVista("ERROR: " + e.getMessage());
             }
 
         } while (!ataqueRealizado);

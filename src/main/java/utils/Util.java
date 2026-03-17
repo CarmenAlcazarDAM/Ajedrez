@@ -23,11 +23,11 @@ public  class Util {
         boolean error = false;
         do {
             try {
-                System.out.println(msn);
+                VistaConsola.imprimirEnVista(msn);
                 n = teclado.nextInt();
                 error = false;
             } catch (InputMismatchException e) {
-                System.out.println(msnError);
+                VistaConsola.imprimirEnVista(msnError);
                 error = true;
                 teclado.next();
             }
@@ -47,7 +47,7 @@ public  class Util {
             estaGuardada = XMLManagerTablero.writeXML(clon, "tablero.xml");
             VistaConsola.guardadoCorrectamente(estaGuardada);
         } catch (RuntimeException e) {
-            System.out.println("Error al guardar la partida: " + e.getMessage());
+            VistaConsola.imprimirEnVista("Error al guardar la partida: " + e.getMessage());
             VistaConsola.guardadoCorrectamente(false);
             return false;
         }
@@ -64,7 +64,7 @@ public  class Util {
             cargado = XMLManagerTablero.readXML("tablero.xml");
 
         } catch (RuntimeException e) {
-            System.out.println("Error al cargar la partida: " + e.getMessage());
+            VistaConsola.imprimirEnVista("Error al cargar la partida: " + e.getMessage());
             return null;
         }
         return cargado;
@@ -84,18 +84,18 @@ public  class Util {
         int numero = 0;
         boolean noHayError = true;
         do {
-            System.out.println(mensaje);
+            VistaConsola.imprimirEnVista(mensaje);
             try {
                 numero = teclado.nextInt();
                 if (numero >= min && numero <= max) {
 
                     noHayError = true;
                 } else {
-                    System.out.println(mensajeError);
+                    VistaConsola.imprimirEnVista(mensajeError);
                     noHayError = false;
                 }
             } catch (InputMismatchException e) {
-                System.out.println(mensajeError);
+                VistaConsola.imprimirEnVista(mensajeError);
                 noHayError = false;
                 teclado.nextLine();
             }

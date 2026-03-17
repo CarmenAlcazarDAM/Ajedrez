@@ -29,10 +29,10 @@ boolean seguirJugando=true;
                 VistaConsola.imprimirLinea();
                 break;
             case 4:
-                System.out.println("Puntos de las fichas negras: " + tablero.obtenerPuntuacionNegras());
+                VistaConsola.imprimirEnVista("Puntos de las fichas negras: " + tablero.obtenerPuntuacionNegras());
                 break;
             case 5:
-                System.out.println("Puntos de las fichas blancas: " + tablero.obtenerPuntuacionBlancas());
+                VistaConsola.imprimirEnVista("Puntos de las fichas blancas: " + tablero.obtenerPuntuacionBlancas());
                 break;
             case 0:
                 seguirJugando=false;
@@ -50,7 +50,7 @@ boolean seguirJugando=true;
                 break;
             case ATACAR:
                 if (pOrigen instanceof Peon) ControllerPrincipal.atacaPeon(pOrigen, tab);
-                else System.out.println("Solo los peones pueden usar la opción atacar.");
+                else VistaConsola.imprimirEnVista("Solo los peones pueden usar la opción atacar.");
                 break;
             case VOLVER:
                 return;
@@ -66,7 +66,7 @@ boolean seguirJugando=true;
 
         Pieza pOrigen = tab.obtenerPiezaEnCasilla(filaPieza, columnaPieza);
 
-        if (pOrigen == null) System.out.println("No hay pieza en la casilla de origen.");
+        if (pOrigen == null) VistaConsola.imprimirEnVista("No hay pieza en la casilla de origen.");
 
         return pOrigen;
     }
