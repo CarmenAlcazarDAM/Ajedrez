@@ -7,6 +7,7 @@ import modelo.Tablero;
 import utils.Util;
 import vista.VistaConsola;
 
+import java.sql.SQLOutput;
 import java.util.SortedMap;
 
 public class ControllerPrincipal {
@@ -57,22 +58,17 @@ public class ControllerPrincipal {
 
     public static boolean tablas(Tablero tablero) {
 
-        if (esTurnoBlancas(tablero)) {
-            System.out.println("¡BLANCAS HA DECLARADO TABLAS!");
-        } else {
-            System.out.println("¡NEGRAS HA DECLARADO TABLAS!");
-        }
+        System.out.println("SE HAN DECLARADO EN TABLAS!");
 
-        VistaConsola.mensajeFinal();
         return false;
     }
 
     public static boolean rendirse(Tablero tablero) {
 
         if (esTurnoBlancas(tablero)) {
-            System.out.println("¡BLANCAS SE HA RENDIDO!");
+            System.out.println("¡LAS BLANCAS SE HAN RENDIDO!");
         } else {
-            System.out.println("¡NEGRAS SE HA RENDIDO!");
+            System.out.println("¡LAS NEGRAS SE HAN RENDIDO!");
         }
 
         return false;
