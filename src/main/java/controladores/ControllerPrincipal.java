@@ -76,7 +76,6 @@ public class ControllerPrincipal {
             System.out.println("¡NEGRAS SE HA RENDIDO!");
         }
 
-        VistaConsola.mensajeFinal();
         return false;
     }
 
@@ -91,12 +90,14 @@ public class ControllerPrincipal {
         return false;
     }
 
+
     public static boolean deseaFinalizar() {
         boolean seguirJugando = true;
         int opcion = VistaConsola.mensajeFinalizar();
         switch (opcion) {
             case 1:
                 seguirJugando = false;
+                VistaConsola.mensajeFinal();
                 break;
             case 2:
                 seguirJugando = true;
