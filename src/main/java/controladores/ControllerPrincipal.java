@@ -27,10 +27,15 @@ public class ControllerPrincipal {
         int opcion = 0;
         Tablero tablero = new Tablero();
 
+        boolean continuar=true;
+
         opcion = Util.pideEnteroRango("Introduce una opción: ", "Error, debe ser una opción entre 0 y 2", 0, 2);
         switch (opcion) {
             case 1 -> tablero.iniciarTablero();
             case 2 -> tablero = Util.cargarPartida();
+            case 0-> {  tablero=null;
+                VistaConsola.mensajeFinal();
+            }
         }
         return tablero;
 

@@ -16,13 +16,20 @@ public class Main {
         System.out.println("AJEDREZ");
         boolean seguirJugando = true;
 
-        try {
-            VistaConsola.menuPrincipal();
-            tablero=cp.gestionarMenuPrincipal();
 
-        } catch (RuntimeException e) {
-            System.out.println("Error:" + e.getMessage());
-        }
+
+    try {
+        VistaConsola.menuPrincipal();
+        tablero = cp.gestionarMenuPrincipal();
+
+    } catch (RuntimeException e) {
+        System.out.println("Error:" + e.getMessage());
+    }
+
+
+
+        if(tablero!=null){
+
 
         int opcion = -1;
 
@@ -32,6 +39,8 @@ public class Main {
             VistaConsola.turnoActual(tablero.getContadorTurnos());
             opcion = VistaConsola.menuPartida();
             seguirJugando = cp.gestionarMenuJuego(opcion, tablero);
+        }
+        vista.mensajeFinal();
         }
     }
 }
