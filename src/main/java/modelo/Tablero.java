@@ -116,6 +116,7 @@ public class Tablero {
     public void iniciarTablero() {
         vaciarPiezas();
         colocarPiezas();
+        setContadorTurnos(1);
     }
 
     /**
