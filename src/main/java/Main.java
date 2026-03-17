@@ -14,29 +14,27 @@ public class Main {
         boolean seguirJugando = true;
 
 
+        try {
+            VistaConsola.menuPrincipal();
+            tablero = cp.gestionarMenuPrincipal();
 
-    try {
-        VistaConsola.menuPrincipal();
-        tablero = cp.gestionarMenuPrincipal();
-
-    } catch (RuntimeException e) {
-        System.out.println("Error:" + e.getMessage());
-    }
-
-
-
-        if(tablero!=null){
-
-
-        int opcion = -1;
-
-
-        while (seguirJugando) {
-            vista.vistaTablero(tablero);
-            VistaConsola.turnoActual(tablero.getContadorTurnos());
-            opcion = VistaConsola.menuPartida();
-            seguirJugando = cp.gestionarMenuJuego(opcion, tablero);
+        } catch (RuntimeException e) {
+            System.out.println("Error:" + e.getMessage());
         }
+
+
+        if (tablero != null) {
+
+
+            int opcion = -1;
+
+
+            while (seguirJugando) {
+                vista.vistaTablero(tablero);
+                VistaConsola.turnoActual(tablero.getContadorTurnos());
+                opcion = VistaConsola.menuPartida();
+                seguirJugando = cp.gestionarMenuJuego(opcion, tablero);
+            }
         }
     }
 }
