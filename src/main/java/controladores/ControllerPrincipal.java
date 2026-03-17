@@ -234,6 +234,7 @@ public class ControllerPrincipal {
                         if (!(p instanceof Atacadora)) {
                             movimientoRealizado = atacarEnMovimiento(p, victima, tablero, nuevaFila, nuevaColumna);
 
+                        }else{
                             System.out.println("El peon no puede comer a una pieza de delante");
                         }
                     } else {
