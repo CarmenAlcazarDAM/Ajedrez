@@ -28,20 +28,23 @@ public class Peon extends Pieza implements Atacadora {
         int distanciaFila = getFila() - fila;
         int distanciaColum = getColumna() - columna;
         boolean legal = false;
+        Tablero t = new Tablero();
 
-        if (this.getColor() == Color.BLANCA){
-            if (distanciaFila == -1 && distanciaColum == 0){
-                legal = true;
-            }
-            if (primerMovimiento && distanciaFila == -2 && distanciaColum == 0){
-                legal = true;
-            }
-        }else {
-            if (distanciaFila == 1 && distanciaColum == 0){
-                legal = true;
-            }
-            if (primerMovimiento && distanciaFila == 2 && distanciaColum == 0){
-                legal = true;
+        if (t.obtenerPiezaEnCasilla(fila,columna) != null){
+            if (this.getColor() == Color.BLANCA){
+                if (distanciaFila == -1 && distanciaColum == 0){
+                    legal = true;
+                }
+                if (primerMovimiento && distanciaFila == -2 && distanciaColum == 0){
+                    legal = true;
+                }
+            }else {
+                if (distanciaFila == 1 && distanciaColum == 0){
+                    legal = true;
+                }
+                if (primerMovimiento && distanciaFila == 2 && distanciaColum == 0){
+                    legal = true;
+                }
             }
         }
         return legal;
@@ -53,13 +56,13 @@ public class Peon extends Pieza implements Atacadora {
         int distanciaColum = this.getColumna() - columna;
 
         if (this.getColor() == Color.BLANCA){
-            if(distanciaFila == 1 && distanciaColum == 1){
+            if(distanciaFila == 1 && (distanciaColum == 1 || distanciaColum == -1)){
                 this.setFila(fila);
                 this.setColumna(columna);
             }
         }
         if (this.getColor() == Color.NEGRA){
-            if (distanciaFila == -1 && distanciaColum == -1){
+            if (distanciaFila == -1 && (distanciaColum == -1 || distanciaColum == 1)){
                 this.setFila(fila);
                 this.setColumna(columna);
             }
