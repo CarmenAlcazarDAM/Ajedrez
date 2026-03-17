@@ -1,6 +1,4 @@
 package controladores;
-
-import controladores.MenusNum.GestEstadoPartida;
 import controladores.MenusNum.GestMATKEnum;
 import modelo.*;
 import utils.Util;

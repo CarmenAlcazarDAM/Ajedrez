@@ -1,8 +1,5 @@
 import controladores.ControllerPrincipal;
-import controladores.ControllerTablero;
-import modelo.Pieza;
 import modelo.Tablero;
-import modelo.Torre;
 import vista.VistaConsola;
 
 public class Main {

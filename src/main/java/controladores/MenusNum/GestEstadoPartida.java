@@ -1,7 +1,5 @@
 package controladores.MenusNum;
 
-
-import controladores.ControllerTablero;
 import utils.Util;
 
 public enum GestEstadoPartida{

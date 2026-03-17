@@ -1,9 +1,7 @@
 package vista;
-
 import modelo.Pieza;
 import modelo.Tablero;
 import utils.Util;
-
 import java.util.Scanner;
 
 public class VistaConsola {

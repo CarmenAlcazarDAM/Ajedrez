@@ -1,5 +1,4 @@
 package controladores;
-
 import Interfaces.Atacadora;
 import modelo.Peon;
 import modelo.Pieza;
@@ -7,8 +6,6 @@ import modelo.Tablero;
 import utils.Util;
 import vista.VistaConsola;
 
-import java.sql.SQLOutput;
-import java.util.SortedMap;
 
 public class ControllerPrincipal {
 

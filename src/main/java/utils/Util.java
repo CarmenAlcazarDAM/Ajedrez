@@ -4,13 +4,10 @@ import dataAccess.XMLManagerTablero;
 import modelo.Tablero;
 import vista.VistaConsola;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
-import javax.xml.bind.Unmarshaller;
+
 import java.util.InputMismatchException;
 import java.util.Scanner;
-import java.io.File;
+
 
 public  class Util {
     public static Scanner teclado = new Scanner(System.in);
