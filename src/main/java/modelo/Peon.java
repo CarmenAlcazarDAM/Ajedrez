@@ -68,9 +68,6 @@ public class Peon extends Pieza implements Atacadora {
             }
         }
 
-        this.setFila(fila);
-        this.setColumna(columna);
-
     }
 
     @Override
