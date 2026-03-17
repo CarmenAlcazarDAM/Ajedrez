@@ -30,7 +30,7 @@ public class Peon extends Pieza implements Atacadora {
         boolean legal = false;
         Tablero t = new Tablero();
 
-        if (t.obtenerPiezaEnCasilla(fila,columna) != null){
+        if (t.obtenerPiezaEnCasilla(fila,columna) == null){
             if (this.getColor() == Color.BLANCA){
                 if (distanciaFila == -1 && distanciaColum == 0){
                     legal = true;

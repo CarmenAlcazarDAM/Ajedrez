@@ -2,6 +2,7 @@ package utils;
 
 import dataAccess.XMLManagerTablero;
 import modelo.Tablero;
+import vista.VistaConsola;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -47,8 +48,10 @@ public  class Util {
         try {
             Tablero clon = tablero.clonarTablero(tablero);
             estaGuardada = XMLManagerTablero.writeXML(clon, "tablero.xml");
+            VistaConsola.guardadoCorrectamente(estaGuardada);
         } catch (RuntimeException e) {
             System.out.println("Error al guardar la partida: " + e.getMessage());
+            VistaConsola.guardadoCorrectamente(false);
             return false;
         }
         return estaGuardada;

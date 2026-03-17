@@ -242,6 +242,21 @@ public class VistaConsola {
         System.out.println(result);
     }
 
+    /**
+     * Muestra si el movimiento ha sido correcto o incorrecto
+     *
+     * @param dato resultado del movimiento
+     */
+    public static void guardadoCorrectamente(boolean dato) {
+        String result = "";
+        if (dato == true) {
+            result = "Partida guardada correctamente";
+        } else {
+            result = "No se ha podido guardar, por favor, inténtalo de nuevo";
+        }
+        System.out.println(result);
+    }
+
 
     /**
      * Muestra el turno actual según el número recibido
