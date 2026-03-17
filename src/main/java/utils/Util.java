@@ -1,5 +1,6 @@
 package utils;
 
+import dataAccess.XMLManagerTablero;
 import modelo.Tablero;
 
 import javax.xml.bind.JAXBContext;
@@ -36,44 +37,37 @@ public  class Util {
         return n;
     }
 
-    /**
-     * Método para serializar el programa y guardar la información en un archivo XML
-     * @param tablero --> Clase Tablero pasada por parámetro
-     * @return --> Devuelve true si se ha guardado la información correctamente
+   /**
+     * Método que guarda la partida actual y controla que no se pare el código por una RuntimeException
+     * @param tablero --> estado actual de la partida en curso
+     * @return --> devuelve true si se ha guardado correctamente, false si no lo hace
      */
-    public static boolean guardarPartida(Tablero tablero){
-           Tablero clon = tablero.clonarTablero(tablero);
+    public static boolean guardarPartida(Tablero tablero) {
+        boolean estaGuardada = false;
         try {
-            JAXBContext context = JAXBContext.newInstance(Tablero.class);
-            Marshaller marshaller = context.createMarshaller();
-            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT,true);
-            marshaller.marshal(clon, new File("tableroXML"));
-            return true;
-        } catch (JAXBException e) {
-            throw new RuntimeException(e);
+            Tablero clon = tablero.clonarTablero(tablero);
+            estaGuardada = XMLManagerTablero.writeXML(clon, "tablero.xml");
+        } catch (RuntimeException e) {
+            System.out.println("Error al guardar la partida: " + e.getMessage());
+            return false;
         }
+        return estaGuardada;
     }
 
     /**
      * Método para leer la información de un archivo XML
      * @return --> Devuelve un objeto tablero con la información del archivo
      */
-    public static Tablero cargarPartida(){
-        Tablero tableroDeserializada;
+    public static Tablero cargarPartida() {
+        Tablero cargado = null;
         try {
-            JAXBContext context = JAXBContext.newInstance(Tablero.class);
-            Unmarshaller unmarshaller = context.createUnmarshaller();
-            tableroDeserializada = (Tablero) unmarshaller.unmarshal(new File("tableroXML"));
+            cargado = XMLManagerTablero.readXML("tablero.xml");
 
-            if(tableroDeserializada == null){
-                System.out.println("Error: no existe partida guardada.");
-                return null;
-            }
-
-        } catch (JAXBException e) {
-            throw new RuntimeException(e);
+        } catch (RuntimeException e) {
+            System.out.println("Error al cargar la partida: " + e.getMessage());
+            return null;
         }
-        return tableroDeserializada;
+        return cargado;
     }
 
     /**
