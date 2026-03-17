@@ -333,7 +333,7 @@ public class ControllerPrincipal {
                     }
 
                     if (tablero.comprobarJaque(tablero, colorOponente)) {
-                        System.out.println("El rey " + colorOponente + "esta en jaque");
+                        System.out.println("El rey " + colorOponente + " esta en jaque");
                     }
                 }
 
