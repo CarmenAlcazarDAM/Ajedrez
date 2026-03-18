@@ -21,7 +21,6 @@ public class Tablero {
 
     }
 
-    /* ///////////////// GET Y SET  ///////////////// */
     public  List<Pieza> getBlancas() {
         return blancas;
     }
@@ -49,8 +48,6 @@ public class Tablero {
     public void setContadorTurnos(int contadorTurnos) {
         this.contadorTurnos = contadorTurnos;
     }
-
-
     /* ///////////////// MÉTODOS  ///////////////// */
 
     /**
@@ -61,7 +58,6 @@ public class Tablero {
         negras.clear();
         eliminadas.clear();
     }
-
     /**
      * Coloca todas las piezas en el tablero
      */
